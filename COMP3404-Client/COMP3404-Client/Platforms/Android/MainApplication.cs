@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace MauiApp
+namespace COMP3404_Client
 {
     [Application]
     public class MainApplication : MauiApplication
