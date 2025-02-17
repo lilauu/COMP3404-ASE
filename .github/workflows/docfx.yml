@@ -16,7 +16,8 @@ jobs:
     - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.x
-    - run: dotnet workload restore "COMP3404-Client/COMP3404-Client.sln"
-    - run: dotnet tool update -g docfx
-    - run: docfx ./docfx.json
+    - run: |
+        dotnet workload restore "COMP3404-Client/COMP3404-Client.sln"
+        dotnet tool update -g docfx
+        docfx ./docfx.json
     - uses: JamesIves/github-pages-deploy-action@v4
