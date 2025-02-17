@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['doxygenbanner_0',['doxygenBanner',['../javadoc-banner_8h.html#a7acf20d2740fdb0d6086abf738c8688f',1,'javadoc-banner.h']]],
-  ['drawrect_1',['drawRect',['../classOverload__Test.html#a840305784a1944b4de9826a1f4204365',1,'Overload_Test::drawRect(int, int, int, int)'],['../classOverload__Test.html#a7a613f50092cbc0ef830a818d9f3409c',1,'Overload_Test::drawRect(const Rect &amp;r)']]]
+  ['oncounterclicked_0',['OnCounterClicked',['../classCOMP3404__Client_1_1MainPage.html#a85a6f5298a9df93c755e6a4c19a74377',1,'COMP3404_Client::MainPage']]]
 ];

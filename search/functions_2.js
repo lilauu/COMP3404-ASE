@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['close_0',['close',['../structcmd_8h.html#ae152484c890a24e4d9b4980e7b965be0',1,'structcmd.h']]],
-  ['createmauiapp_1',['CreateMauiApp',['../classCOMP3404__Client_1_1MauiProgram.html#a5edecc0d791d15d9ef8110e5895e0872',1,'COMP3404_Client.MauiProgram.CreateMauiApp()'],['../classCOMP3404__Client_1_1MainApplication.html#ae40f114919c15b03c25a6fcba8e96ee3',1,'COMP3404_Client.MainApplication.CreateMauiApp()'],['../classCOMP3404__Client_1_1AppDelegate.html#ac069b6444b6bc7df9b18216e83a63d2a',1,'COMP3404_Client.AppDelegate.CreateMauiApp()'],['../classCOMP3404__Client_1_1AppDelegate.html#ac069b6444b6bc7df9b18216e83a63d2a',1,'COMP3404_Client.AppDelegate.CreateMauiApp()'],['../classCOMP3404__Client_1_1Program.html#adf454145732814af77d148b8d53577b3',1,'COMP3404_Client.Program.CreateMauiApp()'],['../classCOMP3404__Client_1_1WinUI_1_1App.html#a877dd528add5c339bd4b3dea50ba4333',1,'COMP3404_Client.WinUI.App.CreateMauiApp()']]],
-  ['cstyle_2',['cstyle',['../javadoc-banner_8h.html#a6ec4bf0132201719721e103451590a9e',1,'javadoc-banner.h']]]
+  ['main_0',['Main',['../classCOMP3404__Client_1_1Program.html#a542ef84b83ff3b194a4c7b707a7b8245',1,'COMP3404_Client.Program.Main(string[] args)'],['../classCOMP3404__Client_1_1Program.html#a542ef84b83ff3b194a4c7b707a7b8245',1,'COMP3404_Client.Program.Main(string[] args)'],['../classCOMP3404__Client_1_1Program.html#a542ef84b83ff3b194a4c7b707a7b8245',1,'COMP3404_Client.Program.Main(string[] args)']]],
+  ['mainapplication_1',['MainApplication',['../classCOMP3404__Client_1_1MainApplication.html#a7b25e0ab52038141e898f7eb968c8839',1,'COMP3404_Client::MainApplication']]],
+  ['mainpage_2',['MainPage',['../classCOMP3404__Client_1_1MainPage.html#a991ee8ca9e5c608373da0bc4e5f07f48',1,'COMP3404_Client::MainPage']]]
 ];
