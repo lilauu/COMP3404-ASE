@@ -1,0 +1,23 @@
+name: docfx
+on:
+  push:
+    branches:
+      - 'main'
+      - 'docfx'
+
+jobs:
+  docfx:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    permissions:
+        contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x
+    - run: |
+        dotnet workload restore "COMP3404-Client/COMP3404-Client.sln"
+        dotnet tool update -g docfx
+        docfx ./docfx.json
+    - uses: JamesIves/github-pages-deploy-action@v4
