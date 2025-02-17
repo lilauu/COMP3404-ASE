@@ -17,7 +17,6 @@ jobs:
       with:
         dotnet-version: 8.x
     - run: dotnet workload restore "COMP3404-Client/COMP3404-Client.sln"
-    - uses: NUnit/docfx-action@v4.0.0
-      with:
-        args: "docfx.json"
+    - run: dotnet tool update -g docfx
+    - run: docfx ./docfx.json
     - uses: JamesIves/github-pages-deploy-action@v4
