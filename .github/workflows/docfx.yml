@@ -1,0 +1,32 @@
+name: docfx
+on:
+  push:
+    branches:
+      - 'main'
+      - 'docfx'
+
+jobs:
+  docfx:
+    concurrency: ci-${{ github.ref }}
+    runs-on: windows-latest
+    permissions:
+        id-token: write
+        pages: write
+    environment:
+      name: github-pages
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x
+    - run: |
+        dotnet tool update -g docfx
+        docfx ./docfx.json
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        # Upload entire repository
+        path: '_site'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
