@@ -19,6 +19,11 @@ jobs:
     - run: |
         dotnet tool update -g docfx
         docfx ./docfx.json
-    - uses: JamesIves/github-pages-deploy-action@v4
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        folder: "_site"
+        # Upload entire repository
+        path: '_site'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
