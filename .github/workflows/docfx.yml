@@ -17,7 +17,8 @@ jobs:
       with:
         dotnet-version: 8.x
     - run: |
-        dotnet workload restore "COMP3404-Client/COMP3404-Client.sln"
         dotnet tool update -g docfx
         docfx ./docfx.json
     - uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: "COMP3404-Client/_site"
