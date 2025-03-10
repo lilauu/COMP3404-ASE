@@ -2,4 +2,4 @@
 
 ## Use-case Diagram
 
-![use-case-diagram](/docs/diagrams/use-case.drawio.png)
+![use-case-diagram](diagrams/use-case.drawio.png)
