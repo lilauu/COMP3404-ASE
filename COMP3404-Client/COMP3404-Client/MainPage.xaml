@@ -16,7 +16,8 @@
         <!-- Vertical Navigation Bar -->
         <StackLayout Grid.Column="0" BackgroundColor="#3A006D" Padding="10"
                      VerticalOptions="Fill" Spacing="20">
-            <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
+            <Button Text="👤" BackgroundColor="Transparent" FontSize="24"
+                    Clicked="ProfileButton_Clicked"
                     SemanticProperties.Hint="Profile"/>
             <Button Text="☀️" BackgroundColor="Transparent" FontSize="24" 
                     SemanticProperties.Hint="Toggle Light/Dark Mode"/>

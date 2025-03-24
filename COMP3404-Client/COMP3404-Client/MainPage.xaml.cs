@@ -8,6 +8,12 @@
         {
             InitializeComponent();
         }
+
+        private void ProfileButton_Clicked(object sender, EventArgs e)
+        {
+            // todo: static page?
+            Navigation.PushAsync(new NewPage1());
+        }
     }
 
 }
