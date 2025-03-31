@@ -2,6 +2,10 @@
 
 namespace COMP3404_Client;
 
+#if WINDOWS
+using WebAuthenticator = WinUIEx.WebAuthenticator;
+#endif
+
 public partial class MainPage : ContentPage
 {
     private HttpClient m_HttpClient;
@@ -37,46 +41,5 @@ public partial class MainPage : ContentPage
         // Do something with the token
         //Debug.WriteLine(accessToken);
 
-/*        var authorizationRequest = $"https://github.com/login/oauth/authorize?client_id=Ov23li6gKzCpMMxUThEE&redirect_uri=comp3404://login/github";
-        // Open the authorization URL in a web browser
-        //await Browser.OpenAsync(authorizationRequest);
-        WebView view = new()
-        {
-            Source = authorizationRequest,
-        };*/
-        
-        // Assume we get the auth response with code here, you might need a web view to capture the callback
-        //var authCode = await ProcessAuthorizationCode(); // Implement this method
-
-        // Exchange the authorization code for tokens
-        /*        var tokenResponse = await ExchangeCodeForToken(authCode);
-                if (tokenResponse.IsError)
-                {
-                    await DisplayAlert("Error", tokenResponse.Error, "OK");
-                    return;
-                }
-                // Use access token to make authenticated API calls
-                var userInfo = await GetUserInfo(tokenResponse.AccessToken);*/
     }
-    /*private async Task<TokenResponse> ExchangeCodeForToken(string authorizationCode)
-    {
-        var tokenRequest = new TokenRequest
-        {
-            Address = App.TokenEndpoint,
-            GrantType = "authorization_code",
-            ClientId = App.ClientId,
-            ClientSecret = App.ClientSecret,
-            Code = authorizationCode,
-            RedirectUri = App.RedirectUri,
-        };
-        // Make the token request
-        var response = await _httpClient.RequestTokenAsync(tokenRequest);
-        return response;
-    }
-    private async Task<string> GetUserInfo(string accessToken)
-    {
-        _httpClient.SetBearerToken(accessToken);
-        var response = await _httpClient.GetAsync("https://your.api/userinfo");
-        return await response.Content.ReadAsStringAsync();
-    }*/
 }
