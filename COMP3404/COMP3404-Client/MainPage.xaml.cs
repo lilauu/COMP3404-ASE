@@ -2,12 +2,17 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
+
         }
+        private async void OnProfileButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate to NextPage using Shell
+            await Shell.Current.GoToAsync("///"+nameof(SettingsPage));
+        }
+
     }
 
 }

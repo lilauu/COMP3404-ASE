@@ -17,7 +17,7 @@
         <StackLayout Grid.Column="0" BackgroundColor="#3A006D" Padding="10"
                      VerticalOptions="Fill" Spacing="20">
             <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
-                    SemanticProperties.Hint="Profile"/>
+                    SemanticProperties.Hint="Profile" Clicked="OnProfileButtonClicked"/>
             <Button Text="☀️" BackgroundColor="Transparent" FontSize="24" 
                     SemanticProperties.Hint="Toggle Light/Dark Mode"/>
             <Button Text="📂" BackgroundColor="Transparent" FontSize="24" 
