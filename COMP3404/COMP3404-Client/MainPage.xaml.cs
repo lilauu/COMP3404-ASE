@@ -9,7 +9,7 @@
         }
         private async void OnProfileButtonClicked(object sender, EventArgs e)
         {
-            // Navigate to NextPage using Shell
+            // settings page nav with shell
             await Shell.Current.GoToAsync("///"+nameof(SettingsPage));
         }
 
