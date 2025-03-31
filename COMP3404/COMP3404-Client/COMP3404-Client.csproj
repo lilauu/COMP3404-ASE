@@ -62,4 +62,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\COMP3404-Shared\COMP3404-Shared.csproj" />
+	</ItemGroup>
+
 </Project>
