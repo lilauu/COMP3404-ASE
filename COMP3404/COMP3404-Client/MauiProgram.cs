@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+#if WINDOWS
+using WinUIEx;
+#endif
 
 namespace COMP3404_Client;
 
@@ -6,6 +9,11 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        if (OperatingSystem.IsWindows())
+        {
+            WinUIEx.WebAuthenticator.CheckOAuthRedirectionActivation();
+        }
+
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()

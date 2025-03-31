@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Windows.ApplicationModel.Activation;
 
+// TAKEN FROM https://github.com/dotMorten/WinUIEx/blob/dae3bfe98b33b5d3a606f7f0dc5b1ea98d179f0a/src/WinUIEx/WebAuthenticator.cs AND SLIGHTLY MODIFIED
+
 namespace WinUIEx
 {
 	/// <summary>
