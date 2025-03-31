@@ -63,16 +63,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
-	  <Folder Include="ViewModels\" />
+	  <ProjectReference Include="..\COMP3404-Shared\COMP3404-Shared.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="NewPage1.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionCOMP3404ClientHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>
