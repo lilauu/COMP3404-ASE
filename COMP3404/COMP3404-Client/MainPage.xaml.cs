@@ -13,6 +13,12 @@
             await Shell.Current.GoToAsync("///"+nameof(SettingsPage));
         }
 
+        private async void OnHistoryButtonClicked(object sender, EventArgs e)
+        {
+            // settings page nav with shell
+            await Shell.Current.GoToAsync("///" + nameof(HistoryPage));
+        }
+
     }
 
 }

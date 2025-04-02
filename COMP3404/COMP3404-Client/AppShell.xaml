@@ -14,5 +14,9 @@
     <ShellContent 
         Route="SettingsPage" 
         ContentTemplate="{DataTemplate local:SettingsPage}" />
-    
+
+    <ShellContent 
+        Route="HistoryPage" 
+        ContentTemplate="{DataTemplate local:HistoryPage}" />
+
 </Shell>

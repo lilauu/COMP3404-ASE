@@ -16,12 +16,12 @@
         <!-- Vertical Navigation Bar -->
         <StackLayout Grid.Column="0" BackgroundColor="#3A006D" Padding="10"
                      VerticalOptions="Fill" Spacing="20">
-            <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
-                    SemanticProperties.Hint="Profile" Clicked="OnProfileButtonClicked"/>
             <Button Text="☀️" BackgroundColor="Transparent" FontSize="24" 
                     SemanticProperties.Hint="Toggle Light/Dark Mode"/>
+            <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
+                    SemanticProperties.Hint="Profile" Clicked="OnProfileButtonClicked"/>
             <Button Text="📂" BackgroundColor="Transparent" FontSize="24" 
-                    SemanticProperties.Hint="Open Saved Chats"/>
+                    SemanticProperties.Hint="Open Saved Chats" Clicked="OnHistoryButtonClicked"/>
             <Button Text="🏠" BackgroundColor="Transparent" FontSize="24" 
                     SemanticProperties.Hint="Go to Home"/>
         </StackLayout>
@@ -33,7 +33,7 @@
                   VerticalOptions="Start" BackgroundColor="#3A006D">
                 <Image Source="profile_icon.png" HeightRequest="40" WidthRequest="40" 
                        SemanticProperties.Description="User Profile" Margin="10"/>
-                <Label Text="NAME / Login" FontSize="24" FontFamily="OpenSansRegular" 
+                <Label Text="Home" FontSize="24" FontFamily="OpenSansRegular" 
                        TextColor="White" VerticalTextAlignment="Center" />
             </Grid>
 
