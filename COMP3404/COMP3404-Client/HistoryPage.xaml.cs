@@ -9,12 +9,13 @@ public partial class HistoryPage : ContentPage
 
     private async void OnHomeButtonClicked(object sender, EventArgs e)
     {
-        // settings page nav with shell
+        // shell nav to main page
         await Shell.Current.GoToAsync("///" + nameof(MainPage));
     }
 
     private async void OnSettingsButtonClicked(object sender, EventArgs e)
     {
+        // shell nav to settings page
         await Shell.Current.GoToAsync("///" + nameof(SettingsPage));
     }
 }

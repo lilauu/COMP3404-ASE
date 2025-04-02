@@ -9,13 +9,13 @@
         }
         private async void OnProfileButtonClicked(object sender, EventArgs e)
         {
-            // settings page nav with shell
+            // shell nav to settings page
             await Shell.Current.GoToAsync("///"+nameof(SettingsPage));
         }
 
         private async void OnHistoryButtonClicked(object sender, EventArgs e)
         {
-            // settings page nav with shell
+            // shell nav to history page
             await Shell.Current.GoToAsync("///" + nameof(HistoryPage));
         }
 
