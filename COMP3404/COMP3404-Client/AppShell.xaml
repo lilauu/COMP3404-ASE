@@ -8,8 +8,15 @@
     Title="COMP3404_Client">
 
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    
+    <ShellContent 
+        Route="SettingsPage" 
+        ContentTemplate="{DataTemplate local:SettingsPage}" />
+
+    <ShellContent 
+        Route="HistoryPage" 
+        ContentTemplate="{DataTemplate local:HistoryPage}" />
 
 </Shell>
