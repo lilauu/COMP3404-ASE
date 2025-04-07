@@ -40,6 +40,7 @@ public partial class MainPage : ContentPage
 		new Uri("comp3404://login/github"));
 #pragma warning restore CA1416
 
+		authResult.CallbackUri.ToString();
 		// THIS WORKS UP TO HERE
 		// todo: change redirect url on github to point to server URL? i think browser should just redirect to server auth endpoint and then server redirects back to app? maybe?
 		// alternatively i could just ping the API with the code and such from here that would work
