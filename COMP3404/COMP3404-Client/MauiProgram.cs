@@ -9,10 +9,10 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        if (OperatingSystem.IsWindows())
-        {
-            WinUIEx.WebAuthenticator.CheckOAuthRedirectionActivation();
-        }
+#if WINDOWS
+        WinUIEx.WebAuthenticator.CheckOAuthRedirectionActivation();
+#endif
+
 
         var builder = MauiApp.CreateBuilder();
         builder

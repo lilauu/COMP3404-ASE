@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-
-namespace COMP3404_Client;
+﻿namespace COMP3404_Client;
 
 #if WINDOWS
 // hack to get around WebAuthenticator not working rn on windows :/
