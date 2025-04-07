@@ -40,11 +40,11 @@ public class AccountController : ControllerBase
         message.RequestUri = new($"https://github.com/login/oauth/access_token?{queryString}");
 
         var response = client.Send(message);
+        // todo: handle errors?
         var parsedResponse = JsonSerializer.Deserialize<GithubOAuthResponse>(response.Content.ReadAsStringAsync().Result);
 
         // if successful, create an account or login to the account, generating a session token and redirecting the user
 
-        //Response.Redirect()
         return parsedResponse?.TokenType ?? "Failed?";
     }
 }
