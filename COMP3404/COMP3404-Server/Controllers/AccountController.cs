@@ -34,7 +34,6 @@ public class AccountController : ControllerBase
         var query = HttpUtility.ParseQueryString(string.Empty);
         query["client_id"] = "Ov23li6gKzCpMMxUThEE";
         query["client_secret"] = m_clientSecret;
-        query["client_secret"] = m_clientSecret;
         query["code"] = code;
         string queryString = query.ToString() ?? throw new Exception("What");
         message.RequestUri = new($"https://github.com/login/oauth/access_token?{queryString}");
@@ -43,7 +42,9 @@ public class AccountController : ControllerBase
         // todo: handle errors?
         var parsedResponse = JsonSerializer.Deserialize<GithubOAuthResponse>(response.Content.ReadAsStringAsync().Result);
 
-        // if successful, create an account or login to the account, generating a session token and redirecting the user
+        // todo: if successful, create an account or login to the account, generating a session token and redirecting the user
+        // check if account already exists, if so, regen the session token, update name etc.
+        // if it doesn't exist, create one, with a new session token, etc.
 
         return parsedResponse?.TokenType ?? "Failed?";
     }
