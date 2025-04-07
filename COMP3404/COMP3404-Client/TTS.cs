@@ -5,10 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Speech.Synthesis;
 
-namespace TTSTest
-{
+namespace COMP3404_Client;
+
+/// <summary>
+/// This class reads a string input out to the user
+/// </summary>
     internal class TTS
     {
+        public static TTS instance;
+
         #region Fields
         SpeechSynthesizer synth;
         ProgressBar progressBar;
@@ -20,6 +25,12 @@ namespace TTSTest
         //Blank constructor
         public TTS()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else return;
+
             //Create a new SpeechSynthesizer
             synth = new SpeechSynthesizer();
             synth.SetOutputToDefaultAudioDevice();
@@ -170,4 +181,3 @@ namespace TTSTest
         #endregion
 
     }
-}
