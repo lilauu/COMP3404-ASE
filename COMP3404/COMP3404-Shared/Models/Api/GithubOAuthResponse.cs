@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace COMP3404_Server.Models;
+namespace COMP3404_Server.Models.Api;
 
 public class GithubOAuthResponse
 {
