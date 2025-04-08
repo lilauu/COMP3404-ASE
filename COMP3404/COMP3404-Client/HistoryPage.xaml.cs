@@ -4,7 +4,7 @@ public partial class HistoryPage : ContentPage
 {
 	public HistoryPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
 
     private async void OnHomeButtonClicked(object sender, EventArgs e)

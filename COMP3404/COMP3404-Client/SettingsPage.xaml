@@ -35,6 +35,11 @@
                 <Label Text="Profile Settings" FontSize="24" FontFamily="OpenSansRegular" 
                 TextColor="White" VerticalTextAlignment="Center" />
             </Grid>
+
+            <Grid Grid.Row="1" Padding="10" VerticalOptions="Start">
+                <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor="#3A006D" FontSize="32" TextColor="White"
+                        SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
+            </Grid>
         </Grid>
     </Grid>
 </ContentPage>
