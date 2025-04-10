@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech.Synthesis;
 
 namespace COMP3404_Client
 {
@@ -10,14 +11,24 @@ namespace COMP3404_Client
     {
         public bool Enabled { get => enabled; }
         public int Rate { get => rate; }
+        public int Volume { get => volume; }
+        public VoiceGender Gender { get => gender; }
+        public VoiceAge Age { get => age; }
 
         bool enabled;
         int rate;
+        int volume;
+        VoiceGender gender;
+        VoiceAge age;
 
-        public TTSSettings(bool pEnabled, int pRate)
+
+        public TTSSettings(bool pEnabled, int pRate, int pVolume, VoiceGender pGender, VoiceAge pAge)
         {
             enabled = pEnabled;
             rate = pRate;
+            volume = pVolume;
+            gender = pGender;
+            age = pAge;
         }
     }
 }

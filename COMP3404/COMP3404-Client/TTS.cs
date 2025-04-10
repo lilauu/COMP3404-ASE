@@ -46,6 +46,8 @@ namespace COMP3404_Client;
             if (settings.Enabled)
             {
                 synth.Rate = settings.Rate;
+                synth.Volume = settings.Volume;
+                synth.SelectVoiceByHints(settings.Gender, settings.Age);
                 synth.SpeakAsyncCancelAll();
                 synth.SpeakAsync(toSpeak);
             }
@@ -57,7 +59,7 @@ namespace COMP3404_Client;
             switch (gender)
             {
                 default:
-                    synth.SelectVoiceByHints(VoiceGender.Male, VoiceAge.Adult);
+                   
                     break;
 
                 case ("Male"):
@@ -84,11 +86,6 @@ namespace COMP3404_Client;
         public void Resume()
         {
             synth.Resume();
-        }
-
-        public void SetVolume(int volume)
-        {
-            synth.Volume = volume;
         }
 
         #endregion

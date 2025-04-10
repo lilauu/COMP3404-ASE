@@ -10,7 +10,8 @@
         public MainPage()
         {
             InitializeComponent();
-            tts = new TTS(new TTSSettings(true, 0));
+            tts = new TTS(new TTSSettings(true, 0, 100, 
+                System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
             
         }
         private async void OnProfileButtonClicked(object sender, EventArgs e)
