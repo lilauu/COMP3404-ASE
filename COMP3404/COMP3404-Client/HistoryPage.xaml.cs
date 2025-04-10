@@ -12,13 +12,13 @@ public partial class HistoryPage : ContentPage
     {
         // shell nav to main page
         await Shell.Current.GoToAsync("///" + nameof(MainPage));
-        TTS.instance.Speak("Home", 0);
+        TTS.instance.Speak("Home");
     }
 
     private async void OnSettingsButtonClicked(object sender, EventArgs e)
     {
         // shell nav to settings page
         await Shell.Current.GoToAsync("///" + nameof(SettingsPage));
-        TTS.instance.Speak("Settings", 0);
+        TTS.instance.Speak("Settings");
     }
 }

@@ -17,7 +17,7 @@
         <StackLayout Grid.Column="0" BackgroundColor="#3A006D" Padding="10"
                      VerticalOptions="Fill" Spacing="20">
             <Button Text="☀️" BackgroundColor="Transparent" FontSize="24" 
-                    SemanticProperties.Hint="Toggle Light/Dark Mode"/>
+                    SemanticProperties.Hint="Toggle Light/Dark Mode" Clicked="LightDarkModeButtonClicked"/>
             <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
                     SemanticProperties.Hint="Profile" Clicked="OnProfileButtonClicked"/>
             <Button Text="📂" BackgroundColor="Transparent" FontSize="24" 
@@ -59,7 +59,7 @@
 
                     <!-- Wrapped Button in a Frame for rounded corners -->
                     <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0" BackgroundColor="#6A0DAD">
-                        <Button Text="➤" BackgroundColor="Transparent" TextColor="White" SemanticProperties.Hint="Send Message"/>
+                        <Button Text="➤" BackgroundColor="Transparent" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"/>
                     </Frame>
                 </Grid>
             </StackLayout>
