@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
 	private async void ProfileButton_Clicked(object sender, EventArgs e)
 	{
 		// temp: start login flow 
-		await Task.Run(Thing);
+		await Task.Run(DoGithubAuth);
 	}
 
 	// github registration flow: (OAuth)
@@ -23,7 +23,7 @@ public partial class MainPage : ContentPage
 	// 2. redirect back to app
 	// 3. exchange code for access token
 	// 4. use token to access API
-	private async void Thing()
+	private async void DoGithubAuth()
 	{
 		Uri authUri = new("https://github.com/login/oauth/authorize?client_id=Ov23li6gKzCpMMxUThEE");
 		Uri redirectUri = new("comp3404://login/github");
