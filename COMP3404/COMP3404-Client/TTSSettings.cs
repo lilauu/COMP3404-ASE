@@ -30,5 +30,14 @@ namespace COMP3404_Client
             gender = pGender;
             age = pAge;
         }
+
+        void UpdateSettings(bool pEnabled, int pRate, int pVolume, VoiceGender pGender, VoiceAge pAge)
+        {
+            enabled = pEnabled;
+            rate = pRate;
+            volume = pVolume;
+            gender = pGender;
+            age = pAge;
+        }
     }
 }

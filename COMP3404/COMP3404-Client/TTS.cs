@@ -48,34 +48,11 @@ namespace COMP3404_Client;
                 synth.Rate = settings.Rate;
                 synth.Volume = settings.Volume;
                 synth.SelectVoiceByHints(settings.Gender, settings.Age);
+
                 synth.SpeakAsyncCancelAll();
                 synth.SpeakAsync(toSpeak);
             }
-    }
-
-        //Sets the voice gender property of the SpeechSynthesizer
-        public void SetGender(string gender)
-        {
-            switch (gender)
-            {
-                default:
-                   
-                    break;
-
-                case ("Male"):
-                    synth.SelectVoiceByHints(VoiceGender.Male, VoiceAge.Adult);
-                    break;
-
-                case ("Female"):
-                    synth.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Adult);
-                    break;
-
-                case ("Neutral"):
-                    synth.SelectVoiceByHints(VoiceGender.Neutral, VoiceAge.Adult);
-                    break;
-            }
         }
-
         //Pauses the SpeechSynthesizer
         public void Pause()
         {
