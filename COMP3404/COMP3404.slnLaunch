@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Server + Win Client",
+    "Projects": [
+      {
+        "Path": "COMP3404-Client\\COMP3404-Client.csproj",
+        "Action": "Start",
+        "DebugTarget": "Windows Machine"
+      },
+      {
+        "Path": "COMP3404-Server\\COMP3404-Server.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  }
+]
