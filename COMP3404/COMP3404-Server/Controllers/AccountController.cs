@@ -25,7 +25,7 @@ public class AccountController : ControllerBase
         m_client = client;
     }
 
-    public string GetGithubToken(string code)
+    private string GetGithubToken(string code)
     {
         HttpRequestMessage message = new();
         message.Method = HttpMethod.Post;
@@ -50,16 +50,8 @@ public class AccountController : ControllerBase
         return parsedResponse.AccessToken;
     }
 
-    /// <summary>
-    /// Authenticates with Github, creating an account if one doesn't exist
-    /// </summary>
-    [HttpGet]
-    [Route("login/github")]
-    public ActionResult<string> GithubLogin(string code)
+    private GetUserResponse? GetGithubUserInfo(string accessToken)
     {
-        // use the code from the client to auth with github and get account info
-        string accessToken = GetGithubToken(code);
-
         HttpRequestMessage message = new();
         message = new();
         message.Method = HttpMethod.Get;
@@ -70,27 +62,42 @@ public class AccountController : ControllerBase
         message.Headers.Add("X-GitHub-Api-Version", "2022-11-28");
 
         var userResponse = m_client.Send(message);
+        if (!userResponse.IsSuccessStatusCode)
+            throw new Exception("Something went wrong while getting user info from github");
         string stringUserResponse = userResponse.Content.ReadAsStringAsync().Result;
-        var parsedUserResponse = JsonSerializer.Deserialize<GetUserResponse>(stringUserResponse);
-        if (parsedUserResponse is null)
-            return Problem($"Failed to parse response from https://api.github.com/user?\n {stringUserResponse}");
+        return JsonSerializer.Deserialize<GetUserResponse>(stringUserResponse);
+    }
 
-        var foundAccount = m_accountRepository.GetById(parsedUserResponse.Id);
+    /// <summary>
+    /// Authenticates with Github, creating an account if one doesn't exist
+    /// </summary>
+    [HttpGet]
+    [Route("login/github")]
+    public ActionResult<string> GithubLogin(string code)
+    {
+        // use the code from the client to auth with github and get account info
+        string accessToken = GetGithubToken(code);
+
+        var userResponse = GetGithubUserInfo(accessToken);
+        if (userResponse is null)
+            return Problem("Failed to get user info from github");
+
+        var foundAccount = m_accountRepository.GetById(userResponse.Id);
         if (foundAccount is null)
         {
             // create account
             UserAccount newAccount = new()
             {
-                AccountId = parsedUserResponse.Id,
+                AccountId = userResponse.Id,
                 GithubToken = accessToken,
-                FirstName = parsedUserResponse.Name,
+                FirstName = userResponse.Name,
             };
             foundAccount = m_accountRepository.Add(newAccount) ?? throw new Exception("Failed to create account?");
         }
         else
         {
             // update account info
-            foundAccount.FirstName = parsedUserResponse.Name;
+            foundAccount.FirstName = userResponse.Name;
             foundAccount.GithubToken = accessToken;
         }
 
