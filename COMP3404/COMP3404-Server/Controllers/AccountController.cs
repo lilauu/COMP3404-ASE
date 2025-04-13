@@ -100,8 +100,7 @@ public class AccountController : ControllerBase
             foundAccount.GithubToken = accessToken;
         }
 
-        // todo: create session token for account and return it
-
-        return Ok(foundAccount.FirstName);
+        // todo: do we need to create our own token? It's probably fine to just reuse the github token for now
+        return Ok(accessToken);
     }
 }

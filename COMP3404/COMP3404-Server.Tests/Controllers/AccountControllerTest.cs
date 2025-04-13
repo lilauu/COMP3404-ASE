@@ -105,7 +105,7 @@ public class AccountControllerTest
         // Assert
         //////////
         Assert.IsType<OkObjectResult>(result.Result);
-        Assert.Equal("Jack", ((OkObjectResult)result.Result).Value);
+        Assert.Equal("gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", ((OkObjectResult)result.Result).Value);
     }
 
     [Fact]
@@ -152,7 +152,7 @@ public class AccountControllerTest
         //////////
 
         Assert.IsType<OkObjectResult>(result.Result);
-        Assert.Equal("Jack", ((OkObjectResult)result.Result).Value);
+        Assert.Equal("gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", ((OkObjectResult)result.Result).Value);
     }
 
     [Fact]
