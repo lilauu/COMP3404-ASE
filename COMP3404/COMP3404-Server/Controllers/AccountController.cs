@@ -4,6 +4,7 @@ using COMP3404_Server.Repositories;
 using COMP3404_Shared.Models.Accounts;
 using COMP3404_Shared.Models.Api.Github;
 using Microsoft.AspNetCore.Mvc;
+using System.Security;
 using System.Text.Json;
 using System.Web;
 
@@ -36,13 +37,16 @@ public class AccountController : ControllerBase
         query["client_id"] = "Ov23li6gKzCpMMxUThEE";
         query["client_secret"] = ClientSecret;
         query["code"] = code;
-        string queryString = query.ToString() ?? throw new Exception("What");
+        string queryString = query.ToString() ?? throw new Exception("Got null queryString"); // not sure what would trigger this case
         message.RequestUri = new($"https://github.com/login/oauth/access_token?{queryString}");
 
         var response = m_client.Send(message);
+        if (!response.IsSuccessStatusCode)
+            throw new SecurityException("Failed to get access token from Github");
+
         string stringResponse = response.Content.ReadAsStringAsync().Result;
         var parsedResponse = JsonSerializer.Deserialize<GithubOAuthResponse>(stringResponse)
-            ?? throw new Exception($"Failed to parse response from https://github.com/login/oauth/access_token?\n {stringResponse}");
+            ?? throw new JsonException($"Failed to parse response from https://github.com/login/oauth/access_token?\n {stringResponse}");
         return parsedResponse.AccessToken;
     }
 
