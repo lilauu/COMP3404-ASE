@@ -53,7 +53,6 @@ public class AccountController : ControllerBase
     private GetUserResponse? GetGithubUserInfo(string accessToken)
     {
         HttpRequestMessage message = new();
-        message = new();
         message.Method = HttpMethod.Get;
         message.RequestUri = new("https://api.github.com/user");
         message.Headers.Add("User-Agent", "COMP3404");

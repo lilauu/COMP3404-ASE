@@ -72,7 +72,7 @@ public class AccountControllerTest
             .Returns<int>(i => new UserAccount()
             {
                 AccountId = i,
-                FirstName = "Test",
+                FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
 
@@ -104,8 +104,8 @@ public class AccountControllerTest
 
         // Assert
         //////////
-
-        Assert.Equal("", result.Value);
+        Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal("Jack", ((OkObjectResult)result.Result).Value);
     }
 
     [Fact]
@@ -151,7 +151,8 @@ public class AccountControllerTest
         // Assert
         //////////
 
-        Assert.Equal("", result.Value);
+        Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal("Jack", ((OkObjectResult)result.Result).Value);
     }
 
     [Fact]
