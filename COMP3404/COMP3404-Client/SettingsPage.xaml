@@ -1,7 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="COMP3404_Client.SettingsPage"
-             BackgroundColor="#4B0082">
+             BackgroundColor= "{DynamicResource Background}">
     <!-- Deep Purple Theme -->
 
     <Grid Padding="10">
@@ -13,15 +13,15 @@
         </Grid.ColumnDefinitions>
 
         <!-- Vertical Navigation Bar -->
-        <StackLayout Grid.Column="0" BackgroundColor="#3A006D" Padding="10"
+        <StackLayout Grid.Column="0" BackgroundColor= "{DynamicResource Background}" Padding="10"
                      VerticalOptions="Fill" Spacing="20">
-            <Button Text="☀️" BackgroundColor="Transparent" FontSize="24" 
+            <Button Text="☀️" BackgroundColor= "{DynamicResource Background}" FontSize="24" 
                     SemanticProperties.Hint="Toggle Light/Dark Mode"/>
-            <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
+            <Button Text="👤" BackgroundColor= "{DynamicResource Background}" FontSize="24" 
                     SemanticProperties.Hint="Profile" />
-            <Button Text="📂" BackgroundColor="Transparent" FontSize="24" 
+            <Button Text="📂" BackgroundColor= "{DynamicResource Background}" FontSize="24" 
                     SemanticProperties.Hint="Open Saved Chats" Clicked="OnHistoryButtonClicked"/>
-            <Button Text="🏠" BackgroundColor="Transparent" FontSize="24" 
+            <Button Text="🏠" BackgroundColor= "{DynamicResource Background}" FontSize="24" 
                     SemanticProperties.Hint="Go to Home" Clicked="OnHomeButtonClicked"/>
         </StackLayout>
 
@@ -29,15 +29,15 @@
         <Grid Grid.Column="1" RowDefinitions="Auto, *">
             <!-- Header -->
             <Grid Grid.Row="0" Padding="10" ColumnDefinitions="Auto, *" 
-           VerticalOptions="Start" BackgroundColor="#3A006D">
+           VerticalOptions="Start" BackgroundColor= "{DynamicResource Background}">
                 <Image Source="profile_icon.png" HeightRequest="40" WidthRequest="40" 
                 SemanticProperties.Description="User Profile" Margin="10"/>
                 <Label Text="Profile Settings" FontSize="24" FontFamily="OpenSansRegular" 
-                TextColor="White" VerticalTextAlignment="Center" />
+                TextColor= "{DynamicResource Text}" VerticalTextAlignment="Center" />
             </Grid>
 
             <Grid Grid.Row="1" Padding="10" VerticalOptions="Start">
-                <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor="#3A006D" FontSize="32" TextColor="White"
+                <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor= "{DynamicResource Background}" FontSize="32" TextColor= "{DynamicResource Text}"
                         SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
             </Grid>
         </Grid>
