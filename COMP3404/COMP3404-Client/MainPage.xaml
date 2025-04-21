@@ -5,7 +5,7 @@
              BackgroundColor="#4B0082">
     <!-- Deep Purple Theme -->
 
-    <Grid Padding="10">
+    <Grid Padding="10" x:Name="topGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <!-- Sidebar -->
@@ -15,7 +15,7 @@
 
         <!-- Vertical Navigation Bar -->
         <StackLayout Grid.Column="0" BackgroundColor="#3A006D" Padding="10"
-                     VerticalOptions="Fill" Spacing="20">
+                     VerticalOptions="Fill" Spacing="20" x:Name="verticalStackLayout">
             <Button Text="☀️" BackgroundColor="Transparent" FontSize="24" 
                     SemanticProperties.Hint="Toggle Light/Dark Mode" Clicked="LightDarkModeButtonClicked"/>
             <Button Text="👤" BackgroundColor="Transparent" FontSize="24" 
@@ -27,18 +27,18 @@
         </StackLayout>
 
         <!-- Main Content -->
-        <Grid Grid.Column="1" RowDefinitions="Auto, *">
+        <Grid Grid.Column="1" RowDefinitions="Auto, * " x:Name="mainContentGrid">
             <!-- Header -->
             <Grid Grid.Row="0" Padding="10" ColumnDefinitions="Auto, *" 
-                  VerticalOptions="Start" BackgroundColor="#3A006D">
+                  VerticalOptions="Start" BackgroundColor="#3A006D" x:Name="topBar">
                 <Image Source="profile_icon.png" HeightRequest="40" WidthRequest="40" 
                        SemanticProperties.Description="User Profile" Margin="10"/>
                 <Label Text="Home" FontSize="24" FontFamily="OpenSansRegular" 
-                       TextColor="White" VerticalTextAlignment="Center" />
+                       TextColor="White" VerticalTextAlignment="Center" x:Name="topBarLabel"/>
             </Grid>
 
             <!-- Chat Window -->
-            <StackLayout Grid.Row="1" Padding="10" Spacing="10">
+            <StackLayout Grid.Row="1" Padding="10" Spacing="10" x:Name="chatWindow">
                 <ScrollView>
                     <StackLayout Spacing="10">
                         <Frame BackgroundColor="White" Padding="10" CornerRadius="15">
@@ -51,10 +51,10 @@
                 </ScrollView>
 
                 <!-- Chat Input -->
-                <Grid ColumnDefinitions="*, Auto" Padding="5">
+                <Grid ColumnDefinitions="*, Auto" Padding="5" x:Name="chatInput">
                     <!-- Wrapped Entry in a Frame for rounded corners -->
                     <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0" BackgroundColor="White">
-                        <Entry Placeholder="Type a message..." FontSize="18" TextColor="#4B0082" BackgroundColor="Transparent"/>
+                        <Entry Placeholder="Type a message..." FontSize="18" TextColor="#4B0082" BackgroundColor="Transparent" x:Name="chatInputFrame"/>
                     </Frame>
 
                     <!-- Wrapped Button in a Frame for rounded corners -->

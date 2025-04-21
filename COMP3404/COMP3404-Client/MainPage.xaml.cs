@@ -1,18 +1,26 @@
-﻿namespace COMP3404_Client
+﻿using Microsoft.Maui.Controls;
+
+namespace COMP3404_Client
 {
     public partial class MainPage : ContentPage
     {
-        bool lightMode = false;
+        // Colours for light / dark mode
+        Color lightModeColor = Color.FromRgb(240, 240,240);
+        Color darkModeColor = Color.FromArgb("#333333");
 
+        //Bool dor light / dark mode
+        bool lightMode = true;
+
+        //TTS class;
         TTS tts;
-        TTSSettings ttsSettings;
 
         public MainPage()
         {
             InitializeComponent();
             tts = new TTS(new TTSSettings(true, 0, 100, 
                 System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
-            
+
+            LightDarkToggle(false);
         }
         private async void OnProfileButtonClicked(object sender, EventArgs e)
         {
@@ -30,23 +38,42 @@
 
         private void LightDarkModeButtonClicked(object sender, EventArgs e)
         {
-            // Does not work - Change background colour here
-            if (lightMode)
-            {
-                //Is dark mode - change to light
-                Shell.Current.BackgroundColor = Color.FromRgb(0, 0, 0);
-            }
-            else
-            {
-                //is light - change to dark
-                Shell.Current.BackgroundColor = Color.FromRgb(255, 255, 255);
-            }
-            lightMode = !lightMode;
+            LightDarkToggle(true);
         }
 
         private void SendButtonClicked(object sender, EventArgs e)
         {
+            TTS.instance.Speak(chatInputFrame.Text);
+        }
 
+        void LightDarkToggle(bool toggleMode)
+        {
+            if (lightMode)
+            {
+                //Is dark mode - change to light
+                verticalStackLayout.BackgroundColor = lightModeColor;
+                topGrid.BackgroundColor = lightModeColor;
+                mainContentGrid.BackgroundColor = lightModeColor;
+                chatWindow.BackgroundColor = lightModeColor;
+                chatInput.BackgroundColor = lightModeColor;
+                topBar.BackgroundColor = lightModeColor;
+
+                topBarLabel.TextColor = darkModeColor;
+            }
+            else
+            {
+                //Is light mode - change to dark
+                verticalStackLayout.BackgroundColor = darkModeColor;
+                topGrid.BackgroundColor = darkModeColor;
+                mainContentGrid.Background = darkModeColor;
+                chatWindow.BackgroundColor = darkModeColor;
+                chatInput.BackgroundColor = darkModeColor;
+                topBar.BackgroundColor = darkModeColor;
+
+                topBarLabel.TextColor = lightModeColor;
+            }
+
+            if(toggleMode) lightMode = !lightMode;
         }
 
     }
