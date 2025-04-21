@@ -14,9 +14,12 @@ public partial class MainPage : ContentPage
     //TTS class;
     TTS tts;
 
+    ICollection<ResourceDictionary> mergedDictionaries;
+
     public MainPage()
     {
         InitializeComponent();
+
         tts = new TTS(new TTSSettings(true, 0, 100, 
             System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
 
@@ -48,6 +51,7 @@ public partial class MainPage : ContentPage
 
     void LightDarkToggle(bool toggleMode)
     {
+        /*
         if (lightMode)
         {
             //Is dark mode - change to light
@@ -71,9 +75,30 @@ public partial class MainPage : ContentPage
             topBar.BackgroundColor = darkModeColor;
 
             topBarLabel.TextColor = lightModeColor;
+        }*/
+
+        if (lightMode)
+        {
+            mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+                mergedDictionaries.Add(new DarkTheme());
+            }
         }
 
-        if(toggleMode) lightMode = !lightMode;
+        else
+        {
+            mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+                mergedDictionaries.Add(new LightTheme());
+            }
+        }
+        
+
+        if (toggleMode) lightMode = !lightMode;
     }
 
     // github registration flow: (OAuth)
