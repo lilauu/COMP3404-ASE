@@ -1,22 +1,75 @@
-﻿namespace COMP3404_Client;
+using COMP3404_Client.Themes;
+using Microsoft.Maui.Controls;
+
+namespace COMP3404_Client;
 
 public partial class MainPage : ContentPage
 {
+    //Bool for light / dark mode
+    bool lightMode = true;
+
+    //TTS class;
+    TTS tts;
+
+    ICollection<ResourceDictionary> mergedDictionaries;
+
     public MainPage()
     {
         InitializeComponent();
 
+        tts = new TTS(new TTSSettings(true, 0, 100, 
+            System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
+
+        LightDarkToggle(false);
     }
     private async void OnProfileButtonClicked(object sender, EventArgs e)
     {
         // shell nav to settings page
-        await Shell.Current.GoToAsync("///" + nameof(SettingsPage));
+        await Shell.Current.GoToAsync("///"+nameof(SettingsPage));
+        TTS.instance.Speak("Profile");
     }
 
     private async void OnHistoryButtonClicked(object sender, EventArgs e)
     {
         // shell nav to history page
         await Shell.Current.GoToAsync("///" + nameof(HistoryPage));
+        TTS.instance.Speak("History");
+    }
+
+    private void LightDarkModeButtonClicked(object sender, EventArgs e)
+    {
+        LightDarkToggle(true);
+    }
+
+    private void SendButtonClicked(object sender, EventArgs e)
+    {
+        TTS.instance.Speak(chatInputFrame.Text);
+    }
+
+    void LightDarkToggle(bool toggleMode)
+    {
+        if (lightMode)
+        {
+            mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+                mergedDictionaries.Add(new DarkTheme());
+            }
+        }
+
+        else
+        {
+            mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+                mergedDictionaries.Add(new LightTheme());
+            }
+        }
+        
+
+        if (toggleMode) lightMode = !lightMode;
     }
 
     // github registration flow: (OAuth)
