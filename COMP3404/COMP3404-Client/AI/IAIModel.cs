@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using COMP3404_Shared.Models.Chats;
 
 namespace COMP3404_Client.AI;
 
@@ -11,5 +7,7 @@ namespace COMP3404_Client.AI;
 /// </summary>
 public interface IAIModel
 {
+    public void GetResponse(string message, Conversation conversation, Action<string> onResponseReceived);
+
 
 }
