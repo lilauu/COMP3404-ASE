@@ -2,15 +2,10 @@ namespace COMP3404_Client;
 
 public partial class SettingsPage : ContentPage
 {
-
-    /*private const string GitHubClientId = "YOUR_GITHUB_CLIENT_ID";
-    private const string GitHubClientSecret = "YOUR_GITHUB_CLIENT_SECRET";
-    private const string GitHubRedirectUri = "YOUR_REDIRECT_URI";*/
-
     public SettingsPage()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private async void OnHomeButtonClicked(object sender, EventArgs e)
     {
@@ -26,39 +21,30 @@ public partial class SettingsPage : ContentPage
 
     private async void OnLoginClicked(object sender, EventArgs e)
     {
-        /*try
-        {
-            // GitHub authorization URL
-            var authUrl = $"https://github.com/login/oauth/authorize?client_id={GitHubClientId}&redirect_uri={GitHubRedirectUri}&scope=user";
+        // github registration flow: (OAuth)
+        // https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#web-application-flow
+        // 1. request identity
+        // 2. redirect back to app
+        // 3. exchange code for access token
+        // 4. use token to access API
+        Uri authUri = new("https://github.com/login/oauth/authorize?client_id=Ov23li6gKzCpMMxUThEE");
+        Uri redirectUri = new("comp3404://login/github");
+#if WINDOWS
+            var result = await WinUIEx.WebAuthenticator.AuthenticateAsync(authUri, redirectUri);
+#else
+        var result = await WebAuthenticator.AuthenticateAsync(authUri, redirectUri);
+#endif
+        // the above somewhat works, but for whatever reason I can't get it to work when doing github -> API server -> uri handler
+        // so i will settle for github -> uri handler -> processing -> api server
 
-            // Use WebAuthenticator to start the OAuth flow
-            var result = await WebAuthenticator.Default.AuthenticateAsync(new Uri(authUrl), new Uri(GitHubRedirectUri));
+        if (!result.Properties.TryGetValue("code", out var code))
+            return;
 
-            if (result != null)
-            {
-                // GitHub will redirect to your Redirect URI with the code parameter
-                var code = result?.QueryParameters["code"];
+        HttpClient client = new();
+        var tokenResult = await client.SendAsync(new(HttpMethod.Get, $"http://127.0.0.1:5093/account/login/github?code={code}"));
+        // todo: store this somewhere for future API requests
+        string token = await tokenResult.Content.ReadAsStringAsync();
 
-                if (code != null)
-                {
-                    // Exchange the code for an access token
-                    var token = await GetGitHubAccessToken(code);
-                    // Use the token as needed (e.g., store it or call GitHub APIs)
-
-                    // Hide the GitHub login button after successful login
-                    LoginButton.IsVisible = false;
-                }
-                else
-                {
-                    await DisplayAlert("Error", "GitHub authentication failed", "OK");
-                }
-            }
-        }*/
-        /*catch (Exception ex)
-        {
-            
-        }*/
-
-        await DisplayAlert("Error", $"An error occurred: MAKE ME FUNCTIONAL JACK", "OK");
+        await DisplayAlert("Wow you are authed", "we should do something in UI about this :)", "OK");
     }
 }
