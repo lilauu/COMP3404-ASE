@@ -43,7 +43,7 @@ namespace COMP3404_Client;
         //Speaks a string input
         public void Speak(string toSpeak)
         {
-            if (settings.Enabled)
+            if (settings.Enabled && toSpeak != string.Empty)
             {
                 synth.Rate = settings.Rate;
                 synth.Volume = settings.Volume;

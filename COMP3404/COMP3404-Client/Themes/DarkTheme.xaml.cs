@@ -1,4 +1,4 @@
-namespace COMP3404_Client;
+namespace COMP3404_Client.Themes;
 
 public partial class DarkTheme : ResourceDictionary
 {

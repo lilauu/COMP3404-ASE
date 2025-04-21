@@ -1,14 +1,11 @@
+using COMP3404_Client.Themes;
 using Microsoft.Maui.Controls;
 
 namespace COMP3404_Client;
 
 public partial class MainPage : ContentPage
 {
-    // Colours for light / dark mode
-    Color lightModeColor = Color.FromRgb(240, 240,240);
-    Color darkModeColor = Color.FromArgb("#333333");
-
-    //Bool dor light / dark mode
+    //Bool for light / dark mode
     bool lightMode = true;
 
     //TTS class;
@@ -51,32 +48,6 @@ public partial class MainPage : ContentPage
 
     void LightDarkToggle(bool toggleMode)
     {
-        /*
-        if (lightMode)
-        {
-            //Is dark mode - change to light
-            verticalStackLayout.BackgroundColor = lightModeColor;
-            topGrid.BackgroundColor = lightModeColor;
-            mainContentGrid.BackgroundColor = lightModeColor;
-            chatWindow.BackgroundColor = lightModeColor;
-            chatInput.BackgroundColor = lightModeColor;
-            topBar.BackgroundColor = lightModeColor;
-
-            topBarLabel.TextColor = darkModeColor;
-        }
-        else
-        {
-            //Is light mode - change to dark
-            verticalStackLayout.BackgroundColor = darkModeColor;
-            topGrid.BackgroundColor = darkModeColor;
-            mainContentGrid.Background = darkModeColor;
-            chatWindow.BackgroundColor = darkModeColor;
-            chatInput.BackgroundColor = darkModeColor;
-            topBar.BackgroundColor = darkModeColor;
-
-            topBarLabel.TextColor = lightModeColor;
-        }*/
-
         if (lightMode)
         {
             mergedDictionaries = Application.Current.Resources.MergedDictionaries;
