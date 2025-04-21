@@ -16,6 +16,8 @@ namespace COMP3404_Client.WinUI
         /// </summary>
         public App()
         {
+            if (WinUIEx.WebAuthenticator.CheckOAuthRedirectionActivation())
+                return;
             this.InitializeComponent();
         }
 
