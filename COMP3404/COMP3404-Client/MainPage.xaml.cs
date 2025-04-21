@@ -8,7 +8,7 @@ public partial class MainPage : ContentPage
     //Bool for light / dark mode
     bool lightMode = true;
 
-    //TTS class;
+    //TTS class - Instantiated in App.xaml.cs
     TTS tts;
 
     ICollection<ResourceDictionary> mergedDictionaries;
@@ -16,9 +16,6 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-
-        tts = new TTS(new TTSSettings(true, 0, 100, 
-            System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
 
         LightDarkToggle(false);
     }
