@@ -72,7 +72,7 @@ public class AccountController : ControllerBase
     /// </summary>
     [HttpGet]
     [Route("login/github")]
-    public ActionResult<string> GithubLogin(string code)
+    public ActionResult<string> GithubLogin(string code, string state)
     {
         // use the code from the client to auth with github and get account info
         string accessToken = GetGithubToken(code);
@@ -100,7 +100,6 @@ public class AccountController : ControllerBase
             foundAccount.GithubToken = accessToken;
         }
 
-        // todo: do we need to create our own token? It's probably fine to just reuse the github token for now
-        return Ok(accessToken);
+        return Redirect($"comp3404://login/github?state={state}&access_token={accessToken}");
     }
 }
