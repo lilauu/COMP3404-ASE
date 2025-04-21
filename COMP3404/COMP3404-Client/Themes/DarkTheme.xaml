@@ -2,6 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="COMP3404_Client.Themes.DarkTheme">
     <Color x:Key="Background">Black</Color>
-    <Color x:Key="Text">White</Color>
+    <Color x:Key="Text">LightGrey</Color>
 
 </ResourceDictionary>
