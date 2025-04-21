@@ -4,3 +4,5 @@
   href: getting-started.md
 - name: Design Documentation
   href: design.md
+- name: UI Design Documentation
+  href: UI.md
