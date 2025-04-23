@@ -11,6 +11,17 @@ public class MessageViewModel : INotifyPropertyChanged
     private string m_fullMessage = "";
     private Timer m_timer;
     private Random m_rand;
+    private bool m_isSender = false;
+
+    public bool IsSender
+    {
+        get => m_isSender;
+        set
+        {
+            m_isSender = value;
+            OnPropertyChanged();
+        }
+    }
 
     public string Message
     {
@@ -19,7 +30,7 @@ public class MessageViewModel : INotifyPropertyChanged
         {
             m_fullMessage = value;
             m_displayMessage = "";
-            OnPropertyChanged(Message);
+            OnPropertyChanged();
         }
     }
 

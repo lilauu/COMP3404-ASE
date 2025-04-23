@@ -57,7 +57,7 @@
                     <StackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Messages}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="viewModels:MessageViewModel">
-                                <controls:MessageView MessageText="{Binding Message}" IsSender="False"/>
+                                <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
