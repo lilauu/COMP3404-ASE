@@ -1,5 +1,6 @@
 using COMP3404_Client.Themes;
 using Microsoft.Maui.Controls;
+using System.Diagnostics;
 
 namespace COMP3404_Client;
 
@@ -7,9 +8,6 @@ public partial class MainPage : ContentPage
 {
     //Bool for light / dark mode
     bool lightMode = true;
-
-    //TTS class - Instantiated in App.xaml.cs
-    TTS tts;
 
     ICollection<ResourceDictionary> mergedDictionaries;
 

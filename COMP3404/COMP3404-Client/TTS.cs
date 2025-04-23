@@ -48,17 +48,5 @@ namespace COMP3404_Client;
                 synth.SpeakAsync(toSpeak);
             }
         }
-        //Pauses the SpeechSynthesizer
-        public void Pause()
-        {
-            synth.Pause();
-        }
-
-        //Resumes the SpeechSynthesizer
-        public void Resume()
-        {
-            synth.Resume();
-        }
-
         #endregion
     }
