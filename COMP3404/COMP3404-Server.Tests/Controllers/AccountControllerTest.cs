@@ -1,6 +1,7 @@
 ﻿using COMP3404_Server.Controllers;
 using COMP3404_Server.Repositories;
 using COMP3404_Shared.Models.Accounts;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Moq.Protected;
@@ -100,12 +101,13 @@ public class AccountControllerTest
         // Act
         ///////
 
-        ActionResult<string> result = controller.GithubLogin("test");
+        ActionResult<string> result = controller.GithubLogin("test", "");
+        var redirect = (result.Result as RedirectResult)?.Url;
 
         // Assert
         //////////
-        Assert.IsType<OkObjectResult>(result.Result);
-        Assert.Equal("gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", ((OkObjectResult)result.Result).Value);
+        Assert.IsType<RedirectResult>(result.Result);
+        Assert.StartsWith("comp3404://login/github", redirect);
     }
 
     [Fact]
@@ -146,13 +148,14 @@ public class AccountControllerTest
         // Act
         ///////
 
-        ActionResult<string> result = controller.GithubLogin("test");
+        ActionResult<string> result = controller.GithubLogin("test", "");
+        var redirect = (result.Result as RedirectResult)?.Url;
 
         // Assert
         //////////
 
-        Assert.IsType<OkObjectResult>(result.Result);
-        Assert.Equal("gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", ((OkObjectResult)result.Result).Value);
+        Assert.IsType<RedirectResult>(result.Result);
+        Assert.StartsWith("comp3404://login/github", redirect);
     }
 
     [Fact]
@@ -198,7 +201,7 @@ public class AccountControllerTest
         // Act
         ///////
 
-        ActionResult<string> act() => controller.GithubLogin("test");
+        ActionResult<string> act() => controller.GithubLogin("test", "");
 
         // Assert
         //////////
@@ -249,7 +252,7 @@ public class AccountControllerTest
         // Act
         ///////
 
-        ActionResult<string> act() => controller.GithubLogin("test");
+        ActionResult<string> act() => controller.GithubLogin("test", "");
 
         // Assert
         //////////
@@ -300,7 +303,7 @@ public class AccountControllerTest
         // Act
         ///////
 
-        ActionResult<string> act() => controller.GithubLogin("test");
+        ActionResult<string> act() => controller.GithubLogin("test", "");
 
         // Assert
         //////////
@@ -351,7 +354,7 @@ public class AccountControllerTest
         // Act
         ///////
 
-        ActionResult<string> act() => controller.GithubLogin("test");
+        ActionResult<string> act() => controller.GithubLogin("test", "");
 
         // Assert
         //////////
