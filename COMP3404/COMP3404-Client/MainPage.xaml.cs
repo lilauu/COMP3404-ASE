@@ -8,17 +8,11 @@ public partial class MainPage : ContentPage
     //Bool for light / dark mode
     bool lightMode = true;
 
-    //TTS class;
-    TTS tts;
-
     ICollection<ResourceDictionary> mergedDictionaries;
 
     public MainPage()
     {
         InitializeComponent();
-
-        tts = new TTS(new TTSSettings(true, 0, 100,
-            System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
 
         LightDarkToggle(false);
     }
@@ -26,14 +20,12 @@ public partial class MainPage : ContentPage
     {
         // shell nav to settings page
         await Shell.Current.GoToAsync("///" + nameof(SettingsPage));
-        TTS.instance.Speak("Profile");
     }
 
     private async void OnHistoryButtonClicked(object sender, EventArgs e)
     {
         // shell nav to history page
         await Shell.Current.GoToAsync("///" + nameof(HistoryPage));
-        TTS.instance.Speak("History");
     }
 
     private void LightDarkModeButtonClicked(object sender, EventArgs e)
@@ -43,7 +35,7 @@ public partial class MainPage : ContentPage
 
     private void SendButtonClicked(object sender, EventArgs e)
     {
-        TTS.instance.Speak(chatInputFrame.Text);
+
     }
 
     void LightDarkToggle(bool toggleMode)
