@@ -2,8 +2,17 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:COMP3404_Client"
+             xmlns:controls="clr-namespace:COMP3404_Client.Views"
+             xmlns:viewModels="clr-namespace:COMP3404_Client.ViewModels"
              x:Class="COMP3404_Client.MainPage"
-             BackgroundColor="{DynamicResource Background}">
+             x:DataType="viewModels:MainPageViewModel"
+             BackgroundColor="{DynamicResource Background}"
+             x:Name="MainPageThing">
+
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel/>
+    </ContentPage.BindingContext>
     <!-- Deep Purple Theme -->
 
     <Grid Padding="10" x:Name="topGrid">
@@ -41,7 +50,11 @@
         </StackLayout>
 
         <!-- Main Content -->
-        <Grid Grid.Column="1" RowDefinitions="Auto, * " x:Name="mainContentGrid">
+        <Grid Grid.Column="1" x:Name="mainContentGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <!-- Header -->
             <Grid Grid.Row="0" Padding="10" ColumnDefinitions="Auto, *" 
                   VerticalOptions="Start" BackgroundColor ="{DynamicResource Background}" x:Name="topBar">
@@ -53,14 +66,13 @@
 
             <!-- Chat Window -->
             <StackLayout Grid.Row="1" Padding="10" Spacing="10" x:Name="chatWindow">
-                <ScrollView>
-                    <StackLayout Spacing="10">
-                        <Frame BackgroundColor="{DynamicResource Background}" Padding="10" CornerRadius="15">
-                            <Label Text="Chat Message 1" TextColor= "{DynamicResource Text}" FontSize="18"/>
-                        </Frame>
-                        <Frame BackgroundColor="{DynamicResource Background}" Padding="10" CornerRadius="15">
-                            <Label Text="Chat Message 2" TextColor= "{DynamicResource Text}" FontSize="18"/>
-                        </Frame>
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <StackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Messages}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:MessageViewModel">
+                                <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
                     </StackLayout>
                 </ScrollView>
 

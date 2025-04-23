@@ -82,10 +82,19 @@
 	  <MauiXaml Update="SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MessageView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="AI\Gemini\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\MessageView.xaml.cs">
+	    <DependentUpon>MessageView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>
