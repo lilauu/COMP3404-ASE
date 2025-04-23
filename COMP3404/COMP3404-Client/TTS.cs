@@ -6,7 +6,7 @@ namespace COMP3404_Client;
 /// This class reads a string input out to the user
 /// </summary>
 
-    internal class TTS
+    public class TTS
     {
     //Should not be using the singleton pattern probably
     public static TTS instance;
