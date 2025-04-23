@@ -9,6 +9,9 @@ public partial class MainPage : ContentPage
     //Bool for light / dark mode
     bool lightMode = true;
 
+    //TTS class;
+    TTS tts;
+
     ICollection<ResourceDictionary> mergedDictionaries;
 
     public MainPage()
@@ -16,6 +19,8 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         LightDarkToggle(false);
+
+        tts = new TTS(new TTSSettings(true, 0, 100, System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
     }
     private async void OnProfileButtonClicked(object sender, EventArgs e)
     {
