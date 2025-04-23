@@ -1,8 +1,11 @@
 ﻿using COMP3404_Server.Controllers;
 using COMP3404_Server.Repositories;
 using COMP3404_Shared.Models.Accounts;
+using COMP3404_Shared.Models.Api;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Routing;
 using Moq;
 using Moq.Protected;
 using System.Security;
@@ -360,5 +363,138 @@ public class AccountControllerTest
         //////////
 
         Assert.Throws<JsonException>(act);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    [Fact]
+    public void GetUserInfo_Success()
+    {
+        // Arrange
+        ///////////
+
+        var request = new Mock<HttpRequest>();
+        request.SetupGet(x => x.Headers).Returns(
+            new HeaderDictionary {
+                {"Authorize", "Bearer thisIsATestToken"}
+            });
+
+        var httpContext = new Mock<HttpContext>();
+        httpContext.SetupGet(x => x.Request).Returns(request.Object);
+        var actionContext = new ActionContext() { HttpContext = httpContext.Object, RouteData = new(), ActionDescriptor = new ControllerActionDescriptor() };
+
+        var accountRepoMock = new Mock<IUserAccountRepository>();
+        accountRepoMock
+            .Setup(r => r.GetByToken(It.IsAny<string>()))
+            .Returns<string>(token => new UserAccount()
+            {
+                AccountId = 69,
+                FirstName = "ThisIsATestFirstName",
+                GithubToken = token,
+            });
+
+        var messageHandlerMock = new Mock<HttpMessageHandler>();
+        var client = new HttpClient(messageHandlerMock.Object);
+
+        AccountController controller = new(accountRepoMock.Object, client);
+        controller.ControllerContext = new ControllerContext(actionContext);
+
+
+        // Act
+        ///////
+
+        ActionResult<UserInfo> userInfoResult = controller.GetUserInfo();
+
+        // Assert
+        //////////
+
+        Assert.IsAssignableFrom<OkObjectResult>(userInfoResult.Result);
+    }
+
+    [Fact]
+    public void GetUserInfo_Failure_NoHeader()
+    {
+        // Arrange
+        ///////////
+
+        var request = new Mock<HttpRequest>();
+        request.SetupGet(x => x.Headers).Returns(
+            new HeaderDictionary {
+            });
+
+        var httpContext = new Mock<HttpContext>();
+        httpContext.SetupGet(x => x.Request).Returns(request.Object);
+        var actionContext = new ActionContext() { HttpContext = httpContext.Object, RouteData = new(), ActionDescriptor = new ControllerActionDescriptor() };
+
+        var accountRepoMock = new Mock<IUserAccountRepository>();
+        accountRepoMock
+            .Setup(r => r.GetByToken(It.IsAny<string>()))
+            .Returns<string>(token => new UserAccount()
+            {
+                AccountId = 69,
+                FirstName = "ThisIsATestFirstName",
+                GithubToken = token,
+            });
+
+        var messageHandlerMock = new Mock<HttpMessageHandler>();
+        var client = new HttpClient(messageHandlerMock.Object);
+
+        AccountController controller = new(accountRepoMock.Object, client);
+        controller.ControllerContext = new ControllerContext(actionContext);
+
+
+        // Act
+        ///////
+
+        ActionResult<UserInfo> userInfoResult = controller.GetUserInfo();
+
+        // Assert
+        //////////
+
+        Assert.IsAssignableFrom<UnauthorizedResult>(userInfoResult.Result);
+    }
+
+    [Fact]
+    public void GetUserInfo_Failure_WeirdHeader()
+    {
+        // Arrange
+        ///////////
+
+        var request = new Mock<HttpRequest>();
+        request.SetupGet(x => x.Headers).Returns(
+            new HeaderDictionary {
+                { "Authorize", "Bearer this is a weird header" }
+            });
+
+        var httpContext = new Mock<HttpContext>();
+        httpContext.SetupGet(x => x.Request).Returns(request.Object);
+        var actionContext = new ActionContext() { HttpContext = httpContext.Object, RouteData = new(), ActionDescriptor = new ControllerActionDescriptor() };
+
+        var accountRepoMock = new Mock<IUserAccountRepository>();
+        accountRepoMock
+            .Setup(r => r.GetByToken(It.IsAny<string>()))
+            .Returns<string>(token => new UserAccount()
+            {
+                AccountId = 69,
+                FirstName = "ThisIsATestFirstName",
+                GithubToken = token,
+            });
+
+        var messageHandlerMock = new Mock<HttpMessageHandler>();
+        var client = new HttpClient(messageHandlerMock.Object);
+
+        AccountController controller = new(accountRepoMock.Object, client);
+        controller.ControllerContext = new ControllerContext(actionContext);
+
+
+        // Act
+        ///////
+
+        ActionResult<UserInfo> userInfoResult = controller.GetUserInfo();
+
+        // Assert
+        //////////
+
+        Assert.IsAssignableFrom<UnauthorizedResult>(userInfoResult.Result);
     }
 }

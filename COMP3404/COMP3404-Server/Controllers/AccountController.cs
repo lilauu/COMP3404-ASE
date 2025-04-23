@@ -109,17 +109,24 @@ public class AccountController : ControllerBase
     [HttpGet]
     public ActionResult<UserInfo> GetUserInfo()
     {
-        if (Request.Headers.TryGetValue("Authorize", out var authoriseHeader))
+        if (!Request.Headers.TryGetValue("Authorize", out var authoriseHeader))
             return Unauthorized();
 
-        if (authoriseHeader.Count != 2 || authoriseHeader[0] != "Bearer")
+        if (authoriseHeader.Count != 1)
             return Unauthorized();
 
-        var accessToken = authoriseHeader[2];
+        var splitted = authoriseHeader.ToString().Split(" ");
+        if (splitted.Length != 2)
+            return Unauthorized();
+
+        var accessToken = splitted[1];
         if (accessToken is null)
             return Unauthorized();
 
         // find account in db with that token
+        // TODO: this is likely to be rather vulnerable to timing attacks, that's what we get for rolling our own auth i guess
+        // I don't have time for a better implementation because that would require moving the entire project away from MAUI and
+        // into just being a web app, but hey, at least the auth would be like 5 lines of code total that would be cool
         var account = m_accountRepository.GetByToken(accessToken);
         if (account is null)
             return Forbid();
