@@ -2,37 +2,23 @@
 
 namespace COMP3404_Client
 {
-    internal class TTSSettings
+    public class TTSSettings
     {
-        public bool Enabled { get => enabled; }
-        public int Rate { get => rate; }
-        public int Volume { get => volume; }
-        public VoiceGender Gender { get => gender; }
-        public VoiceAge Age { get => age; }
-
-        bool enabled;
-        int rate;
-        int volume;
-        VoiceGender gender;
-        VoiceAge age;
-
-
         public TTSSettings(bool pEnabled, int pRate, int pVolume, VoiceGender pGender, VoiceAge pAge)
         {
-            enabled = pEnabled;
-            rate = pRate;
-            volume = pVolume;
-            gender = pGender;
-            age = pAge;
+            Enabled = pEnabled;
+            Rate = pRate;
+            Volume = pVolume;
+            Gender = pGender;
+            Age = pAge;
         }
 
-        void UpdateSettings(bool pEnabled, int pRate, int pVolume, VoiceGender pGender, VoiceAge pAge)
-        {
-            enabled = pEnabled;
-            rate = pRate;
-            volume = pVolume;
-            gender = pGender;
-            age = pAge;
-        }
+
+        public bool Enabled;
+        public int Rate;
+        public int Volume;
+        public VoiceGender Gender;
+        public VoiceAge Age;
+
     }
 }
