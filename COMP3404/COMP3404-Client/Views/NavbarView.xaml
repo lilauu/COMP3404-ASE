@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="COMP3404_Client.Views.NavbarView">
+    <StackLayout Padding="10" VerticalOptions="Fill" Spacing="20" x:Name="verticalStackLayout">
+        <Button Text="🏠" FontSize="24"
+                    SemanticProperties.Hint="Go to Home" Clicked="OnHomeButtonClicked"/>
+        <Button Text="👤" FontSize="24" 
+                    SemanticProperties.Hint="Profile" Clicked="OnProfileButtonClicked"/>
+        <Button Text="📂" FontSize="24" 
+                    SemanticProperties.Hint="Open Saved Chats" Clicked="OnHistoryButtonClicked"/>
+        <Button Text="☀️" FontSize="24" 
+                    SemanticProperties.Hint="Toggle Light/Dark Mode" Clicked="ThemeToggleButtonClicked"/>
+    </StackLayout>
+</ContentView>
