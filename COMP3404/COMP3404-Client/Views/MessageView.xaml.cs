@@ -6,7 +6,7 @@ namespace COMP3404_Client.Views;
 public partial class MessageView : ContentView
 {
     public static readonly BindableProperty MessageTextProperty =
-        BindableProperty.Create(nameof(MessageText), typeof(string), typeof(MessageView), string.Empty);
+    BindableProperty.Create(nameof(MessageText), typeof(string), typeof(MessageView), string.Empty);
     /// <summary>
     /// The text to display.
     /// </summary>

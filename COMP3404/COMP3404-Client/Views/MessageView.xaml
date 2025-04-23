@@ -4,10 +4,8 @@
              xmlns:local="clr-namespace:COMP3404_Client.Views"
              x:Name="this"
              x:Class="COMP3404_Client.Views.MessageView"
-             x:DataType="local:MessageView"
-             BindingContext="{x:Reference this}"
              >
-    <Frame BackgroundColor="{DynamicResource Background}" Padding="10" CornerRadius="15">
+    <Frame BindingContext="{x:Reference this}" BackgroundColor="{DynamicResource Background}" Padding="10" CornerRadius="15">
         <Label HorizontalTextAlignment="{Binding HorizontalTextAlignment}" Text="{Binding MessageText}" TextColor= "{DynamicResource Text}" FontSize="18"/>
     </Frame>
 </ContentView>

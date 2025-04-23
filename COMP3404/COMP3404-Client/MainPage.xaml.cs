@@ -1,4 +1,5 @@
 using COMP3404_Client.Themes;
+using COMP3404_Client.ViewModels;
 using Microsoft.Maui.Controls;
 
 namespace COMP3404_Client;
@@ -20,8 +21,10 @@ public partial class MainPage : ContentPage
         tts = new TTS(new TTSSettings(true, 0, 100, 
             System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
 
+
         LightDarkToggle(false);
     }
+
     private async void OnProfileButtonClicked(object sender, EventArgs e)
     {
         // shell nav to settings page
@@ -44,6 +47,7 @@ public partial class MainPage : ContentPage
     private void SendButtonClicked(object sender, EventArgs e)
     {
         TTS.instance.Speak(chatInputFrame.Text);
+        //TestThing.Message = chatInputFrame.Text;
     }
 
     void LightDarkToggle(bool toggleMode)
@@ -71,6 +75,8 @@ public partial class MainPage : ContentPage
 
         if (toggleMode) lightMode = !lightMode;
     }
+
+
 
     // github registration flow: (OAuth)
     // https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#web-application-flow
