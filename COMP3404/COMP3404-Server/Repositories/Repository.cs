@@ -17,6 +17,11 @@ public class Repository : IUserAccountRepository
         return m_dbContext.Accounts.FirstOrDefault(a => a.AccountId == id);
     }
 
+    UserAccount? IUserAccountRepository.GetByToken(string token)
+    {
+        return m_dbContext.Accounts.FirstOrDefault(a => a.GithubToken == token);
+    }
+
     UserAccount? IUserAccountRepository.Add(UserAccount newAccount)
     {
         return m_dbContext.Accounts.Add(newAccount).Entity;

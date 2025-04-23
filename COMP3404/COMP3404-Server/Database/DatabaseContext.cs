@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using COMP3404_Server.Models;
-using COMP3404_Shared.Models.Accounts;
+﻿using COMP3404_Shared.Models.Accounts;
+using Microsoft.EntityFrameworkCore;
 
 namespace COMP3404_Server.Database;
 

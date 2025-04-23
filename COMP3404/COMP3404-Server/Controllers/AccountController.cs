@@ -1,7 +1,7 @@
 ﻿using COMP3404_Server.Database;
-using COMP3404_Server.Models.Api;
 using COMP3404_Server.Repositories;
 using COMP3404_Shared.Models.Accounts;
+using COMP3404_Shared.Models.Api;
 using COMP3404_Shared.Models.Api.Github;
 using Microsoft.AspNetCore.Mvc;
 using System.Security;
@@ -11,7 +11,7 @@ using System.Web;
 namespace COMP3404_Server.Controllers;
 
 [ApiController]
-[Route("account/")]
+[Route("account")]
 public class AccountController : ControllerBase
 {
     private IUserAccountRepository m_accountRepository;
@@ -101,5 +101,34 @@ public class AccountController : ControllerBase
         }
 
         return Redirect($"comp3404://login/github?state={state}&access_token={accessToken}");
+    }
+
+    /// <summary>
+    /// Gets information about the currently authed user.
+    /// </summary>
+    [HttpGet]
+    public ActionResult<UserInfo> GetUserInfo()
+    {
+        if (Request.Headers.TryGetValue("Authorize", out var authoriseHeader))
+            return Unauthorized();
+
+        if (authoriseHeader.Count != 2 || authoriseHeader[0] != "Bearer")
+            return Unauthorized();
+
+        var accessToken = authoriseHeader[2];
+        if (accessToken is null)
+            return Unauthorized();
+
+        // find account in db with that token
+        var account = m_accountRepository.GetByToken(accessToken);
+        if (account is null)
+            return Forbid();
+
+        UserInfo userInfo = new()
+        {
+            FirstName = account.FirstName,
+        };
+
+        return Ok(userInfo);
     }
 }
