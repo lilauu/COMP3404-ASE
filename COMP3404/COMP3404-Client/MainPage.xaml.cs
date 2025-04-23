@@ -101,11 +101,11 @@ public partial class MainPage : ContentPage
 
     private void Slider_Pitch_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        //TTS.instance.options.Pitch = (int)e.NewValue * -1;
+        TTS.instance.options.Pitch = (float)e.NewValue;
     }
 
     private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        //TTS.instance.settings.Enabled = e.Value;
+        TTS.instance.enabled = e.Value;
     }
 }

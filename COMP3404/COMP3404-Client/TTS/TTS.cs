@@ -16,6 +16,7 @@ internal class TTS
     #region Fields
     CancellationTokenSource cts;
     public SpeechOptions options;
+    public bool enabled;
     #endregion
 
     #region Constructors
@@ -29,6 +30,7 @@ internal class TTS
         else return;
 
         options = new();
+        options.Pitch = 2;
         GetLocales();
     }
     #endregion
@@ -39,6 +41,9 @@ internal class TTS
 
     public async Task Speak(string toSpeak)
     {
+        if (!enabled)
+            return;
+
         CancelSpeech();
         cts = new CancellationTokenSource();
         await TextToSpeech.Default.SpeakAsync(toSpeak, options, cancelToken: cts.Token);
