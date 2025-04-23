@@ -16,4 +16,8 @@ public interface IAIModel
     public void GetResponse(string message, Conversation conversation, Action<string> onResponseReceived);
 
     public void SetLanguage(string language, Conversation conversation, Action<string> onResponseReceived);
+
+    public void LimitNumberOfWordsInResponce(int numberOfWords, Conversation conversation, Action<string> onResponseReceived);
+
+
 }
