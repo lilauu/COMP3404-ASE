@@ -25,6 +25,13 @@
                     SemanticProperties.Hint="Open Saved Chats" Clicked="OnHistoryButtonClicked"/>
             <Button Text="🏠" BackgroundColor="{DynamicResource Text}" FontSize="24" 
                     SemanticProperties.Hint="Go to Home"/>
+            
+            <Slider Maximum="1" Value="1" ValueChanged="Slider_Volume_ValueChanged" />
+
+            <Slider Maximum="2" Value="0" ValueChanged="Slider_Pitch_ValueChanged" />
+
+            <CheckBox IsChecked="False" CheckedChanged="CheckBox_CheckedChanged"/>
+
         </StackLayout>
 
         <!-- Main Content -->
