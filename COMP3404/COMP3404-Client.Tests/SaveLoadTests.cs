@@ -1,5 +1,5 @@
 ﻿namespace COMP3404_Client.Tests;
-using COMP3404_Client.SaveLoadManager;
+using COMP3404_Client.SaveLoadManagerScripts;
 {
     public class SaveLoadTests
     {
