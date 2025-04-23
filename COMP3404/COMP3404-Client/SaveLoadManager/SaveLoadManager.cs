@@ -6,16 +6,16 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace COMP3404_Client
+namespace COMP3404_Client.SaveLoadManager
 {
-    public class SaveLoadManager
+    public class SaveLoadManager : ISaveLoadManager
     {
         public SaveLoadManager()
         {
 
         }
 
-        public void SaveData<T>(T data, string fileName)
+        public void SaveDataToFile<T>(T data, string fileName)
         {
             //Create the file path using the MyDocuments folder
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -27,7 +27,7 @@ namespace COMP3404_Client
 
         }
 
-        public T LoadData<T>(string fileName)
+        public T LoadDataFromFile<T>(string fileName)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -39,7 +39,6 @@ namespace COMP3404_Client
             var text = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<T>(text) ?? throw new Exception("Failed to parse JSON, what the fuck");
         }
-
         public void DeleteFileIfExists(string fileName)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -51,5 +50,21 @@ namespace COMP3404_Client
                 File.Delete(filePath);
             }
         }
+
+        public void SaveDataToOnline()
+        {
+            //Save the data to the online database
+            throw new NotImplementedException();
+        }
+
+        public T LoadDataFromOnline<T>()
+        {
+            //Load the data from the online database
+            throw new NotImplementedException();
+        }
+
+
+
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using COMP3404_Client;
-namespace COMP3404_Client.Tests
+﻿namespace COMP3404_Client.Tests
 {
     public class SaveLoadTests
     {
