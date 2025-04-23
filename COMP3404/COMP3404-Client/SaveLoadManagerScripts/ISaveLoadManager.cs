@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace COMP3404_Client
+namespace COMP3404_Client.SaveLoadManagerScripts
 {
-    internal interface ISaveLoadManager
+    public interface ISaveLoadManager
     {
         void SaveDataToFile<T>(T data, string fileName);
         T LoadDataFromFile<T>(string fileName);

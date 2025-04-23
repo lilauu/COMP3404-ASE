@@ -1,10 +1,11 @@
 using COMP3404_Client.Themes;
-using Microsoft.Maui.Controls;
+using COMP3404_Client.SaveLoadManagerScripts;
 
 namespace COMP3404_Client;
 
 public partial class MainPage : ContentPage
 {
+    SaveLoadManager saveLoadManager = new();
     //Bool for light / dark mode
     bool lightMode = true;
 
@@ -15,6 +16,8 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         LightDarkToggle(false);
+        saveLoadManager = new();
+        chatInputFrame.Text = saveLoadManager.LoadDataFromFile<string>("LastChatMessage.txt");
     }
     private async void OnProfileButtonClicked(object sender, EventArgs e)
     {
@@ -35,7 +38,7 @@ public partial class MainPage : ContentPage
 
     private void SendButtonClicked(object sender, EventArgs e)
     {
-
+        saveLoadManager.SaveDataToFile(chatInputFrame.Text, "LastChatMessage.txt");
     }
 
     void LightDarkToggle(bool toggleMode)

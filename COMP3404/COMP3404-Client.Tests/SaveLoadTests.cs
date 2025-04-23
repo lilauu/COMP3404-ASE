@@ -1,4 +1,5 @@
-﻿namespace COMP3404_Client.Tests
+﻿namespace COMP3404_Client.Tests;
+using COMP3404_Client.SaveLoadManager;
 {
     public class SaveLoadTests
     {
@@ -12,7 +13,7 @@
             //Act 
             List<string> testData = ["Test One", "Test Two", "Test Three"];
 
-            saveLoadManager.SaveData(testData, "TestData.txt");
+            saveLoadManager.SaveDataToFile(testData, "TestData.txt");
 
             //Assert
             Assert.True(File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TestData.txt")));
@@ -28,9 +29,9 @@
             //Act 
             List<string> testData = ["Test One", "Test Two", "Test Three"];
 
-            saveLoadManager.SaveData(testData, "TestData.txt");
+            saveLoadManager.SaveDataToFile(testData, "TestData.txt");
 
-            var loadList = saveLoadManager.LoadData<List<string>>("TestData.txt");
+            var loadList = saveLoadManager.LoadDataFromFile<List<string>>("TestData.txt");
 
             //Assert
             Assert.Equal(testData, loadList);

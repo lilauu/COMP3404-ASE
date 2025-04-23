@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace COMP3404_Client.SaveLoadManager
+namespace COMP3404_Client.SaveLoadManagerScripts
 {
     public class SaveLoadManager : ISaveLoadManager
     {
