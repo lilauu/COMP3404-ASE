@@ -15,5 +15,5 @@ public interface IAIModel
     /// <param name="onResponseReceived">A callback that is called when a response is received from the model, with a string parameter of the model's response</param>
     public void GetResponse(string message, Conversation conversation, Action<string> onResponseReceived);
 
-    public void SetLanguage(string language, string message, Conversation conversation, Action<string> onResponseReceived);
+    public void SetLanguage(string language, Conversation conversation, Action<string> onResponseReceived);
 }
