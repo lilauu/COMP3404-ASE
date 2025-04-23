@@ -1,6 +1,6 @@
 ﻿namespace COMP3404_Client.Tests;
 using COMP3404_Client.SaveLoadManagerScripts;
-{
+
     public class SaveLoadTests
     {
         [Fact]
@@ -37,5 +37,3 @@ using COMP3404_Client.SaveLoadManagerScripts;
             Assert.Equal(testData, loadList);
         }
     }
-    
-}
