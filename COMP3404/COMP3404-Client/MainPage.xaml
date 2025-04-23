@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:COMP3404_Client.Views"
              x:Class="COMP3404_Client.MainPage"
              BackgroundColor="{DynamicResource Background}">
     <!-- Deep Purple Theme -->
@@ -42,12 +43,8 @@
             <StackLayout Grid.Row="1" Padding="10" Spacing="10" x:Name="chatWindow">
                 <ScrollView>
                     <StackLayout Spacing="10">
-                        <Frame BackgroundColor="{DynamicResource Background}" Padding="10" CornerRadius="15">
-                            <Label Text="Chat Message 1" TextColor= "{DynamicResource Text}" FontSize="18"/>
-                        </Frame>
-                        <Frame BackgroundColor="{DynamicResource Background}" Padding="10" CornerRadius="15">
-                            <Label Text="Chat Message 2" TextColor= "{DynamicResource Text}" FontSize="18"/>
-                        </Frame>
+                        <controls:MessageView MessageText="Chat Message 1"/>
+                        <controls:MessageView MessageText="Chat Message 2" IsSender="True"/>
                     </StackLayout>
                 </ScrollView>
 
