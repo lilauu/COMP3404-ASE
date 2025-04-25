@@ -1,9 +1,10 @@
 ﻿using COMP3404_Server.Database;
 using COMP3404_Shared.Models.Accounts;
+using COMP3404_Shared.Models.Chats;
 
 namespace COMP3404_Server.Repositories;
 
-public class Repository : IUserAccountRepository
+public class Repository : IUserAccountRepository, IChatRepository
 {
     private DatabaseContext m_dbContext;
 
@@ -25,5 +26,21 @@ public class Repository : IUserAccountRepository
     UserAccount? IUserAccountRepository.Add(UserAccount newAccount)
     {
         return m_dbContext.Accounts.Add(newAccount).Entity;
+    }
+
+    IEnumerable<Chat> IChatRepository.GetChats(int userId)
+    {
+        return m_dbContext.Chats.Where(c => c.OwnerId == userId);
+    }
+
+    Chat? IChatRepository.AddChat(int userId, string chatName, IEnumerable<ChatMessage> messages)
+    {
+        Chat newChat = new()
+        {
+            OwnerId = userId,
+            ChatName = chatName,
+            Messages = messages.ToList() 
+        };
+        return m_dbContext.Chats.Add(newChat).Entity;
     }
 }

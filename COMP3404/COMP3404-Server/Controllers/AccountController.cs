@@ -1,5 +1,4 @@
-﻿using COMP3404_Server.Database;
-using COMP3404_Server.Repositories;
+﻿using COMP3404_Server.Repositories;
 using COMP3404_Shared.Models.Accounts;
 using COMP3404_Shared.Models.Api;
 using COMP3404_Shared.Models.Api.Github;
@@ -109,18 +108,7 @@ public class AccountController : ControllerBase
     [HttpGet]
     public ActionResult<UserInfo> GetUserInfo()
     {
-        if (!Request.Headers.TryGetValue("Authorize", out var authoriseHeader))
-            return Unauthorized();
-
-        if (authoriseHeader.Count != 1)
-            return Unauthorized();
-
-        var splitted = authoriseHeader.ToString().Split(" ");
-        if (splitted.Length != 2)
-            return Unauthorized();
-
-        var accessToken = splitted[1];
-        if (accessToken is null)
+        if (!Utils.GetUserTokenFromHeaders(Request.Headers, out string accessToken))
             return Unauthorized();
 
         // find account in db with that token
