@@ -56,6 +56,8 @@ public class ChatController : ControllerBase
         if (result is null)
             return Problem();
 
+        m_accountRepository.Save();
+
         return Ok();
     }
 

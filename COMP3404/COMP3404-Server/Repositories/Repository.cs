@@ -25,7 +25,9 @@ public class Repository : IUserAccountRepository, IChatRepository
 
     UserAccount? IUserAccountRepository.Add(UserAccount newAccount)
     {
-        return m_dbContext.Accounts.Add(newAccount).Entity;
+        var ent = m_dbContext.Accounts.Add(newAccount).Entity;
+        m_dbContext.SaveChanges();
+        return ent;
     }
 
     IEnumerable<Chat> IChatRepository.GetChats(int userId)
@@ -41,6 +43,13 @@ public class Repository : IUserAccountRepository, IChatRepository
             ChatName = chatName,
             Messages = new(messages)
         };
-        return m_dbContext.Chats.Add(newChat).Entity;
+        var ent = m_dbContext.Chats.Add(newChat).Entity;
+        m_dbContext.SaveChanges();
+        return ent;
+    }
+
+    public void Save()
+    {
+        m_dbContext.SaveChanges();
     }
 }

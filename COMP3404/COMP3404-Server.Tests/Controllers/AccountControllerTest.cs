@@ -376,7 +376,7 @@ public class AccountControllerTest
         var request = new Mock<HttpRequest>();
         request.SetupGet(x => x.Headers).Returns(
             new HeaderDictionary {
-                {"Authorize", "Bearer thisIsATestToken"}
+                {"Authorization", "Bearer thisIsATestToken"}
             });
 
         var httpContext = new Mock<HttpContext>();
@@ -463,7 +463,7 @@ public class AccountControllerTest
         var request = new Mock<HttpRequest>();
         request.SetupGet(x => x.Headers).Returns(
             new HeaderDictionary {
-                { "Authorize", "Bearer this is a weird header" }
+                { "Authorization", "Bearer this is a weird header" }
             });
 
         var httpContext = new Mock<HttpContext>();

@@ -1,28 +1,41 @@
-﻿using System;
+﻿using COMP3404_Shared.Models.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace COMP3404_Client.API;
 
 public class DataManager
 {
+    public static DataManager Instance { get; private set; }
+
     const string ServerURI = "http://localhost:5093";
 
     private HttpClient m_httpClient;
 
     private string? m_accessToken = null;
 
+    private UserInfo? m_userInfo = null;
+
+    public string FirstName => m_userInfo?.FirstName ?? "";
+
     public DataManager(HttpClient httpClient)
     {
-        m_httpClient = httpClient;
+        if (Instance is null)
+            Instance = this;
+        else
+            return;
+
+         m_httpClient = httpClient;
     }
 
     public bool IsAuthenticated() => m_accessToken != null;
 
-    public async void Authenticate()
+    public async Task<bool> Authenticate()
     {
         // github registration flow: (OAuth)
         // https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#web-application-flow
@@ -39,6 +52,24 @@ public class DataManager
 #endif
 
         m_accessToken = result.AccessToken;
+
+        return m_accessToken is not null;
+    }
+
+    public async Task<UserInfo?> GetUserInfo()
+    {
+        var res = await MakeAuthenticatedRequest(HttpMethod.Get, new HttpRequestOptions(), "account");
+        if (res.StatusCode != System.Net.HttpStatusCode.OK)
+        {
+            m_userInfo = null;
+        }
+        else
+        {
+            string content = await res.Content.ReadAsStringAsync();
+            m_userInfo = JsonSerializer.Deserialize<UserInfo>(content);
+        }
+
+        return m_userInfo;
     }
 
     public async Task<HttpResponseMessage> MakeAuthenticatedRequest(HttpMethod method, HttpRequestOptions options, string endpoint, HttpContent? content = null)
@@ -55,7 +86,7 @@ public class DataManager
         // force the authentication header
         message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", m_accessToken);
         // force the request URI
-        message.RequestUri = new($"{ServerURI}{endpoint}");
+        message.RequestUri = new($"{ServerURI}/{endpoint}");
 
 
         return await m_httpClient.SendAsync(message);

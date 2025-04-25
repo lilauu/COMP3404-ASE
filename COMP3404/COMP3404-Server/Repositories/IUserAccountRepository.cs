@@ -7,4 +7,6 @@ public interface IUserAccountRepository
     public UserAccount? GetById(int id);
     public UserAccount? GetByToken(string token);
     public UserAccount? Add(UserAccount newAccount);
+
+    public void Save();
 }

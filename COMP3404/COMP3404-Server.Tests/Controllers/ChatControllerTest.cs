@@ -72,7 +72,7 @@ public class ChatControllerTest
             .SetupGet(r => r.Headers)
             .Returns(new HeaderDictionary()
             {
-                { "Authorize", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+                { "Authorization", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
             });
 
         var httpContextMock = new Mock<HttpContext>();
@@ -158,7 +158,7 @@ public class ChatControllerTest
             .SetupGet(r => r.Headers)
             .Returns(new HeaderDictionary()
             {
-                { "Authorize", new("Bearer this_is_a_bad_token") }
+                { "Authorization", new("Bearer this_is_a_bad_token") }
             });
 
         var httpContextMock = new Mock<HttpContext>();
@@ -331,7 +331,7 @@ public class ChatControllerTest
             .SetupGet(r => r.Headers)
             .Returns(new HeaderDictionary()
             {
-                { "Authorize", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+                { "Authorization", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
             });
 
         var httpContextMock = new Mock<HttpContext>();
