@@ -57,20 +57,15 @@ namespace COMP3404_Client.SaveLoadManagerScripts
             }
         }
 
-        public void SaveDataToOnline()
-        {
-            //Save the data to the online database
-            throw new NotImplementedException();
-        }
-
         public T LoadDataFromOnline<T>()
         {
             //Load the data from the online database
             throw new NotImplementedException();
         }
 
-
-
-
+        public void SaveDataToOnline<T>(T data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace COMP3404_Client.SaveLoadManagerScripts
         void SaveDataToFile<T>(T data, string fileName);
         T LoadDataFromFile<T>(string fileName);
 
-        void SaveDataToOnline();
+        void SaveDataToOnline<T>(T data);
 
         T LoadDataFromOnline<T>();
         void DeleteFileIfExists(string fileName);
