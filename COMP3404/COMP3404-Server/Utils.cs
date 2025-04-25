@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-
-namespace COMP3404_Server;
+﻿namespace COMP3404_Server;
 
 public static class Utils
 {
