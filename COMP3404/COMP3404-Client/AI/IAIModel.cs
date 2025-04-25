@@ -11,9 +11,10 @@ public interface IAIModel
     /// Gets a response from the AI model.
     /// </summary>
     /// <param name="message">The message that the user has sent</param>
-    /// <param name="conversation">The ongoing conversation, containing message history</param>
+    /// <param name="chat">The ongoing conversation, containing message history</param>
     /// <param name="onResponseReceived">A callback that is called when a response is received from the model, with a string parameter of the model's response</param>
-    public void GetResponse(string message, Chat conversation, Action<string> onResponseReceived);
+    public void GetResponse(string message, Chat chat, Action<string> onResponseReceived);
 
-
+    public void TranslateLanguage(string message, string language, Chat chat, Action<string> onResponseReceived);
 }
+

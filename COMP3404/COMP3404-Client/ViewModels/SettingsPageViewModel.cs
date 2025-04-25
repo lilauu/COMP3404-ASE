@@ -66,6 +66,19 @@ public class SettingsPageViewModel : INotifyPropertyChanged
         }
     }
 
+    public string Language
+    {
+        get => Preferences.Get("Language", "English");
+
+        set
+        {
+            if (value == Language)
+                return;
+            Preferences.Set("Language", value);
+            OnPropertyChanged();
+        }
+    }
+
     /// <summary>
     /// Invokes the PropertyChanged event
     /// </summary>

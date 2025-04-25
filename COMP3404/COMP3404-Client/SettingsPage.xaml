@@ -30,10 +30,11 @@
                         SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
             </Grid>
 
-            <Grid Grid.Row="2" RowDefinitions="Auto, * ,*" Padding="10" VerticalOptions="Start">
-                <CheckBox Grid.Row="0" x:Name="EnabledCheckBox" IsChecked="{Binding Path=Enabled}"/>
-                <Slider  Grid.Row="1" Maximum="1" Value="{Binding Path=Volume}"/>
-                <Slider  Grid.Row="2" Maximum="2" Value="{Binding Path=Pitch}"/>
+            <Grid Grid.Row="2" RowDefinitions="Auto, * ,*, *" Padding="10" VerticalOptions="Start">
+                <Entry  Grid.Row="0" Text="{Binding Path=Language}" FontSize="18"/>
+                <CheckBox Grid.Row="1" x:Name="EnabledCheckBox" IsChecked="{Binding Path=Enabled}"/>
+                <Slider  Grid.Row="2" Maximum="1" Value="{Binding Path=Volume}"/>
+                <Slider  Grid.Row="3" Maximum="2" Value="{Binding Path=Pitch}"/>
             </Grid>
 
 

@@ -9,4 +9,9 @@ internal class StubAIModel : IAIModel
         // doesnt use the conversation at all
         onResponseReceived($"This is a stub response! You said: {message}");
     }
+
+    public void TranslateLanguage(string message, string language, Chat chat, Action<string> onResponseReceived)
+    {
+        onResponseReceived($"This is a stub response! You said: '{message}' and I am responding in {language}");
+    }
 }
