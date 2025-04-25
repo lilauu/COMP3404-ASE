@@ -44,7 +44,10 @@ public class SaveLoadTests
         Assert.Equal(firstTestChat.Messages.Count, firstChat.Messages.Count);
         for (int i = 0; i < firstChat.Messages.Count; i++)
         {
-            Assert.Equal(firstTestChat.Messages[i], firstChat.Messages[i]);
+            Assert.Equal(firstTestChat.Messages[i].Message, firstChat.Messages[i].Message);
+            Assert.Equal(firstTestChat.Messages[i].Id, firstChat.Messages[i].Id);
+            Assert.Equal(firstTestChat.Messages[i].Timestamp, firstChat.Messages[i].Timestamp);
+            Assert.Equal(firstTestChat.Messages[i].IsHumanSender, firstChat.Messages[i].IsHumanSender);
         }
     }
 }

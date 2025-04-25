@@ -24,9 +24,8 @@ public class MainPageViewModel : INotifyPropertyChanged
     public MainPageViewModel()
     {
         SwitchChatWindow = new Command<string>(SetActiveChat);
-        chatViewModelList.Add(new(new()));
-        chatViewModelList.Add(new(new()));
-        chatViewModelList.Add(new(new()));
+        // todo: load from API as well
+        
     }
 
     private void SetActiveChat(string chatId)
