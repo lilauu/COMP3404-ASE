@@ -31,11 +31,29 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         SwitchChatWindow = new Command<ChatViewModel>(SetActiveChat);
         CreateNewChat = new Command(CreateChat);
-        // todo: load from API as well
 
-        // default new chat
-        if (chatViewModelList.Count == 0)
-            CreateChat();
+        RefreshChats();
+    }
+
+    // todo: call this somehow when login is complete
+    public void RefreshChats()
+    {
+        Task.Run(async () =>
+        {
+            // load chats from file
+            var chatsFromDisk = await DiskSaveLoadManager.Instance.LoadChatsAsync();
+            foreach (var chat in chatsFromDisk)
+            {
+                var viewModel = new ChatViewModel(chat);
+                chatViewModelList.Add(viewModel);
+            }
+
+            // default new chat
+            if (chatViewModelList.Count == 0)
+                CreateChat();
+            else
+                SetActiveChat(chatViewModelList[0]);
+        });
     }
 
     private void SetActiveChat(ChatViewModel chat)

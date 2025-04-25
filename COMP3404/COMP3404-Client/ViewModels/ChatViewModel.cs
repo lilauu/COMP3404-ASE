@@ -56,7 +56,9 @@ public class ChatViewModel : INotifyPropertyChanged
         SendChatMessage = new Command<string>(SendMessage);
         //saveChatMessagesOnline = new Command<string>((key) => InputString += key);
 
-        // todo: implement a way to tear down this class
+        // populate messages 
+        AddChatMessages(m_chat.Messages);
+        // todo: implement a way to tear down this class, we might be leaking by not deregistering this
         m_chat.Messages.CollectionChanged += ChatMessages_CollectionChanged;
     }
 
@@ -68,11 +70,14 @@ public class ChatViewModel : INotifyPropertyChanged
         }
         if (e.NewItems != null)
         {
-            foreach (var item in e.NewItems.Cast<ChatMessage>())
-            {
-                Messages.Add(new MessageViewModel(item.Message, item.IsHumanSender));
-            }
+            AddChatMessages(e.NewItems.Cast<ChatMessage>());
         }
+    }
+
+    private void AddChatMessages(IEnumerable<ChatMessage> messages)
+    {
+        foreach (var message in messages)
+            Messages.Add(new MessageViewModel(message.Message, message.IsHumanSender));
     }
 
     void SaveChat(ISaveLoadManager manager)

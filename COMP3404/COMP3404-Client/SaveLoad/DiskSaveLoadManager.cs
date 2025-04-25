@@ -22,26 +22,21 @@ public class DiskSaveLoadManager : ISaveLoadManager
         string directoryPath = GetTargetDirectory();
         var files = Directory.GetFiles(directoryPath, "*.json");
 
-        List<Chat> ret = [];
+        List<Task<Chat>> tasks = [];
 
         foreach (var file in files)
         {
             // load each chat on a background thread
-            await Task.Run(() =>
+            tasks.Add(Task.Run(() =>
             {
-                try
-                {
-                    ret.Add(LoadDataFromFile<Chat>(file));
-                }
-                catch (Exception ex)
-                {
-                    // don't let one failure stop us from reading the rest
-                    Console.WriteLine(ex.Message);
-                }
-            });
+                Chat chat = LoadDataFromFile<Chat>(file);
+                return chat;
+            }));
         }
 
-        return ret;
+        var results = await Task.WhenAll(tasks);
+
+        return results?.ToList() ?? [];
     }
 
     private string GetTargetDirectory() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "COMP3404");
