@@ -34,7 +34,7 @@ internal class TTS
     #region Methods
     //Speaks a string input
 
-    public async Task Speak(string toSpeak)
+    public void Speak(string toSpeak)
     {
         if (!Preferences.Get("Enabled", false))
             return;
@@ -47,7 +47,7 @@ internal class TTS
             Volume = Preferences.Get("Volume", 1f),
             Pitch = Preferences.Get("Pitch", 0f),
         };
-        await TextToSpeech.Default.SpeakAsync(toSpeak, opt, cancelToken: cts.Token);
+        TextToSpeech.Default.SpeakAsync(toSpeak, opt, cancelToken: cts.Token);
 
         // This method will block until utterance finishes.
     }

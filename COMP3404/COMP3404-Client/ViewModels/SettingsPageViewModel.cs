@@ -18,6 +18,8 @@ public class SettingsPageViewModel : INotifyPropertyChanged
 
         set 
         {
+            if (value == Enabled)
+                return;
             Preferences.Set("Enabled", value);
             OnPropertyChanged();
         } 
@@ -29,6 +31,8 @@ public class SettingsPageViewModel : INotifyPropertyChanged
 
         set
         {
+            if (value == Volume)
+                return;
             Preferences.Set("Volume", value);
             OnPropertyChanged();
         }
@@ -40,6 +44,8 @@ public class SettingsPageViewModel : INotifyPropertyChanged
 
         set
         {
+            if (value == Pitch)
+                return;
             Preferences.Set("Pitch", value);
             OnPropertyChanged();
         }
