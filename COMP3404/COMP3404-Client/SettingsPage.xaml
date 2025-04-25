@@ -1,8 +1,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:COMP3404_Client.Views"
-             x:Class="COMP3404_Client.SettingsPage">
-    <!-- Deep Purple Theme -->
+             xmlns:viewModels="clr-namespace:COMP3404_Client.ViewModels"
+             x:Class="COMP3404_Client.SettingsPage"
+             x:DataType="viewModels:SettingsPageViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:SettingsPageViewModel/>
+    </ContentPage.BindingContext>
 
     <Grid Padding="10" >
         <Grid.ColumnDefinitions>
@@ -16,7 +21,7 @@
         <controls:NavbarView Grid.Column="0"/>
 
         <!-- Main Content -->
-        <Grid Grid.Column="1" RowDefinitions="Auto, *">
+        <Grid Grid.Column="1" RowDefinitions="Auto, * ,*">
             <!-- Header -->
             <controls:HeaderView Grid.Row="0" Title="Profile Settings"/>
 
@@ -24,6 +29,14 @@
                 <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor="#3A006D" FontSize="32" TextColor="White"
                         SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
             </Grid>
+
+            <Grid Grid.Row="2" RowDefinitions="Auto, * ,*" Padding="10" VerticalOptions="Start">
+                <CheckBox Grid.Row="0" x:Name="EnabledCheckBox" IsChecked="{Binding Path=Enabled}"/>
+                <Slider  Grid.Row="1" Maximum="1" Value="{Binding Path=Volume}"/>
+                <Slider  Grid.Row="2" Maximum="2" Value="{Binding Path=Pitch}"/>
+            </Grid>
+
+
         </Grid>
     </Grid>
 </ContentPage>
