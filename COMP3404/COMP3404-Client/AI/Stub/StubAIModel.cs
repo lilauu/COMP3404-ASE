@@ -1,4 +1,5 @@
-﻿using COMP3404_Shared.Models.Chats;
+﻿using COMP3404_Client.API;
+using COMP3404_Shared.Models.Chats;
 
 namespace COMP3404_Client.AI.Stub;
 
@@ -9,6 +10,9 @@ public class StubAIModel : IAIModel
     public void GetResponse(string message, Chat conversation, Action<string> onResponseReceived)
     {
         // doesnt use the conversation at all
-        onResponseReceived($"This is a stub response! You said: {message}");
+        string nameStr = DataManager.Instance.FirstName;
+        if (string.IsNullOrEmpty(nameStr))
+            nameStr = "You";
+        onResponseReceived($"This is a stub response! {nameStr} said: {message}");
     }
 }
