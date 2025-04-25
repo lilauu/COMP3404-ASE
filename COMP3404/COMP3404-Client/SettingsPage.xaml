@@ -24,6 +24,14 @@
                 <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor="#3A006D" FontSize="32" TextColor="White"
                         SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
             </Grid>
+            
+            <Grid Grid.Row="1" Padding="10" VerticalOptions="Start">
+                <CheckBox x:Name="EnabledCheckBox" CheckedChanged="EnabledCheckBox_CheckedChanged"/>
+                <Slider Maximum="2" ValueChanged="VolumeSlider_ValueChanged"/>
+                <Slider Maximum="2" ValueChanged="PitchSlider_ValueChanged"/>
+            </Grid>
+
+
         </Grid>
     </Grid>
 </ContentPage>
