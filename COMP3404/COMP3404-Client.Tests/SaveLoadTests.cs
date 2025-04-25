@@ -4,7 +4,7 @@ using COMP3404_Client.SaveLoadManagerScripts;
     public class SaveLoadTests
     {
         [Fact]
-        public void SaveFileExists()
+        public void SaveDataToFile_Success()
         {
             //Arrange
             SaveLoadManager saveLoadManager = new ();
@@ -15,14 +15,18 @@ using COMP3404_Client.SaveLoadManagerScripts;
 
             saveLoadManager.SaveDataToFile(testData, "TestData.txt");
 
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path = Path.Combine(path, "COMP3404");
+            path = Path.Combine(path, "TestData.txt");
+
             //Assert
-            Assert.True(File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TestData.txt")));
+            Assert.True(File.Exists(path));
 
             saveLoadManager.DeleteFileIfExists("TestData.txt");
         }
 
         [Fact]
-        public void LoadingFileWorks()
+        public void LoadDataFromFile_Success()
         {
             //Arrange
             SaveLoadManager saveLoadManager = new ();
@@ -40,4 +44,21 @@ using COMP3404_Client.SaveLoadManagerScripts;
 
             saveLoadManager.DeleteFileIfExists("TestData.txt");
         }
+
+    [Fact]
+    public void LoadDataFromFile_Failure()
+    {
+        //Arrange
+        SaveLoadManager saveLoadManager = new();
+        saveLoadManager.DeleteFileIfExists("TestData.txt");
+
+        //Act 
+
+        var loadList = () => saveLoadManager.LoadDataFromFile<List<string>>("DONOTRENAMETHIS.txt");
+
+        //Assert
+        Assert.Throws<FileNotFoundException>(loadList);
+    }
+
+
 }

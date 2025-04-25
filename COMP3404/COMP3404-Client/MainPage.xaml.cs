@@ -10,5 +10,6 @@ public partial class MainPage : ContentPage
     private void SendButtonClicked(object sender, EventArgs e)
     {
         TTS.instance.Speak(chatInputFrame.Text);
+        chatInputFrame.Text = string.Empty;
     }
 }

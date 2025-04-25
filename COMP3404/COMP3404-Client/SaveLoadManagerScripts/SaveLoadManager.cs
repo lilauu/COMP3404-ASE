@@ -37,6 +37,8 @@ namespace COMP3404_Client.SaveLoadManagerScripts
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
+            path = Path.Combine(path, "COMP3404");
+
             string filePath = Path.Combine(path, fileName);
 
             if (!File.Exists(filePath))
