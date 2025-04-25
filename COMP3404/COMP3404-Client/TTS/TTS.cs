@@ -9,7 +9,9 @@ namespace COMP3404_Client;
 
 internal class TTS
 {
-    //Should not be using the singleton pattern probably
+    /// <summary>
+    /// The instance variable of the TTS class.
+    /// </summary>
     public static TTS instance;
 
     //Composed of TTSSettings
@@ -19,6 +21,10 @@ internal class TTS
     #endregion
 
     #region Constructors
+
+    /// <summary>
+    /// Constructor of the TTS class - Creates the instance of the singleton
+    /// </summary>
     //Blank constructor
     public TTS()
     {
@@ -34,6 +40,10 @@ internal class TTS
     #region Methods
     //Speaks a string input
 
+    /// <summary>
+    /// Speaks the input out to the user
+    /// </summary>
+    /// <param name="toSpeak"></param>
     public void Speak(string toSpeak)
     {
         if (!Preferences.Get("Enabled", false))
@@ -52,6 +62,9 @@ internal class TTS
         // This method will block until utterance finishes.
     }
 
+    /// <summary>
+    /// Cancels the current speaking token if it is still running
+    /// </summary>
     // Cancel speech if a cancellation token exists & hasn't been already requested.
     public void CancelSpeech()
     {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace COMP3404_Client.SaveLoadManagerScripts
 {
+    /// <summary>
+    /// Interface for the SaveLoadManager
+    /// </summary>
     public interface ISaveLoadManager
     {
         void SaveDataToFile<T>(T data, string fileName);

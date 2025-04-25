@@ -8,10 +8,16 @@ namespace COMP3404_Client;
 
 internal class AccountManager
 {
+    /// <summary>
+    /// The instance variable of the AccountManager class.
+    /// </summary>
     public static AccountManager instance;
 
     private string? accessToken = null;
 
+    /// <summary>
+    /// Constructor of the AccountManager class - Creates the instance of the singleton
+    /// </summary>
     public AccountManager()
     {
         if (instance == null)
@@ -21,6 +27,9 @@ internal class AccountManager
         else return;
     }
 
+    /// <summary>
+    /// Authorises the user via GitHub link
+    /// </summary>
     public async void DoGitHubAuth()
     {
         if (accessToken != null)

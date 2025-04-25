@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace COMP3404_Client.SaveLoadManagerScripts
 {
+    /// <summary>
+    /// This class saves and loads data both to and from file and online
+    /// </summary>
     public class SaveLoadManager : ISaveLoadManager
     {
-        public SaveLoadManager()
-        {
-
-        }
-
+        /// <summary>
+        /// Saves the data to file in MyDocuments/COMP3404
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <param name="fileName"></param>
         public void SaveDataToFile<T>(T data, string fileName)
         {
             //Create the file path using the MyDocuments folder
@@ -32,7 +36,14 @@ namespace COMP3404_Client.SaveLoadManagerScripts
             //Write the data into the path
             File.WriteAllText(filePath, JsonSerializer.Serialize(data, options:new() { WriteIndented = true, }));
         }
-
+        /// <summary>
+        /// Loads the data with the passed in name from MyDocuments/COMP3404
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="Exception"></exception>
         public T LoadDataFromFile<T>(string fileName)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -47,6 +58,10 @@ namespace COMP3404_Client.SaveLoadManagerScripts
             var text = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<T>(text) ?? throw new Exception("Failed to parse JSON, what the fuck");
         }
+        /// <summary>
+        /// Deletes any file with a specified name in MyDocuments/COMP3404
+        /// </summary>
+        /// <param name="fileName"></param>
         public void DeleteFileIfExists(string fileName)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -58,13 +73,21 @@ namespace COMP3404_Client.SaveLoadManagerScripts
                 File.Delete(filePath);
             }
         }
-
+        /// <summary>
+        /// Saves data to the online database
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public void SaveDataToOnline()
         {
             //Save the data to the online database
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// Loads data from the online database
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public T LoadDataFromOnline<T>()
         {
             //Load the data from the online database
