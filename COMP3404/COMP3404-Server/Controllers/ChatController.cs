@@ -52,7 +52,9 @@ public class ChatController : ControllerBase
         if (account is null)
             return Forbid();
 
-        m_chatRepository.AddChat(account.AccountId, chatName, messages);
+        var result = m_chatRepository.AddChat(account.AccountId, chatName, messages);
+        if (result is null)
+            return Problem();
 
         return Ok();
     }
