@@ -14,5 +14,5 @@ public class Chat
     [JsonIgnore]
     public UserAccount OwnerInfo { get; set; }
     public string ChatName { get; set; }
-    public ObservableCollection<ChatMessage> Messages { get; set; }
+    public ObservableCollection<ChatMessage> Messages { get; set; } = new();
 }

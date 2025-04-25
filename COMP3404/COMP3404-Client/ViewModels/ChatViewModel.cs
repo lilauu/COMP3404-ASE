@@ -15,17 +15,23 @@ namespace COMP3404_Client.ViewModels;
 
 public class ChatViewModel : INotifyPropertyChanged
 {
-    public ICommand SaveChatMessagesLocal { get; private set; }
-    //public ICommand SaveChatMessagesOnline { get; private set; }
-    public ICommand SendChatMessage { get; private set; }
-
-    DiskSaveLoadManager saveLoadManager;
-
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public ObservableCollection<MessageViewModel> Messages { get; private set; } = [];
+    public ICommand SaveChatMessages { get; private set; }
+    public ICommand SendChatMessage { get; private set; }
 
-    private readonly Chat m_chat;
+    public ISaveLoadManager DiskSaveLoadManager => SaveLoad.DiskSaveLoadManager.Instance;
+    public ISaveLoadManager ServerSaveLoadManager => SaveLoad.ServerSaveLoadManager.Instance;
+
+    public string ChatName
+    {
+        get => m_chat.ChatName;
+        set
+        {
+            m_chat.ChatName = value;
+            OnPropertyChanged();
+        }
+    }
 
     private bool m_waitingForResponse = false;
     public bool WaitingForResponse
@@ -38,11 +44,15 @@ public class ChatViewModel : INotifyPropertyChanged
         }
     }
 
+    public ObservableCollection<MessageViewModel> Messages { get; private set; } = [];
+
+
+    private readonly Chat m_chat;
+
     public ChatViewModel(Chat chat)
     {
         m_chat = chat;
-        saveLoadManager = new();
-        SaveChatMessagesLocal = new Command(SaveToFile);
+        SaveChatMessages = new Command<ISaveLoadManager>(SaveChat);
         SendChatMessage = new Command<string>(SendMessage);
         //saveChatMessagesOnline = new Command<string>((key) => InputString += key);
 
@@ -65,13 +75,16 @@ public class ChatViewModel : INotifyPropertyChanged
         }
     }
 
-    void SaveToFile()
+    void SaveChat(ISaveLoadManager manager)
     {
-        saveLoadManager.SaveChat(m_chat);
+        manager.SaveChat(m_chat);
     }
 
     void SendMessage(string message)
     {
+        if (WaitingForResponse)
+            return;
+
         if (string.IsNullOrWhiteSpace(message))
             return;
 
@@ -79,7 +92,7 @@ public class ChatViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(Messages));
 
         // lock button until a response is received
-        WaitingForResponse = true;
+        //WaitingForResponse = true;
         // todo: ask AI model for a response
     }
 

@@ -5,6 +5,8 @@ namespace COMP3404_Client.SaveLoad;
 
 public class DiskSaveLoadManager : ISaveLoadManager
 {
+    public static readonly DiskSaveLoadManager Instance = new();
+
     public void SaveChat(Chat chat)
     {
         string directoryPath = GetTargetDirectory();

@@ -34,11 +34,17 @@
             <controls:HeaderView Grid.Row="0" Title="Home"/>
 
             <!-- Chat Window -->
-            <StackLayout Grid.Row="1" Orientation="Horizontal">
-                <Button Text="Chat window 0" Command="{Binding SwitchChatWindow}" CommandParameter="0"/>
-                <Button Text="Chat window 1" Command="{Binding SwitchChatWindow}" CommandParameter="1"/>
-                <Button Text="Chat window 2" Command="{Binding SwitchChatWindow}" CommandParameter="2"/>
-            </StackLayout>
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto">
+                <CollectionView ItemsSource="{Binding Chats}" Grid.Column="0" ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:ChatViewModel">
+                            <Button Margin="10,0,10,0" Text="{Binding ChatName}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=SwitchChatWindow}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Grid.Column="1" Text="➕" Command="{Binding CreateNewChat}"/>
+            </Grid>
+
             <controls:ChatView Grid.Row="2" BindingContext="{Binding ActiveChat}"/>
         </Grid>
     </Grid>
