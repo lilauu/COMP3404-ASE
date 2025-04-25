@@ -1,7 +1,7 @@
 ﻿using COMP3404_Server.Database;
-using COMP3404_Server.Models.Api;
 using COMP3404_Server.Repositories;
 using COMP3404_Shared.Models.Accounts;
+using COMP3404_Shared.Models.Api;
 using COMP3404_Shared.Models.Api.Github;
 using Microsoft.AspNetCore.Mvc;
 using System.Security;
@@ -11,7 +11,7 @@ using System.Web;
 namespace COMP3404_Server.Controllers;
 
 [ApiController]
-[Route("account/")]
+[Route("account")]
 public class AccountController : ControllerBase
 {
     private IUserAccountRepository m_accountRepository;
@@ -72,7 +72,7 @@ public class AccountController : ControllerBase
     /// </summary>
     [HttpGet]
     [Route("login/github")]
-    public ActionResult<string> GithubLogin(string code)
+    public ActionResult<string> GithubLogin(string code, string state)
     {
         // use the code from the client to auth with github and get account info
         string accessToken = GetGithubToken(code);
@@ -100,7 +100,42 @@ public class AccountController : ControllerBase
             foundAccount.GithubToken = accessToken;
         }
 
-        // todo: do we need to create our own token? It's probably fine to just reuse the github token for now
-        return Ok(accessToken);
+        return Redirect($"comp3404://login/github?state={state}&access_token={accessToken}");
+    }
+
+    /// <summary>
+    /// Gets information about the currently authed user.
+    /// </summary>
+    [HttpGet]
+    public ActionResult<UserInfo> GetUserInfo()
+    {
+        if (!Request.Headers.TryGetValue("Authorize", out var authoriseHeader))
+            return Unauthorized();
+
+        if (authoriseHeader.Count != 1)
+            return Unauthorized();
+
+        var splitted = authoriseHeader.ToString().Split(" ");
+        if (splitted.Length != 2)
+            return Unauthorized();
+
+        var accessToken = splitted[1];
+        if (accessToken is null)
+            return Unauthorized();
+
+        // find account in db with that token
+        // TODO: this is likely to be rather vulnerable to timing attacks, that's what we get for rolling our own auth i guess
+        // I don't have time for a better implementation because that would require moving the entire project away from MAUI and
+        // into just being a web app, but hey, at least the auth would be like 5 lines of code total that would be cool
+        var account = m_accountRepository.GetByToken(accessToken);
+        if (account is null)
+            return Forbid();
+
+        UserInfo userInfo = new()
+        {
+            FirstName = account.FirstName,
+        };
+
+        return Ok(userInfo);
     }
 }

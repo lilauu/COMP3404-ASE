@@ -32,20 +32,12 @@ public partial class SettingsPage : ContentPage
         Uri authUri = new("https://github.com/login/oauth/authorize?client_id=Ov23li6gKzCpMMxUThEE");
         Uri redirectUri = new("comp3404://login/github");
 #if WINDOWS
-            var result = await WinUIEx.WebAuthenticator.AuthenticateAsync(authUri, redirectUri);
+        var result = await WinUIEx.WebAuthenticator.AuthenticateAsync(authUri, redirectUri);
 #else
         var result = await WebAuthenticator.AuthenticateAsync(authUri, redirectUri);
 #endif
-        // the above somewhat works, but for whatever reason I can't get it to work when doing github -> API server -> uri handler
-        // so i will settle for github -> uri handler -> processing -> api server
-
-        if (!result.Properties.TryGetValue("code", out var code))
-            return;
-
-        HttpClient client = new();
-        var tokenResult = await client.SendAsync(new(HttpMethod.Get, $"http://127.0.0.1:5093/account/login/github?code={code}"));
         // todo: store this somewhere for future API requests
-        string token = await tokenResult.Content.ReadAsStringAsync();
+        string token = result.AccessToken;
 
         await DisplayAlert("Wow you are authed", "we should do something in UI about this :)", "OK");
     }
