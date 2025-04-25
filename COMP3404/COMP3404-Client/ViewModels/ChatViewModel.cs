@@ -1,4 +1,5 @@
-﻿using COMP3404_Client.SaveLoad;
+﻿using COMP3404_Client.AI;
+using COMP3404_Client.SaveLoad;
 using COMP3404_Shared.Models.Chats;
 using System;
 using System.Collections.Generic;
@@ -97,8 +98,9 @@ public class ChatViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(Messages));
 
         // lock button until a response is received
-        //WaitingForResponse = true;
+        WaitingForResponse = true;
         // todo: ask AI model for a response
+        IAIModel.Instance.GetResponse(message, m_chat, OnResponseReceived);
     }
 
     void OnResponseReceived(string response)

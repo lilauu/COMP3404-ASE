@@ -2,8 +2,10 @@
 
 namespace COMP3404_Client.AI.Stub;
 
-internal class StubAIModel : IAIModel
+public class StubAIModel : IAIModel
 {
+    public static readonly StubAIModel Instance = new();
+
     public void GetResponse(string message, Chat conversation, Action<string> onResponseReceived)
     {
         // doesnt use the conversation at all
