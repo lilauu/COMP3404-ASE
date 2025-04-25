@@ -7,7 +7,7 @@ using COMP3404_Client.SaveLoadManagerScripts;
         public void SaveFileExists()
         {
             //Arrange
-            SaveLoadManager saveLoadManager = new SaveLoadManager();
+            SaveLoadManager saveLoadManager = new ();
             saveLoadManager.DeleteFileIfExists("TestData.txt");
 
             //Act 
@@ -17,13 +17,15 @@ using COMP3404_Client.SaveLoadManagerScripts;
 
             //Assert
             Assert.True(File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TestData.txt")));
+
+            saveLoadManager.DeleteFileIfExists("TestData.txt");
         }
 
         [Fact]
         public void LoadingFileWorks()
         {
             //Arrange
-            SaveLoadManager saveLoadManager = new SaveLoadManager();
+            SaveLoadManager saveLoadManager = new ();
             saveLoadManager.DeleteFileIfExists("TestData.txt");
 
             //Act 
@@ -35,5 +37,7 @@ using COMP3404_Client.SaveLoadManagerScripts;
 
             //Assert
             Assert.Equal(testData, loadList);
+
+            saveLoadManager.DeleteFileIfExists("TestData.txt");
         }
-    }
+}
