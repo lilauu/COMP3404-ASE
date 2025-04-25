@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using COMP3404_Client.SaveLoadManagerScripts;
+using COMP3404_Client.SaveLoad;
 using Microsoft.Maui.Controls;
 
 namespace COMP3404_Client.ViewModels;
@@ -24,9 +24,9 @@ public class MainPageViewModel : INotifyPropertyChanged
     public MainPageViewModel()
     {
         SwitchChatWindow = new Command<string>(SetActiveChat);
-        chatViewModelList.Add(new());
-        chatViewModelList.Add(new());
-        chatViewModelList.Add(new());
+        chatViewModelList.Add(new(new()));
+        chatViewModelList.Add(new(new()));
+        chatViewModelList.Add(new(new()));
     }
 
     private void SetActiveChat(string chatId)

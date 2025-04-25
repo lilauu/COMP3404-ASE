@@ -1,4 +1,5 @@
 ﻿using COMP3404_Shared.Models.Accounts;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace COMP3404_Shared.Models.Chats;
@@ -13,5 +14,5 @@ public class Chat
     [JsonIgnore]
     public UserAccount OwnerInfo { get; set; }
     public string ChatName { get; set; }
-    public List<ChatMessage> Messages { get; set; }
+    public ObservableCollection<ChatMessage> Messages { get; set; }
 }

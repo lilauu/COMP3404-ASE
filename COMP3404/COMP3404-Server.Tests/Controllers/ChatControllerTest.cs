@@ -323,7 +323,7 @@ public class ChatControllerTest
             {
                 OwnerId = i,
                 ChatName = s,
-                Messages = cm.ToList(),
+                Messages = new(cm),
             });
 
         var httpRequestMock = new Mock<HttpRequest>();

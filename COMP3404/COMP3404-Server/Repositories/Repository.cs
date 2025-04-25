@@ -39,7 +39,7 @@ public class Repository : IUserAccountRepository, IChatRepository
         {
             OwnerId = userId,
             ChatName = chatName,
-            Messages = messages.ToList() 
+            Messages = new(messages)
         };
         return m_dbContext.Chats.Add(newChat).Entity;
     }
