@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:COMP3404_Client.Views"
+             x:Name="Message"
+             x:Class="COMP3404_Client.Views.MessageView">
+    <Frame BindingContext="{x:Reference Message}" Padding="10" CornerRadius="15">
+        <Label HorizontalTextAlignment="{Binding HorizontalTextAlignment}" Text="{Binding MessageText}" FontSize="18"/>
+    </Frame>
+</ContentView>
