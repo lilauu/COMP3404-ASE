@@ -1,6 +1,7 @@
 ﻿using COMP3404_Client.SaveLoadManagerScripts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -20,17 +21,7 @@ public class ChatViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private List<MessageViewModel> m_messages = [];
-
-    public List<MessageViewModel> Messages
-    {
-        get => m_messages;
-        set
-        {
-            m_messages = value;
-            OnPropertyChanged();
-        }
-    }
+    public ObservableCollection<MessageViewModel> Messages { get; private set; } = [];
 
     public ChatViewModel()
     {
@@ -42,7 +33,7 @@ public class ChatViewModel : INotifyPropertyChanged
 
     void SaveToFile()
     {
-        var messages = m_messages.Select(m => m.FullMessage);
+        var messages = Messages.Select(m => m.FullMessage);
 
         saveLoadManager.SaveDataToFile(messages, "test.txt");
     }
@@ -52,6 +43,7 @@ public class ChatViewModel : INotifyPropertyChanged
         if (message?.Length > 0)
         {
             Messages.Add(new MessageViewModel() { Message = message, IsSender = true });
+            OnPropertyChanged(nameof(Messages));
         }
     }
 

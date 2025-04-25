@@ -8,14 +8,37 @@ namespace COMP3404_Client.ViewModels;
 
 public class MainPageViewModel : INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler PropertyChanged;
 
+    public ICommand SwitchChatWindow { get; private set; }
+
+    private int m_activeChatIndex;
+
+    public ChatViewModel ActiveChat
+    {
+        get => chatViewModelList[m_activeChatIndex];
+    }
+
+    private List<ChatViewModel> chatViewModelList = new();
 
     public MainPageViewModel()
     {
-        saveLoadManager = new();
-        SaveChatMessagesLocal = new Command(SaveToFile);
-        SendChatMessage = new Command<string>(SendMessage);
-        //saveChatMessagesOnline = new Command<string>((key) => InputString += key);
+        SwitchChatWindow = new Command<string>(SetActiveChat);
+        chatViewModelList.Add(new());
+        chatViewModelList.Add(new());
+        chatViewModelList.Add(new());
     }
 
+    private void SetActiveChat(string chatId)
+    {
+        if (!int.TryParse(chatId, out var res))
+            return;
+        if (res >= chatViewModelList.Count)
+            return;
+        m_activeChatIndex = res;
+        OnPropertyChanged(nameof(ActiveChat));
+    }
+
+    public void OnPropertyChanged([CallerMemberName] string name = "") =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

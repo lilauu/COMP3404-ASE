@@ -5,17 +5,15 @@
              xmlns:viewModels="clr-namespace:COMP3404_Client.ViewModels"
              x:Class="COMP3404_Client.Views.ChatView"
              x:DataType="viewModels:ChatViewModel">
-    
+
     <StackLayout Padding="10" Spacing="10" x:Name="chatWindow">
-        <ScrollView VerticalOptions="FillAndExpand">
-            <StackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Messages}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="viewModels:MessageViewModel">
-                        <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-        </ScrollView>
+        <CollectionView ItemsSource="{Binding Messages}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:MessageViewModel">
+                    <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!-- Chat Input -->
         <Grid ColumnDefinitions="*, Auto, Auto" Padding="5" x:Name="chatInput">

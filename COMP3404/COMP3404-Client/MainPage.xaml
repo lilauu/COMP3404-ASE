@@ -27,13 +27,19 @@
         <Grid Grid.Column="1" x:Name="mainContentGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Header -->
             <controls:HeaderView Grid.Row="0" Title="Home"/>
 
             <!-- Chat Window -->
-            <controls:ChatView Grid.Row="1"/>
+            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                <Button Text="Chat window 0" Command="{Binding SwitchChatWindow}" CommandParameter="0"/>
+                <Button Text="Chat window 1" Command="{Binding SwitchChatWindow}" CommandParameter="1"/>
+                <Button Text="Chat window 2" Command="{Binding SwitchChatWindow}" CommandParameter="2"/>
+            </StackLayout>
+            <controls:ChatView Grid.Row="2" BindingContext="{Binding ActiveChat}"/>
         </Grid>
     </Grid>
 </ContentPage>
