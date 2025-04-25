@@ -30,7 +30,6 @@ internal class TTS
         else return;
 
         options = new();
-        options.Pitch = 2;
         GetLocales();
     }
     #endregion
