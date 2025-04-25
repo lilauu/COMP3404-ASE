@@ -21,7 +21,7 @@
             <controls:HeaderView Grid.Row="0" Title="Profile Settings"/>
 
             <Grid Grid.Row="1" Padding="10" VerticalOptions="Start">
-                <Button x:Name="LoginButton" Text="Log in with Github" FontSize="32"
+                <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor="#3A006D" FontSize="32" TextColor="White"
                         SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
             </Grid>
         </Grid>
