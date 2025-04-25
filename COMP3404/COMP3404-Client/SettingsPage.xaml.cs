@@ -35,11 +35,13 @@ public partial class SettingsPage : ContentPage
 
     private void VolumeSlider_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        TTS.instance.options.Volume = (float)e.OldValue;
+        TTS.instance.options.Volume = (float)e.NewValue;
+        Preferences.Set("Volume", e.NewValue);
     }
 
     private void PitchSlider_ValueChanged(object sender, ValueChangedEventArgs e)
     {
         TTS.instance.options.Pitch = (float)e.OldValue;
+        Preferences.Set("Pitch", e.NewValue);
     }
 }

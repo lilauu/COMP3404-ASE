@@ -9,18 +9,6 @@ public partial class App : Application
         InitializeComponent();
 
         TTS tts = new();
-        TTS tts = new TTS(new TTSSettings(true, 0, 100,
-           System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
-
-#endif
-        TTS tts = new TTS(new TTSSettings(true, 0, 100,
-           System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
-
-#endif
-        TTS tts = new TTS(new TTSSettings(true, 0, 100,
-           System.Speech.Synthesis.VoiceGender.Male, System.Speech.Synthesis.VoiceAge.Adult));
-
-#endif
 
         MainPage = new AppShell();
     }

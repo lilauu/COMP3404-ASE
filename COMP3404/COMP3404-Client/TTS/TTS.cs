@@ -1,5 +1,5 @@
-﻿using Microsoft.Maui.Media;
-using System.Speech.Synthesis;
+﻿using Microsoft.Maui.Storage;
+using System.Text.Json;
 
 namespace COMP3404_Client;
 
@@ -30,6 +30,7 @@ internal class TTS
         else return;
 
         options = new();
+        LoadSettings();
         GetLocales();
     }
     #endregion
@@ -37,6 +38,11 @@ internal class TTS
     #region Methods
     //Speaks a string input
 
+    void LoadSettings()
+    {
+        options.Volume = Preferences.Get("Volume", 2f);
+        options.Pitch = Preferences.Get("Pitch", 0f);
+    }
 
     public async Task Speak(string toSpeak)
     {
