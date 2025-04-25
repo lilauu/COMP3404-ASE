@@ -6,14 +6,11 @@
              xmlns:controls="clr-namespace:COMP3404_Client.Views"
              xmlns:viewModels="clr-namespace:COMP3404_Client.ViewModels"
              x:Class="COMP3404_Client.MainPage"
-             x:DataType="viewModels:MainPageViewModel"
-             BackgroundColor="{DynamicResource Background}"
-             x:Name="MainPageThing">
+             x:DataType="viewModels:MainPageViewModel">
 
     <ContentPage.BindingContext>
         <viewModels:MainPageViewModel/>
     </ContentPage.BindingContext>
-    <!-- Deep Purple Theme -->
 
     <Grid Padding="10" x:Name="topGrid">
         <Grid.ColumnDefinitions>
@@ -24,29 +21,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Vertical Navigation Bar -->
-        <StackLayout Grid.Column="0" BackgroundColor="{DynamicResource Background}" Padding="10"
-                     VerticalOptions="Fill" Spacing="20" x:Name="verticalStackLayout">
-            <Button Text="☀️" BackgroundColor="{DynamicResource Text}" FontSize="24" 
-                    SemanticProperties.Hint="Toggle Light/Dark Mode" Clicked="LightDarkModeButtonClicked"/>
-            <Button Text="👤" BackgroundColor="{DynamicResource Text}" FontSize="24" 
-                    SemanticProperties.Hint="Profile" Clicked="OnProfileButtonClicked"/>
-            <Button Text="📂" BackgroundColor="{DynamicResource Text}" FontSize="24" 
-                    SemanticProperties.Hint="Open Saved Chats" Clicked="OnHistoryButtonClicked"/>
-            <Button Text="🏠" BackgroundColor="{DynamicResource Text}" FontSize="24" 
-                    SemanticProperties.Hint="Go to Home"/>
-            <Label Text="Volume" TextColor="{DynamicResource Text}"
-                   />
-            <Slider Maximum="1" Value="1" ValueChanged="Slider_Volume_ValueChanged"
-                    />
-            <Label Text="Pitch" TextColor="{DynamicResource Text}" 
-                   />
-            <Slider Maximum="2" Value="0" ValueChanged="Slider_Pitch_ValueChanged"
-                    />
-            <Label Text="Enabled" TextColor="{DynamicResource Text}"
-                   />
-            <CheckBox IsChecked="False" CheckedChanged="CheckBox_CheckedChanged"
-                      />
-        </StackLayout>
+        <controls:NavbarView Grid.Column="0"/>
 
         <!-- Main Content -->
         <Grid Grid.Column="1" x:Name="mainContentGrid">
@@ -55,13 +30,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Header -->
-            <Grid Grid.Row="0" Padding="10" ColumnDefinitions="Auto, *" 
-                  VerticalOptions="Start" BackgroundColor ="{DynamicResource Background}" x:Name="topBar">
-                <Image Source="profile_icon.png" HeightRequest="40" WidthRequest="40" 
-                       SemanticProperties.Description="User Profile" Margin="10"/>
-                <Label Text="Home" FontSize="24" FontFamily="OpenSansRegular" 
-                       TextColor= "{DynamicResource Text}" VerticalTextAlignment="Center" x:Name="topBarLabel"/>
-            </Grid>
+            <controls:HeaderView Grid.Row="0" Title="Home"/>
 
             <!-- Chat Window -->
             <StackLayout Grid.Row="1" Padding="10" Spacing="10" x:Name="chatWindow">
@@ -78,13 +47,13 @@
                 <!-- Chat Input -->
                 <Grid ColumnDefinitions="*, Auto" Padding="5" x:Name="chatInput">
                     <!-- Wrapped Entry in a Frame for rounded corners -->
-                    <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0" BackgroundColor="{DynamicResource Background}">
-                        <Entry Placeholder="Type a message..." FontSize="18" TextColor= "{DynamicResource Text}" BackgroundColor="{DynamicResource Background}" x:Name="chatInputFrame"/>
+                    <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0">
+                        <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame"/>
                     </Frame>
 
                     <!-- Wrapped Button in a Frame for rounded corners -->
-                    <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0" BackgroundColor="{DynamicResource Background}">
-                        <Button Text="➤" BackgroundColor="{DynamicResource Background}" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"/>
+                    <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0">
+                        <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"/>
                     </Frame>
                 </Grid>
             </StackLayout>

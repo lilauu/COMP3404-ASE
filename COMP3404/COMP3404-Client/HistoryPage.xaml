@@ -1,7 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="COMP3404_Client.HistoryPage"
-             BackgroundColor="{DynamicResource Background}">
+             xmlns:controls="clr-namespace:COMP3404_Client.Views"
+             x:Class="COMP3404_Client.HistoryPage">
     <!-- Deep Purple Theme -->
 
     <Grid Padding="10">
@@ -13,28 +13,12 @@
         </Grid.ColumnDefinitions>
 
         <!-- Vertical Navigation Bar -->
-        <StackLayout Grid.Column="0" BackgroundColor="{DynamicResource Background}" Padding="10"
-                     VerticalOptions="Fill" Spacing="20">
-            <Button Text="☀️" BackgroundColor="{DynamicResource Background}" FontSize="24" 
-                    SemanticProperties.Hint="Toggle Light/Dark Mode"/>
-            <Button Text="👤" BackgroundColor="{DynamicResource Background}" FontSize="24" 
-                    SemanticProperties.Hint="Profile" Clicked="OnSettingsButtonClicked"/>
-            <Button Text="📂" BackgroundColor="{DynamicResource Background}" FontSize="24" 
-                    SemanticProperties.Hint="Open Saved Chats"/>
-            <Button Text="🏠" BackgroundColor="{DynamicResource Background}" FontSize="24" 
-                    SemanticProperties.Hint="Go to Home" Clicked="OnHomeButtonClicked"/>
-        </StackLayout>
+        <controls:NavbarView Grid.Column="0"/>
 
         <!-- Main Content -->
         <Grid Grid.Column="1" RowDefinitions="Auto, *">
             <!-- Header -->
-            <Grid Grid.Row="0" Padding="10" ColumnDefinitions="Auto, *" 
-           VerticalOptions="Start" BackgroundColor="{DynamicResource Background}">
-                <Image Source="profile_icon.png" HeightRequest="40" WidthRequest="40" 
-                SemanticProperties.Description="User Profile" Margin="10"/>
-                <Label Text="Chat History" FontSize="24" FontFamily="OpenSansRegular" 
-                 TextColor= "{DynamicResource Text}" VerticalTextAlignment="Center" />
-            </Grid>
+            <controls:HeaderView Grid.Row="0" Title="Chat History"/>
         </Grid>
     </Grid>
 </ContentPage>

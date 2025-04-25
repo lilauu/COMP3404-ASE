@@ -1,6 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    x:Class="COMP3404_Client.Themes.LightTheme">
-    <Color x:Key="Background">#cccccc</Color>
-    <Color x:Key="Text">#333333</Color>
-</ResourceDictionary>

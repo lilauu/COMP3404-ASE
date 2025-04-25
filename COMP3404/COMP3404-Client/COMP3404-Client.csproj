@@ -70,19 +70,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Themes\DarkTheme.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="HistoryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Themes\LightTheme.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\HeaderView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MessageView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\NavbarView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -94,6 +94,9 @@
 	<ItemGroup>
 	  <Compile Update="Views\MessageView.xaml.cs">
 	    <DependentUpon>MessageView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\NavbarView.xaml.cs">
+	    <DependentUpon>NavbarView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
