@@ -19,5 +19,6 @@ public class Startup
         services.AddHttpClient();
 
         services.AddScoped<IUserAccountRepository, Repository>();
+        services.AddScoped<IChatRepository, Repository>();
     }
 }

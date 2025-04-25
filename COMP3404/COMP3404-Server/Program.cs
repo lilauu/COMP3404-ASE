@@ -1,4 +1,3 @@
-
 namespace COMP3404_Server;
 
 public class Program
