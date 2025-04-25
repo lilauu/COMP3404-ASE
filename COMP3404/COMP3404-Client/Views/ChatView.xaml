@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:COMP3404_Client.Views"
+             xmlns:viewModels="clr-namespace:COMP3404_Client.ViewModels"
+             x:Class="COMP3404_Client.Views.ChatView"
+             x:DataType="viewModels:ChatViewModel">
+
+    <StackLayout Padding="10" Spacing="10" x:Name="chatWindow">
+        <CollectionView ItemsSource="{Binding Messages}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:MessageViewModel">
+                    <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Chat Input -->
+        <Grid ColumnDefinitions="*, Auto, Auto" Padding="5" x:Name="chatInput">
+            <!-- Wrapped Entry in a Frame for rounded corners -->
+            <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0">
+                <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame"/>
+            </Frame>
+
+            <!-- Wrapped Button in a Frame for rounded corners -->
+            <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0">
+                <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"  Command="{Binding SendChatMessage}" CommandParameter="{Binding Source={x:Reference chatInputFrame}, Path=Text}"/>
+            </Frame>
+
+            <Frame Grid.Column="2" CornerRadius="10" HasShadow="False" Padding="0">
+                <Button Text="Save Local" TextColor="White" SemanticProperties.Hint="Save chat logs" Command="{Binding SaveChatMessagesLocal}"/>
+            </Frame>
+
+        </Grid>
+    </StackLayout>
+</ContentView>

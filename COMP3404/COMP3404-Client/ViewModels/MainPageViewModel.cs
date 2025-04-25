@@ -8,84 +8,35 @@ namespace COMP3404_Client.ViewModels;
 
 public class MainPageViewModel : INotifyPropertyChanged
 {
-    public ICommand SaveChatMessagesLocal {  get; private set; }
-    //public ICommand SaveChatMessagesOnline { get; private set; }
-    public ICommand SendChatMessage { get; private set; }
-
-    SaveLoadManager saveLoadManager;
-
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private List<MessageViewModel> m_messages = [
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way", IsSender = true },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        new MessageViewModel() { Message = "holy shit does this actually work? no way" },
-        ];
-    public List<MessageViewModel> Messages
+    public ICommand SwitchChatWindow { get; private set; }
+
+    private int m_activeChatIndex;
+
+    public ChatViewModel ActiveChat
     {
-        get => m_messages;
-        set
-        {
-            m_messages = value;
-            OnPropertyChanged();
-        }
+        get => chatViewModelList[m_activeChatIndex];
     }
+
+    private List<ChatViewModel> chatViewModelList = new();
 
     public MainPageViewModel()
     {
-        saveLoadManager = new();
-        SaveChatMessagesLocal = new Command(SaveToFile);
-        SendChatMessage = new Command<string>(SendMessage);
-        //saveChatMessagesOnline = new Command<string>((key) => InputString += key);
+        SwitchChatWindow = new Command<string>(SetActiveChat);
+        chatViewModelList.Add(new());
+        chatViewModelList.Add(new());
+        chatViewModelList.Add(new());
     }
 
-    void SaveToFile()
+    private void SetActiveChat(string chatId)
     {
-        var messages = m_messages.Select(m => m.FullMessage);
-
-        saveLoadManager.SaveDataToFile(messages, "test.txt");
-    }
-
-    void SendMessage(string message)
-    {
-        if (message?.Length > 0)
-        {
-            Messages.Add(new MessageViewModel() { Message = message, IsSender = true });
-        }
+        if (!int.TryParse(chatId, out var res))
+            return;
+        if (res >= chatViewModelList.Count)
+            return;
+        m_activeChatIndex = res;
+        OnPropertyChanged(nameof(ActiveChat));
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>

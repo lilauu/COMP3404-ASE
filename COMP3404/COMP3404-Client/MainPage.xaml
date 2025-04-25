@@ -27,41 +27,19 @@
         <Grid Grid.Column="1" x:Name="mainContentGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Header -->
             <controls:HeaderView Grid.Row="0" Title="Home"/>
 
             <!-- Chat Window -->
-            <StackLayout Grid.Row="1" Padding="10" Spacing="10" x:Name="chatWindow">
-                <ScrollView VerticalOptions="FillAndExpand">
-                    <StackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Messages}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:MessageViewModel">
-                                <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-                </ScrollView>
-
-                <!-- Chat Input -->
-                <Grid ColumnDefinitions="*, Auto, Auto" Padding="5" x:Name="chatInput">
-                    <!-- Wrapped Entry in a Frame for rounded corners -->
-                    <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0">
-                        <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame"/>
-                    </Frame>
-
-                    <!-- Wrapped Button in a Frame for rounded corners -->
-                    <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0">
-                        <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"  Command="{Binding SendChatMessage}" CommandParameter="{Binding Source={x:Reference chatInputFrame}, Path=Text}"/>
-                    </Frame>
-
-                    <Frame Grid.Column="2" CornerRadius="10" HasShadow="False" Padding="0">
-                        <Button Text="Save Local" TextColor="White" SemanticProperties.Hint="Save chat logs" Command="{Binding SaveChatMessagesLocal}"/>
-                    </Frame>
-
-                </Grid>
+            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                <Button Text="Chat window 0" Command="{Binding SwitchChatWindow}" CommandParameter="0"/>
+                <Button Text="Chat window 1" Command="{Binding SwitchChatWindow}" CommandParameter="1"/>
+                <Button Text="Chat window 2" Command="{Binding SwitchChatWindow}" CommandParameter="2"/>
             </StackLayout>
+            <controls:ChatView Grid.Row="2" BindingContext="{Binding ActiveChat}"/>
         </Grid>
     </Grid>
 </ContentPage>

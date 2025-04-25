@@ -6,10 +6,4 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
     }
-
-    private void SendButtonClicked(object sender, EventArgs e)
-    {
-        TTS.instance.Speak(chatInputFrame.Text);
-        chatInputFrame.Text = string.Empty;
-    }
 }
