@@ -16,8 +16,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddAuthorization();
-
         // configure dependency injection services
         startup.ConfigureServices(builder.Environment, builder.Services);
 
@@ -31,6 +29,8 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseAuthorization();
 
         app.MapControllers();
 
