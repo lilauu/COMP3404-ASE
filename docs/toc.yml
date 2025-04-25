@@ -4,5 +4,9 @@
   href: getting-started.md
 - name: Problem Analysis
   href: problem-analysis.md
-- name: Design Documentation
-  href: design.md
+- name: Technical Design
+  href: technical-design.md
+- name: UI Design
+  href: ui-design.md
+- name: Architecture
+  href: architecture.md
