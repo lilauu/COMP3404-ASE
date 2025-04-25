@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using COMP3404_Client.SaveLoadManagerScripts;
@@ -16,10 +8,10 @@ namespace COMP3404_Client.ViewModels;
 public class MainPageViewModel : INotifyPropertyChanged
 {
     public ICommand SaveChatMessagesLocal {  get; private set; }
-    //public ICommand saveChatMessagesOnline { get; private set; }
+    //public ICommand SaveChatMessagesOnline { get; private set; }
+    public ICommand SendChatMessage { get; private set; }
 
     SaveLoadManager saveLoadManager;
-
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -76,6 +68,7 @@ public class MainPageViewModel : INotifyPropertyChanged
     {
         saveLoadManager = new();
         SaveChatMessagesLocal = new Command(SaveToFile);
+        SendChatMessage = new Command<string>(SendMessage);
         //saveChatMessagesOnline = new Command<string>((key) => InputString += key);
     }
 
@@ -84,6 +77,11 @@ public class MainPageViewModel : INotifyPropertyChanged
         var messages = m_messages.Select(m => m.FullMessage);
 
         saveLoadManager.SaveDataToFile(messages, "test.txt");
+    }
+
+    void SendMessage(string message)
+    {
+        Messages.Add(new MessageViewModel() { Message = message, IsSender = true });
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>

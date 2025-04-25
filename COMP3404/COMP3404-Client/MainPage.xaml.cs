@@ -17,7 +17,6 @@ public partial class MainPage : ContentPage
 
     private void SaveButtonClicked(object sender, EventArgs e)
     {   
-        List<String> list = ["One", "Two", "Three", "Four"];
-        saveLoadManager.SaveDataToFile(list, "ChatLogsTest.txt");
+
     }
 }
