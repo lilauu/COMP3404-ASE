@@ -53,7 +53,7 @@
 
                     <!-- Wrapped Button in a Frame for rounded corners -->
                     <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0">
-                        <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Command="{Binding SendChatMessage}" CommandParameter="{Binding Source={x:Reference chatInputFrame}, Path=Text}"/>
+                        <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"  Command="{Binding SendChatMessage}" CommandParameter="{Binding Source={x:Reference chatInputFrame}, Path=Text}"/>
                     </Frame>
 
                     <Frame Grid.Column="2" CornerRadius="10" HasShadow="False" Padding="0">

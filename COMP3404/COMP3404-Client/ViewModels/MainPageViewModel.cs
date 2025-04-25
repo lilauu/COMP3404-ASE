@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using COMP3404_Client.SaveLoadManagerScripts;
+using Microsoft.Maui.Controls;
 
 namespace COMP3404_Client.ViewModels;
 
@@ -81,7 +82,10 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     void SendMessage(string message)
     {
-        Messages.Add(new MessageViewModel() { Message = message, IsSender = true });
+        if (message?.Length > 0)
+        {
+            Messages.Add(new MessageViewModel() { Message = message, IsSender = true });
+        }
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>
