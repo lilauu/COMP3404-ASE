@@ -1,4 +1,6 @@
-﻿namespace COMP3404_Shared.Models.Accounts;
+﻿using COMP3404_Shared.Models.Chats;
+
+namespace COMP3404_Shared.Models.Accounts;
 
 /// <summary>
 /// An user account's login and session info.
@@ -19,6 +21,8 @@ public class UserAccount
     /// A Github access token used to authenticate with Github.
     /// </summary>
     public string GithubToken { get; set; }
+
+    public List<Chat> Chats { get; set; }
 
     /// <summary>
     /// A token representing the current user's session, allowing repeated requests without the need to reauthenticate

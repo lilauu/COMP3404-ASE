@@ -1,4 +1,3 @@
-
 namespace COMP3404_Server;
 
 public class Program
@@ -16,6 +15,8 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddAuthorization();
 
         // configure dependency injection services
         startup.ConfigureServices(builder.Environment, builder.Services);
