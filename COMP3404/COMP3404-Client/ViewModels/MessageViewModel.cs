@@ -34,6 +34,8 @@ public class MessageViewModel : INotifyPropertyChanged
         }
     }
 
+    public string FullMessage => m_fullMessage;
+
     public MessageViewModel()
     {
         m_timer = new Timer(new TimerCallback(OnTimerTick), null, TimeSpan.Zero, TimeSpan.FromSeconds(0.2));

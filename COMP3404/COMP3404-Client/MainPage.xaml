@@ -45,7 +45,7 @@
                 </ScrollView>
 
                 <!-- Chat Input -->
-                <Grid ColumnDefinitions="*, Auto" Padding="5" x:Name="chatInput">
+                <Grid ColumnDefinitions="*, Auto, Auto" Padding="5" x:Name="chatInput">
                     <!-- Wrapped Entry in a Frame for rounded corners -->
                     <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0">
                         <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame"/>
@@ -55,6 +55,11 @@
                     <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0">
                         <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"/>
                     </Frame>
+
+                    <Frame Grid.Column="2" CornerRadius="10" HasShadow="False" Padding="0">
+                        <Button Text="Save" TextColor="White" SemanticProperties.Hint="Save chat logs" Command="{Binding SaveChatMessagesLocal}"/>
+                    </Frame>
+
                 </Grid>
             </StackLayout>
         </Grid>

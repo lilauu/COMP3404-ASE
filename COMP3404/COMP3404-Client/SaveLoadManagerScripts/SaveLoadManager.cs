@@ -20,11 +20,17 @@ namespace COMP3404_Client.SaveLoadManagerScripts
             //Create the file path using the MyDocuments folder
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
+            path = Path.Combine(path, "COMP3404");
+
+            if (!Path.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             string filePath = Path.Combine(path, fileName);
 
             //Write the data into the path
-            File.WriteAllText(filePath, JsonSerializer.Serialize(data));
-
+            File.WriteAllText(filePath, JsonSerializer.Serialize(data, options:new() { WriteIndented = true, }));
         }
 
         public T LoadDataFromFile<T>(string fileName)
