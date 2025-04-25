@@ -27,21 +27,4 @@ public partial class SettingsPage : ContentPage
 
         await DisplayAlert("Wow you are authed", "we should do something in UI about this :)", "OK");
     }
-
-    private void EnabledCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        TTS.instance.enabled = e.Value;
-    }
-
-    private void VolumeSlider_ValueChanged(object sender, ValueChangedEventArgs e)
-    {
-        TTS.instance.options.Volume = (float)e.NewValue;
-        Preferences.Set("Volume", e.NewValue);
-    }
-
-    private void PitchSlider_ValueChanged(object sender, ValueChangedEventArgs e)
-    {
-        TTS.instance.options.Pitch = (float)e.OldValue;
-        Preferences.Set("Pitch", e.NewValue);
-    }
 }

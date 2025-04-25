@@ -15,7 +15,6 @@ internal class TTS
     //Composed of TTSSettings
     #region Fields
     CancellationTokenSource cts;
-    public SpeechOptions options;
     public bool enabled;
     #endregion
 
@@ -29,29 +28,26 @@ internal class TTS
         }
         else return;
 
-        options = new();
-        LoadSettings();
-        GetLocales();
     }
     #endregion
 
     #region Methods
     //Speaks a string input
 
-    void LoadSettings()
-    {
-        options.Volume = Preferences.Get("Volume", 2f);
-        options.Pitch = Preferences.Get("Pitch", 0f);
-    }
-
     public async Task Speak(string toSpeak)
     {
-        if (!enabled)
+        if (!Preferences.Get("Enabled", false))
             return;
 
         CancelSpeech();
         cts = new CancellationTokenSource();
-        await TextToSpeech.Default.SpeakAsync(toSpeak, options, cancelToken: cts.Token);
+        SpeechOptions opt = new()
+        {
+            Locale = TextToSpeech.Default.GetLocalesAsync().Result.FirstOrDefault(),
+            Volume = Preferences.Get("Volume", 1f),
+            Pitch = Preferences.Get("Pitch", 0f),
+        };
+        await TextToSpeech.Default.SpeakAsync(toSpeak, opt, cancelToken: cts.Token);
 
         // This method will block until utterance finishes.
     }
@@ -63,13 +59,6 @@ internal class TTS
             return;
 
         cts.Cancel();
-    }
-
-    async void GetLocales()
-    {
-        IEnumerable<Locale> locales = await TextToSpeech.Default.GetLocalesAsync();
-
-        options.Locale = locales.FirstOrDefault();
     }
     #endregion
 }

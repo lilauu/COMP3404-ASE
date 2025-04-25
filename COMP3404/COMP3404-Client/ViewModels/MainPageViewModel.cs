@@ -65,7 +65,7 @@ public class MainPageViewModel : INotifyPropertyChanged
         }
     }
 
-    public MainPageViewModel() : base()
+    public MainPageViewModel()
     {
         saveLoadManager = new();
         SaveChatMessagesLocal = new Command(SaveToFile);
