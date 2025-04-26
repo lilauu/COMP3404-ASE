@@ -76,12 +76,8 @@ public class DiskStorageService : IStorageService
         return JsonSerializer.Deserialize<T>(text) ?? throw new Exception("Failed to parse JSON, what the fuck");
     }
 
-    private void DeleteFileIfExists(string fileName)
+    private void DeleteFileIfExists(string filePath)
     {
-        string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        string filePath = Path.Combine(path, fileName);
-
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
