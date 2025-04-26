@@ -21,19 +21,27 @@
         <controls:NavbarView Grid.Column="0"/>
 
         <!-- Main Content -->
-        <Grid Grid.Column="1" RowDefinitions="Auto, * ,*">
+        <Grid Grid.Column="1" RowDefinitions="Auto, Auto ,*" ColumnDefinitions="*, *">
             <!-- Header -->
-            <controls:HeaderView Grid.Row="0" Title="Profile Settings"/>
+            <controls:HeaderView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Title="Profile Settings"/>
 
-            <Grid Grid.Row="1" Padding="10" VerticalOptions="Start">
-                <Button x:Name="LoginButton" Text="Log in with Github" BackgroundColor="#3A006D" FontSize="32" TextColor="White"
+            <Grid Grid.Row="1" Padding="10">
+                <Button x:Name="LoginButton" Text="Log in with Github" FontSize="32"
                         SemanticProperties.Hint="Github Login" Clicked="OnLoginClicked"/>
             </Grid>
 
-            <Grid Grid.Row="2" RowDefinitions="Auto, * ,*" Padding="10" VerticalOptions="Start">
-                <CheckBox Grid.Row="0" x:Name="EnabledCheckBox" IsChecked="{Binding Path=Enabled}"/>
-                <Slider  Grid.Row="1" Maximum="1" Value="{Binding Path=Volume}"/>
-                <Slider  Grid.Row="2" Maximum="2" Value="{Binding Path=Pitch}"/>
+            <Grid Grid.Row="2" RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="Auto, *"
+                  Padding="10" ColumnSpacing="10" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Text to Speech Settings:" FontSize="24" VerticalTextAlignment="Center"/>
+                
+                <Label Grid.Row="1" Grid.Column="0" Text="Enabled " HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                <CheckBox Grid.Row="1" Grid.Column="1" x:Name="EnabledCheckBox" IsChecked="{Binding Path=Enabled}"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Volume " HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                <Slider Grid.Row="2" Grid.Column="1" Maximum="1" Value="{Binding Path=Volume}"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Pitch " HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                <Slider  Grid.Row="3" Grid.Column="1" Maximum="2" Value="{Binding Path=Pitch}"/>
             </Grid>
 
 
