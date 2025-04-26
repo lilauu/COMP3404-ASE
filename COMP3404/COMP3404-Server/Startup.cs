@@ -16,6 +16,7 @@ public class Startup
     {
         services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        
         services.AddHttpClient();
 
         services.AddScoped<IUserAccountRepository, Repository>();

@@ -5,6 +5,10 @@ namespace COMP3404_Shared.Models.Chats;
 public class ChatMessage
 {
     [JsonIgnore]
+    public int ChatId { get; set; }
+    [JsonIgnore]
+    public Chat ChatInfo { get; set; }
+    [JsonIgnore]
     public int Id { get; set; }
     public string Message { get; set; }
     public bool IsHumanSender { get; set; }

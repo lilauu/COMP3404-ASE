@@ -35,7 +35,7 @@ public class ChatController : ControllerBase
         if (account is null)
             return Forbid();
 
-        var chats = m_chatRepository.GetChats(account.AccountId);
+        var chats = m_chatRepository.GetChats(account.UserAccountId);
         if (chats is null)
             return Ok(new List<Chat>());
 
@@ -43,7 +43,7 @@ public class ChatController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult CreateChat(string chatName, List<ChatMessage> messages)
+    public ActionResult CreateChat(string chatName, IEnumerable<ChatMessage> messages)
     {
         if (!Utils.GetUserTokenFromHeaders(Request.Headers, out string accessToken))
             return Unauthorized();
@@ -52,7 +52,7 @@ public class ChatController : ControllerBase
         if (account is null)
             return Forbid();
 
-        var result = m_chatRepository.AddChat(account.AccountId, chatName, messages);
+        var result = m_chatRepository.AddChat(account.UserAccountId, chatName, messages);
         if (result is null)
             return Problem();
 

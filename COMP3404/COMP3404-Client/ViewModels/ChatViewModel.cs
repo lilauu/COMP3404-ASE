@@ -1,5 +1,4 @@
-﻿using COMP3404_Client.AI;
-using COMP3404_Client.SaveLoad;
+﻿using COMP3404_Client.Services.AI;
 using COMP3404_Shared.Models.Chats;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using COMP3404_Client.Services.Storage;
 
 namespace COMP3404_Client.ViewModels;
 
@@ -21,8 +21,10 @@ public class ChatViewModel : INotifyPropertyChanged
     public ICommand SaveChatMessages { get; private set; }
     public ICommand SendChatMessage { get; private set; }
 
-    public ISaveLoadManager DiskSaveLoadManager => SaveLoad.DiskSaveLoadManager.Instance;
-    public ISaveLoadManager ServerSaveLoadManager => SaveLoad.ServerSaveLoadManager.Instance;
+    public IStorageService ServerStorageService { get; private set; }
+    public IStorageService DiskStorageService { get; private set; }
+
+    private IAIModelService m_modelService;
 
     public string ChatName
     {
@@ -50,17 +52,21 @@ public class ChatViewModel : INotifyPropertyChanged
 
     private readonly Chat m_chat;
 
-    public ChatViewModel(Chat chat)
+    public ChatViewModel(Chat chat, IAIModelService modelService, DiskStorageService diskStorageService, ServerStorageService serverStorageService)
     {
+        m_modelService = modelService;
+        DiskStorageService = diskStorageService;
+        ServerStorageService = serverStorageService;
+
         m_chat = chat;
-        SaveChatMessages = new Command<ISaveLoadManager>(SaveChat);
+        SaveChatMessages = new Command<IStorageService>(SaveChat);
         SendChatMessage = new Command<string>(SendMessage);
-        //saveChatMessagesOnline = new Command<string>((key) => InputString += key);
 
         // populate messages 
         AddChatMessages(m_chat.Messages);
         // todo: implement a way to tear down this class, we might be leaking by not deregistering this
         m_chat.Messages.CollectionChanged += ChatMessages_CollectionChanged;
+
     }
 
     private void ChatMessages_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -81,7 +87,7 @@ public class ChatViewModel : INotifyPropertyChanged
             Messages.Add(new MessageViewModel(message.Message, message.IsHumanSender));
     }
 
-    void SaveChat(ISaveLoadManager manager)
+    void SaveChat(IStorageService manager)
     {
         manager.SaveChat(m_chat);
     }
@@ -100,7 +106,7 @@ public class ChatViewModel : INotifyPropertyChanged
         // lock button until a response is received
         WaitingForResponse = true;
         // todo: ask AI model for a response
-        IAIModel.Instance.GetResponse(message, m_chat, OnResponseReceived);
+        m_modelService.GetResponse(message, m_chat, OnResponseReceived);
     }
 
     void OnResponseReceived(string response)

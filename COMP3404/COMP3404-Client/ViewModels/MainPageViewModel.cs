@@ -3,9 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using COMP3404_Client.SaveLoad;
+using COMP3404_Client.Services.AI;
 using COMP3404_Shared.Models.Chats;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
+using COMP3404_Client.Services.Storage;
 
 namespace COMP3404_Client.ViewModels;
 
@@ -27,33 +29,18 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     private ObservableCollection<ChatViewModel> chatViewModelList = new();
 
-    public MainPageViewModel()
+    private DiskStorageService m_diskStorageService;
+    private ServerStorageService m_serverStorageService;
+
+    public MainPageViewModel(DiskStorageService diskStorageService, ServerStorageService serverStorageService)
     {
+        m_diskStorageService = diskStorageService;
+        m_serverStorageService = serverStorageService;
+
         SwitchChatWindow = new Command<ChatViewModel>(SetActiveChat);
         CreateNewChat = new Command(CreateChat);
 
-        RefreshChats();
-    }
-
-    // todo: call this somehow when login is complete
-    public void RefreshChats()
-    {
-        Task.Run(async () =>
-        {
-            // load chats from file
-            var chatsFromDisk = await DiskSaveLoadManager.Instance.LoadChatsAsync();
-            foreach (var chat in chatsFromDisk)
-            {
-                var viewModel = new ChatViewModel(chat);
-                chatViewModelList.Add(viewModel);
-            }
-
-            // default new chat
-            if (chatViewModelList.Count == 0)
-                CreateChat();
-            else
-                SetActiveChat(chatViewModelList[0]);
-        });
+        CreateChat();
     }
 
     private void SetActiveChat(ChatViewModel chat)
@@ -64,7 +51,7 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     private void CreateChat()
     {
-        var newChat = new ChatViewModel(new Chat() { ChatName = "New Chat" });
+        var newChat = new ChatViewModel(new Chat() { ChatName = "New Chat" }, MauiProgram.GetService<IAIModelService>(), m_diskStorageService, m_serverStorageService);
         chatViewModelList.Add(newChat);
         SetActiveChat(newChat);
     }

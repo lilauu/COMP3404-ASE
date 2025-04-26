@@ -7,12 +7,10 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace COMP3404_Client.API;
+namespace COMP3404_Client.Services;
 
-public class DataManager
+public class ServerService
 {
-    public static DataManager Instance { get; private set; }
-
     const string ServerURI = "http://localhost:5093";
 
     private HttpClient m_httpClient;
@@ -23,13 +21,8 @@ public class DataManager
 
     public string FirstName => m_userInfo?.FirstName ?? "";
 
-    public DataManager(HttpClient httpClient)
+    public ServerService(HttpClient httpClient)
     {
-        if (Instance is null)
-            Instance = this;
-        else
-            return;
-
          m_httpClient = httpClient;
     }
 

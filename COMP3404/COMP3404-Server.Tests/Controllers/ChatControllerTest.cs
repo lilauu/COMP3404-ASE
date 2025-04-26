@@ -27,7 +27,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -35,7 +35,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = s,
             });
@@ -110,7 +110,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -118,7 +118,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.Is<string>(s => s == "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -195,7 +195,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -203,7 +203,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.Is<string>(s => s == "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -279,7 +279,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -287,7 +287,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = s,
             });

@@ -1,4 +1,4 @@
-﻿using COMP3404_Client.SaveLoad;
+﻿using COMP3404_Client.Services.Storage;
 using COMP3404_Shared.Models.Chats;
 
 namespace COMP3404_Client.Tests;
@@ -11,7 +11,7 @@ public class SaveLoadTests
     public void Disk_SaveChat_Success()
     {
         //Arrange
-        DiskSaveLoadManager saveLoadManager = new ();
+        DiskStorageService saveLoadManager = new ();
 
         //Act 
         saveLoadManager.SaveChat(firstTestChat);
@@ -28,7 +28,7 @@ public class SaveLoadTests
     public async void Disk_LoadChats_Success()
     {
         //Arrange
-        DiskSaveLoadManager saveLoadManager = new();
+        DiskStorageService saveLoadManager = new();
 
         //Act 
         saveLoadManager.SaveChat(firstTestChat);

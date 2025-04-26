@@ -1,30 +1,39 @@
+
+using COMP3404_Client.Services;
+
 namespace COMP3404_Client.Views;
 
 public partial class NavbarView : ContentView
 {
+	private TTSService TTS;
 	public NavbarView()
-	{
-		InitializeComponent();
-	}
+		: this(MauiProgram.GetService<TTSService>())
+	{ }
 
-	private async void OnHomeButtonClicked(object sender, EventArgs e)
+    public NavbarView(TTSService service)
+    {
+        TTS = MauiProgram.GetService<TTSService>();
+        InitializeComponent();
+    }
+
+    private async void OnHomeButtonClicked(object sender, EventArgs e)
 	{
 		await Shell.Current.GoToAsync("///"+nameof(MainPage));
-		TTS.instance.Speak("Home");
+		TTS.Speak("Home");
 	}
 
 	private async void OnProfileButtonClicked(object sender, EventArgs e)
 	{
 		// shell nav to settings page
 		await Shell.Current.GoToAsync("///"+nameof(SettingsPage));
-		TTS.instance.Speak("Profile");
+		TTS.Speak("Profile");
 	}
 
 	private async void OnHistoryButtonClicked(object sender, EventArgs e)
 	{
 		// shell nav to history page
 		await Shell.Current.GoToAsync("///" + nameof(HistoryPage));
-		TTS.instance.Speak("History");
+		TTS.Speak("History");
 	}
 
 	private void ThemeToggleButtonClicked(object sender, EventArgs e)

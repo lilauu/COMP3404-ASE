@@ -8,10 +8,6 @@
              x:Class="COMP3404_Client.MainPage"
              x:DataType="viewModels:MainPageViewModel">
 
-    <ContentPage.BindingContext>
-        <viewModels:MainPageViewModel/>
-    </ContentPage.BindingContext>
-
     <Grid Padding="10" x:Name="topGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

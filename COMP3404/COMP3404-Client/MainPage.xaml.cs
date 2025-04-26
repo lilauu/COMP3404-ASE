@@ -1,9 +1,13 @@
+using COMP3404_Client.ViewModels;
+
 namespace COMP3404_Client;
-using COMP3404_Client.SaveLoad;
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    public MainPageViewModel ViewModel { get; private set; }
+    public MainPage(MainPageViewModel viewModel)
     {
+        ViewModel = viewModel;
+        BindingContext = ViewModel;
         InitializeComponent();
     }
 }

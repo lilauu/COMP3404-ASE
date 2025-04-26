@@ -86,7 +86,7 @@ public class AccountController : ControllerBase
             // create account
             UserAccount newAccount = new()
             {
-                AccountId = userResponse.Id,
+                GithubAccountId = userResponse.Id,
                 GithubToken = accessToken,
                 FirstName = userResponse.Name,
             };

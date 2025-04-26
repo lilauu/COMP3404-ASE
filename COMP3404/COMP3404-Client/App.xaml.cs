@@ -1,18 +1,18 @@
-﻿using COMP3404_Client.API;
+﻿using COMP3404_Client.Services;
 
 namespace COMP3404_Client;
 
 public partial class App : Application
 {
     readonly HttpClient m_client;
-    readonly DataManager m_dataManager;
+    readonly ServerService m_dataManager;
+
     public App()
     {
         InitializeComponent();
 
-        TTS tts = new();
         m_client = new HttpClient();
-        m_dataManager = new DataManager(m_client);
+        m_dataManager = new ServerService(m_client);
 
         MainPage = new AppShell();
     }

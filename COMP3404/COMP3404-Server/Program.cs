@@ -1,3 +1,5 @@
+using COMP3404_Server.Database;
+
 namespace COMP3404_Server;
 
 public class Program

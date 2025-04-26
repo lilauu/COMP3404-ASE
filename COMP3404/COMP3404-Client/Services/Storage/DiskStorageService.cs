@@ -1,11 +1,13 @@
 ﻿using COMP3404_Shared.Models.Chats;
 using System.Text.Json;
 
-namespace COMP3404_Client.SaveLoad;
+namespace COMP3404_Client.Services.Storage;
 
-public class DiskSaveLoadManager : ISaveLoadManager
+public class DiskStorageService : IStorageService
 {
-    public static readonly DiskSaveLoadManager Instance = new();
+    // To allow DI to work
+    public DiskStorageService()
+    { }
 
     public void SaveChat(Chat chat)
     {
