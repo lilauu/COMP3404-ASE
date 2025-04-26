@@ -35,7 +35,7 @@
                 <CollectionView ItemsSource="{Binding Chats}" Grid.Column="0" ItemsLayout="HorizontalList">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="viewModels:ChatViewModel">
-                            <Button Margin="0,0,10,0" Text="{Binding ChatName}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=SwitchChatWindow}" CommandParameter="{Binding}"/>
+                            <Button x:Name="{Binding ChatName, StringFormat='ChatSwitcher: {0}'}" Margin="0,0,10,0" Text="{Binding ChatName}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=SwitchChatWindow}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -43,7 +43,9 @@
             </Grid>
 
             <!-- Chat Header (editable) -->
-            <Entry Grid.Row="2" Text="{Binding ActiveChat.ChatName}" FontSize="18" FontFamily="OpenSansRegular"/>
+            <Frame Grid.Row="2" CornerRadius="10" HasShadow="False" Padding="0">
+                <Entry Text="{Binding ActiveChat.ChatName}" FontAttributes="Bold" FontSize="18" FontFamily="OpenSansRegular"/>
+            </Frame>
 
             <!-- Chat Window -->
             <controls:ChatView Grid.Row="3" BindingContext="{Binding ActiveChat}"/>

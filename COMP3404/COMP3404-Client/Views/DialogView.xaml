@@ -6,9 +6,12 @@
              x:Class="COMP3404_Client.Views.DialogView"
              x:Name="Dialog">
     <CollectionView BindingContext="{x:Reference Dialog}" ItemsSource="{Binding ItemsSource}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+        </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="viewModels:MessageViewModel">
-                <local:MessageView Margin="0,5,0,5" MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
+                <local:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

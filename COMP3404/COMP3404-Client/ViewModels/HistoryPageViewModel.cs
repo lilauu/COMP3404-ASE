@@ -1,14 +1,9 @@
-﻿using COMP3404_Client.Services.AI;
+﻿using COMP3404_Client.Services;
+using COMP3404_Client.Services.AI;
 using COMP3404_Client.Services.Storage;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace COMP3404_Client.ViewModels;
@@ -52,7 +47,7 @@ public class HistoryPageViewModel : INotifyPropertyChanged
 
         foreach (var chat in chatsFromDisk.Concat(chatsFromServer))
         {
-            var viewModel = new ChatViewModel(chat, MauiProgram.GetService<IAIModelService>(), m_diskStorageService, m_serverStorageService);
+            var viewModel = new ChatViewModel(chat, MauiProgram.GetService<IAIModelService>(), m_diskStorageService, m_serverStorageService, MauiProgram.GetService<TTSService>());
             m_chats.Add(viewModel);
         }
     }

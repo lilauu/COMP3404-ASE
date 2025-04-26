@@ -8,6 +8,7 @@ using COMP3404_Shared.Models.Chats;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
 using COMP3404_Client.Services.Storage;
+using COMP3404_Client.Services;
 
 namespace COMP3404_Client.ViewModels;
 
@@ -51,7 +52,7 @@ public class MainPageViewModel : INotifyPropertyChanged
 
     private void CreateChat()
     {
-        var newChat = new ChatViewModel(new Chat() { ChatName = "New Chat" }, MauiProgram.GetService<IAIModelService>(), m_diskStorageService, m_serverStorageService);
+        var newChat = new ChatViewModel(new Chat() { ChatName = "New Chat" }, MauiProgram.GetService<IAIModelService>(), m_diskStorageService, m_serverStorageService, MauiProgram.GetService<TTSService>());
         chatViewModelList.Add(newChat);
         SetActiveChat(newChat);
     }
