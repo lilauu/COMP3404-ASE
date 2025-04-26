@@ -27,7 +27,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -35,7 +35,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = s,
             });
@@ -72,7 +72,7 @@ public class ChatControllerTest
             .SetupGet(r => r.Headers)
             .Returns(new HeaderDictionary()
             {
-                { "Authorize", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+                { "Authorization", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
             });
 
         var httpContextMock = new Mock<HttpContext>();
@@ -110,7 +110,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -118,7 +118,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.Is<string>(s => s == "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -158,7 +158,7 @@ public class ChatControllerTest
             .SetupGet(r => r.Headers)
             .Returns(new HeaderDictionary()
             {
-                { "Authorize", new("Bearer this_is_a_bad_token") }
+                { "Authorization", new("Bearer this_is_a_bad_token") }
             });
 
         var httpContextMock = new Mock<HttpContext>();
@@ -195,7 +195,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -203,7 +203,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.Is<string>(s => s == "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -279,7 +279,7 @@ public class ChatControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -287,7 +287,7 @@ public class ChatControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(s => new UserAccount()
             {
-                AccountId = 0,
+                GithubAccountId = 0,
                 FirstName = "Test_FirstName",
                 GithubToken = s,
             });
@@ -323,7 +323,7 @@ public class ChatControllerTest
             {
                 OwnerId = i,
                 ChatName = s,
-                Messages = cm.ToList(),
+                Messages = new(cm),
             });
 
         var httpRequestMock = new Mock<HttpRequest>();
@@ -331,7 +331,7 @@ public class ChatControllerTest
             .SetupGet(r => r.Headers)
             .Returns(new HeaderDictionary()
             {
-                { "Authorize", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+                { "Authorization", new("Bearer gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
             });
 
         var httpContextMock = new Mock<HttpContext>();

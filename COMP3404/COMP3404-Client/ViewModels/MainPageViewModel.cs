@@ -1,8 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using COMP3404_Client.SaveLoadManagerScripts;
+using COMP3404_Client.Services.AI;
+using COMP3404_Shared.Models.Chats;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
+using COMP3404_Client.Services.Storage;
 
 namespace COMP3404_Client.ViewModels;
 
@@ -11,32 +16,44 @@ public class MainPageViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
 
     public ICommand SwitchChatWindow { get; private set; }
+    public ICommand CreateNewChat { get; private set; }
 
-    private int m_activeChatIndex;
+    private ChatViewModel m_activeChat;
 
     public ChatViewModel ActiveChat
     {
-        get => chatViewModelList[m_activeChatIndex];
+        get => m_activeChat;
     }
 
-    private List<ChatViewModel> chatViewModelList = new();
+    public IEnumerable<ChatViewModel> Chats => chatViewModelList;
 
-    public MainPageViewModel()
+    private ObservableCollection<ChatViewModel> chatViewModelList = new();
+
+    private DiskStorageService m_diskStorageService;
+    private ServerStorageService m_serverStorageService;
+
+    public MainPageViewModel(DiskStorageService diskStorageService, ServerStorageService serverStorageService)
     {
-        SwitchChatWindow = new Command<string>(SetActiveChat);
-        chatViewModelList.Add(new());
-        chatViewModelList.Add(new());
-        chatViewModelList.Add(new());
+        m_diskStorageService = diskStorageService;
+        m_serverStorageService = serverStorageService;
+
+        SwitchChatWindow = new Command<ChatViewModel>(SetActiveChat);
+        CreateNewChat = new Command(CreateChat);
+
+        CreateChat();
     }
 
-    private void SetActiveChat(string chatId)
+    private void SetActiveChat(ChatViewModel chat)
     {
-        if (!int.TryParse(chatId, out var res))
-            return;
-        if (res >= chatViewModelList.Count)
-            return;
-        m_activeChatIndex = res;
+        m_activeChat = chat;
         OnPropertyChanged(nameof(ActiveChat));
+    }
+
+    private void CreateChat()
+    {
+        var newChat = new ChatViewModel(new Chat() { ChatName = "New Chat" }, MauiProgram.GetService<IAIModelService>(), m_diskStorageService, m_serverStorageService);
+        chatViewModelList.Add(newChat);
+        SetActiveChat(newChat);
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>

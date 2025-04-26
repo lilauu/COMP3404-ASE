@@ -1,34 +1,18 @@
 ﻿using Microsoft.Maui.Storage;
 using System.Text.Json;
 
-namespace COMP3404_Client;
+namespace COMP3404_Client.Services;
 
 /// <summary>
 /// This class reads a string input out to the user
 /// </summary>
 
-internal class TTS
+public class TTSService
 {
-    //Should not be using the singleton pattern probably
-    public static TTS instance;
-
-    //Composed of TTSSettings
+    // Composed of TTSSettings
     #region Fields
-    CancellationTokenSource cts;
+    CancellationTokenSource? cts;
     public bool enabled;
-    #endregion
-
-    #region Constructors
-    //Blank constructor
-    public TTS()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else return;
-
-    }
     #endregion
 
     #region Methods

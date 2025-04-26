@@ -1,7 +1,9 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:COMP3404_Client.Views"
-             x:Class="COMP3404_Client.HistoryPage">
+             xmlns:viewModels="clr-namespace:COMP3404_Client.ViewModels"
+             x:Class="COMP3404_Client.HistoryPage"
+             x:DataType="viewModels:HistoryPageViewModel">
     <!-- Deep Purple Theme -->
 
     <Grid Padding="10">
@@ -16,9 +18,25 @@
         <controls:NavbarView Grid.Column="0"/>
 
         <!-- Main Content -->
-        <Grid Grid.Column="1" RowDefinitions="Auto, *">
+        <Grid Grid.Column="1" RowDefinitions="Auto, Auto, *">
             <!-- Header -->
             <controls:HeaderView Grid.Row="0" Title="Chat History"/>
+
+            <!-- Chat Selector -->
+            <Grid Grid.Row="1" ColumnDefinitions="Auto, *">
+                <Button Grid.Column="0" Text="🔄" Command="{Binding Refresh}"/>
+                
+                <CollectionView ItemsSource="{Binding Chats}" Grid.Column="1" ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:ChatViewModel">
+                            <Button Margin="0,0,10,0" Text="{Binding ChatName}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HistoryPageViewModel}}, Path=SwitchChatWindow}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <controls:DialogView Grid.Row="2" ItemsSource="{Binding ActiveChat.Messages}"/>
+
         </Grid>
     </Grid>
 </ContentPage>

@@ -8,10 +8,6 @@
              x:Class="COMP3404_Client.MainPage"
              x:DataType="viewModels:MainPageViewModel">
 
-    <ContentPage.BindingContext>
-        <viewModels:MainPageViewModel/>
-    </ContentPage.BindingContext>
-
     <Grid Padding="10" x:Name="topGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -24,8 +20,9 @@
         <controls:NavbarView Grid.Column="0"/>
 
         <!-- Main Content -->
-        <Grid Grid.Column="1" x:Name="mainContentGrid">
+        <Grid Grid.Column="1" x:Name="mainContentGrid" RowSpacing="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -33,13 +30,23 @@
             <!-- Header -->
             <controls:HeaderView Grid.Row="0" Title="Home"/>
 
+            <!-- Chat Selector -->
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto">
+                <CollectionView ItemsSource="{Binding Chats}" Grid.Column="0" ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:ChatViewModel">
+                            <Button Margin="0,0,10,0" Text="{Binding ChatName}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=SwitchChatWindow}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Grid.Column="1" Text="➕" Command="{Binding CreateNewChat}"/>
+            </Grid>
+
+            <!-- Chat Header (editable) -->
+            <Entry Grid.Row="2" Text="{Binding ActiveChat.ChatName}" FontSize="18" FontFamily="OpenSansRegular"/>
+
             <!-- Chat Window -->
-            <StackLayout Grid.Row="1" Orientation="Horizontal">
-                <Button Text="Chat window 0" Command="{Binding SwitchChatWindow}" CommandParameter="0"/>
-                <Button Text="Chat window 1" Command="{Binding SwitchChatWindow}" CommandParameter="1"/>
-                <Button Text="Chat window 2" Command="{Binding SwitchChatWindow}" CommandParameter="2"/>
-            </StackLayout>
-            <controls:ChatView Grid.Row="2" BindingContext="{Binding ActiveChat}"/>
+            <controls:ChatView Grid.Row="3" BindingContext="{Binding ActiveChat}"/>
         </Grid>
     </Grid>
 </ContentPage>

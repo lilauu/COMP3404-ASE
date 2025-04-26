@@ -8,11 +8,14 @@ public class DatabaseContext : DbContext
 {
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
+        Database.EnsureCreated();
     }
 
     public DbSet<UserAccount> Accounts { get; set; } = null!;
 
     public DbSet<Chat> Chats { get; set; } = null!;
+
+    public DbSet<ChatMessage> ChatMessages { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,24 +23,28 @@ public class DatabaseContext : DbContext
 
         modelBuilder.Entity<UserAccount>(e =>
         {
-            e.HasKey(ua => ua.AccountId);
+            e.HasKey(ua => ua.UserAccountId);
         });
 
         modelBuilder.Entity<Chat>(e =>
         {
-            e.HasKey(c => c.ChatName);
-            e.HasKey(c => c.OwnerId);
+            e.HasKey(c => c.ChatId);
             e.HasOne(c => c.OwnerInfo)
                 .WithMany(ua => ua.Chats)
                 .HasForeignKey(c => c.OwnerId);
-            e.HasMany(c => c.Messages);
+            e.HasMany(c => c.Messages)
+                .WithOne(cm => cm.ChatInfo)
+                .HasForeignKey(cm => cm.ChatId);
         });
 
         modelBuilder.Entity<ChatMessage>(e =>
         {
             e.HasKey(cm => cm.Id);
             e.Property(cm => cm.Id)
-                .HasDefaultValueSql("nextval('\"ChatMessageIds\"')");
+                .HasDefaultValueSql("NEXT VALUE FOR ChatMessageIds");
+            e.HasOne(cm => cm.ChatInfo)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(cm => cm.ChatId);
 
         });
     }

@@ -6,31 +6,28 @@
              x:Class="COMP3404_Client.Views.ChatView"
              x:DataType="viewModels:ChatViewModel">
 
-    <StackLayout Padding="10" Spacing="10" x:Name="chatWindow">
-        <CollectionView ItemsSource="{Binding Messages}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:MessageViewModel">
-                    <controls:MessageView MessageText="{Binding Message}" IsSender="{Binding IsSender}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+    <Grid RowDefinitions="*, Auto" RowSpacing="10" x:Name="chatWindow">
+        <controls:DialogView Grid.Row="0" ItemsSource="{Binding Messages}"/>
 
         <!-- Chat Input -->
-        <Grid ColumnDefinitions="*, Auto, Auto" Padding="5" x:Name="chatInput">
+        <Grid Grid.Row="1" ColumnDefinitions="*, Auto, Auto, Auto" Padding="5" x:Name="chatInput">
             <!-- Wrapped Entry in a Frame for rounded corners -->
             <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0">
-                <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame"/>
+                <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame" Completed="TextEntered" ReturnCommand="{Binding SendChatMessage}" ReturnCommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
             </Frame>
 
             <!-- Wrapped Button in a Frame for rounded corners -->
             <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" Padding="0">
-                <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked ="SendButtonClicked"  Command="{Binding SendChatMessage}" CommandParameter="{Binding Source={x:Reference chatInputFrame}, Path=Text}"/>
+                <Button Text="➤" TextColor="White" SemanticProperties.Hint="Send Message" Clicked="TextEntered" Command="{Binding SendChatMessage}" CommandParameter="{Binding Source={x:Reference chatInputFrame}, Path=Text}"/>
             </Frame>
 
             <Frame Grid.Column="2" CornerRadius="10" HasShadow="False" Padding="0">
-                <Button Text="Save Local" TextColor="White" SemanticProperties.Hint="Save chat logs" Command="{Binding SaveChatMessagesLocal}"/>
+                <Button Text="Save Local" TextColor="White" SemanticProperties.Hint="Save chat logs to disk" Command="{Binding SaveChatMessages}" CommandParameter="{Binding DiskStorageService}"/>
+            </Frame>
+            <Frame Grid.Column="3" CornerRadius="10" HasShadow="False" Padding="0">
+                <Button Text="Upload" TextColor="White" SemanticProperties.Hint="Save chat logs online" Command="{Binding SaveChatMessages}" CommandParameter="{Binding ServerStorageService}"/>
             </Frame>
 
         </Grid>
-    </StackLayout>
+    </Grid>
 </ContentView>

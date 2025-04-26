@@ -86,7 +86,7 @@ public class AccountController : ControllerBase
             // create account
             UserAccount newAccount = new()
             {
-                AccountId = userResponse.Id,
+                GithubAccountId = userResponse.Id,
                 GithubToken = accessToken,
                 FirstName = userResponse.Name,
             };
@@ -99,6 +99,7 @@ public class AccountController : ControllerBase
             foundAccount.GithubToken = accessToken;
         }
 
+        m_accountRepository.Save();
         return Redirect($"comp3404://login/github?state={state}&access_token={accessToken}");
     }
 

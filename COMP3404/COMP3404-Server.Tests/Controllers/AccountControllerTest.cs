@@ -75,7 +75,7 @@ public class AccountControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test_FirstName",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -175,7 +175,7 @@ public class AccountControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -226,7 +226,7 @@ public class AccountControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -277,7 +277,7 @@ public class AccountControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -328,7 +328,7 @@ public class AccountControllerTest
             .Setup(r => r.GetById(It.IsAny<int>()))
             .Returns<int>(i => new UserAccount()
             {
-                AccountId = i,
+                GithubAccountId = i,
                 FirstName = "Test",
                 GithubToken = "gho_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             });
@@ -376,7 +376,7 @@ public class AccountControllerTest
         var request = new Mock<HttpRequest>();
         request.SetupGet(x => x.Headers).Returns(
             new HeaderDictionary {
-                {"Authorize", "Bearer thisIsATestToken"}
+                {"Authorization", "Bearer thisIsATestToken"}
             });
 
         var httpContext = new Mock<HttpContext>();
@@ -388,7 +388,7 @@ public class AccountControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(token => new UserAccount()
             {
-                AccountId = 69,
+                GithubAccountId = 69,
                 FirstName = "ThisIsATestFirstName",
                 GithubToken = token,
             });
@@ -431,7 +431,7 @@ public class AccountControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(token => new UserAccount()
             {
-                AccountId = 69,
+                GithubAccountId = 69,
                 FirstName = "ThisIsATestFirstName",
                 GithubToken = token,
             });
@@ -463,7 +463,7 @@ public class AccountControllerTest
         var request = new Mock<HttpRequest>();
         request.SetupGet(x => x.Headers).Returns(
             new HeaderDictionary {
-                { "Authorize", "Bearer this is a weird header" }
+                { "Authorization", "Bearer this is a weird header" }
             });
 
         var httpContext = new Mock<HttpContext>();
@@ -475,7 +475,7 @@ public class AccountControllerTest
             .Setup(r => r.GetByToken(It.IsAny<string>()))
             .Returns<string>(token => new UserAccount()
             {
-                AccountId = 69,
+                GithubAccountId = 69,
                 FirstName = "ThisIsATestFirstName",
                 GithubToken = token,
             });

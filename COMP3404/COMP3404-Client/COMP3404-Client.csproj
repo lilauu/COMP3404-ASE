@@ -58,6 +58,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Services\AI\Gemini\**" />
+	  <EmbeddedResource Remove="Services\AI\Gemini\**" />
+	  <MauiCss Remove="Services\AI\Gemini\**" />
+	  <MauiXaml Remove="Services\AI\Gemini\**" />
+	  <None Remove="Services\AI\Gemini\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -88,10 +96,9 @@
 	  <MauiXaml Update="Views\NavbarView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="AI\Gemini\" />
+	  <MauiXaml Update="Views\DialogView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -100,6 +107,9 @@
 	  </Compile>
 	  <Compile Update="Views\NavbarView.xaml.cs">
 	    <DependentUpon>NavbarView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\DialogView.xaml.cs">
+	    <DependentUpon>DialogView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

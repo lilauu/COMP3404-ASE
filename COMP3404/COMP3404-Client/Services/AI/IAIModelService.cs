@@ -1,11 +1,11 @@
 ﻿using COMP3404_Shared.Models.Chats;
 
-namespace COMP3404_Client.AI;
+namespace COMP3404_Client.Services.AI;
 
 /// <summary>
 /// The interface that UI etc. should use when interacting with the AI model.
 /// </summary>
-public interface IAIModel
+public interface IAIModelService
 {
     /// <summary>
     /// Gets a response from the AI model.

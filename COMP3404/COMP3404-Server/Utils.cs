@@ -12,7 +12,7 @@ public static class Utils
     {
         token = "";
 
-        if (!headers.TryGetValue("Authorize", out var authoriseHeader))
+        if (!headers.TryGetValue("Authorization", out var authoriseHeader))
             return false;
 
         if (authoriseHeader.Count != 1)

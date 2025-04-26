@@ -8,9 +8,13 @@ namespace COMP3404_Shared.Models.Accounts;
 public class UserAccount
 {
     /// <summary>
+    /// Primary key.
+    /// </summary>
+    public int UserAccountId { get; set; }
+    /// <summary>
     /// The Id of the user account. (from Github)
     /// </summary>
-    public int AccountId { get; set; }
+    public int GithubAccountId { get; set; }
 
     /// <summary>
     /// The user's first name.

@@ -2,6 +2,7 @@
 using COMP3404_Shared.Models.Chats;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace COMP3404_Server.Controllers;
 
@@ -35,15 +36,21 @@ public class ChatController : ControllerBase
         if (account is null)
             return Forbid();
 
-        var chats = m_chatRepository.GetChats(account.AccountId);
+        var chats = m_chatRepository.GetChats(account.UserAccountId);
         if (chats is null)
             return Ok(new List<Chat>());
+
+        foreach (var chat in chats)
+        {
+            if (chat.Messages.Count > 0)
+                Console.WriteLine("WHAT");
+        }
 
         return Ok(chats);
     }
 
     [HttpPost]
-    public ActionResult CreateChat(string chatName, List<ChatMessage> messages)
+    public ActionResult CreateChat(string chatName, IEnumerable<ChatMessage> messages)
     {
         if (!Utils.GetUserTokenFromHeaders(Request.Headers, out string accessToken))
             return Unauthorized();
@@ -52,9 +59,11 @@ public class ChatController : ControllerBase
         if (account is null)
             return Forbid();
 
-        var result = m_chatRepository.AddChat(account.AccountId, chatName, messages);
+        var result = m_chatRepository.AddChat(account.UserAccountId, chatName, messages);
         if (result is null)
             return Problem();
+
+        m_accountRepository.Save();
 
         return Ok();
     }

@@ -9,8 +9,8 @@ public class MessageViewModel : INotifyPropertyChanged
 
     private string m_displayMessage = "";
     private string m_fullMessage = "";
-    private Timer m_timer;
-    private Random m_rand;
+    private readonly Timer m_timer;
+    private readonly Random m_rand;
     private bool m_isSender = false;
 
     public bool IsSender
@@ -19,6 +19,8 @@ public class MessageViewModel : INotifyPropertyChanged
         set
         {
             m_isSender = value;
+            if (m_isSender)
+                m_displayMessage = m_fullMessage;
             OnPropertyChanged();
         }
     }
@@ -34,12 +36,22 @@ public class MessageViewModel : INotifyPropertyChanged
         }
     }
 
-    public string FullMessage => m_fullMessage;
-
-    public MessageViewModel()
+    public MessageViewModel(string message, bool isSender)
     {
-        m_timer = new Timer(new TimerCallback(OnTimerTick), null, TimeSpan.Zero, TimeSpan.FromSeconds(0.2));
-        m_rand = new Random();
+        m_isSender = isSender;
+        m_fullMessage = message;
+
+        if (isSender)
+        {
+            // set the display message directly to avoid having it be "typed" by the model
+            m_displayMessage = message;
+        }
+        else
+        {
+            // simulate the AI "typing"
+            m_timer = new Timer(new TimerCallback(OnTimerTick), null, TimeSpan.Zero, TimeSpan.FromSeconds(0.2));
+            m_rand = new Random();
+        }
     }
 
     private void OnTimerTick(object? sender)
@@ -48,7 +60,7 @@ public class MessageViewModel : INotifyPropertyChanged
             return;
 
         int startIndex = m_displayMessage.Length;
-        int length = int.Min(m_rand.Next(4), m_fullMessage.Length - startIndex);
+        int length = int.Min(m_rand.Next(8), m_fullMessage.Length - startIndex);
         // grab the next few characters from the full message
         string toAdd = m_fullMessage.Substring(startIndex, length);
 
