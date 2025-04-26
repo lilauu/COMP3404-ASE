@@ -2,6 +2,7 @@
 using COMP3404_Shared.Models.Chats;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace COMP3404_Server.Controllers;
 
@@ -38,6 +39,12 @@ public class ChatController : ControllerBase
         var chats = m_chatRepository.GetChats(account.UserAccountId);
         if (chats is null)
             return Ok(new List<Chat>());
+
+        foreach (var chat in chats)
+        {
+            if (chat.Messages.Count > 0)
+                Console.WriteLine("WHAT");
+        }
 
         return Ok(chats);
     }

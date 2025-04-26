@@ -20,5 +20,6 @@ public class Chat
 
     [JsonPropertyName("chatName")]
     public string ChatName { get; set; }
-    public ObservableCollection<ChatMessage> Messages { get; set; } = new();
+    [JsonPropertyName("messages")]
+    public List<ChatMessage> Messages { get; set; } = new();
 }

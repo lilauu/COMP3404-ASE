@@ -64,21 +64,7 @@ public class ChatViewModel : INotifyPropertyChanged
 
         // populate messages 
         AddChatMessages(m_chat.Messages);
-        // todo: implement a way to tear down this class, we might be leaking by not deregistering this
-        m_chat.Messages.CollectionChanged += ChatMessages_CollectionChanged;
 
-    }
-
-    private void ChatMessages_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (e.OldItems != null)
-        {
-            throw new NotImplementedException("Removing messages is unsupported");
-        }
-        if (e.NewItems != null)
-        {
-            AddChatMessages(e.NewItems.Cast<ChatMessage>());
-        }
     }
 
     private void AddChatMessages(IEnumerable<ChatMessage> messages)
@@ -100,7 +86,10 @@ public class ChatViewModel : INotifyPropertyChanged
         if (string.IsNullOrWhiteSpace(message))
             return;
 
-        m_chat.Messages.Add(new(message, true));
+        var cm = new ChatMessage(message, true);
+        m_chat.Messages.Add(cm);
+        AddChatMessages([cm]);
+        
         OnPropertyChanged(nameof(Messages));
 
         // lock button until a response is received
@@ -112,7 +101,9 @@ public class ChatViewModel : INotifyPropertyChanged
     void OnResponseReceived(string response)
     {
         WaitingForResponse = false;
-        m_chat.Messages.Add(new(response, false));
+        var cm = new ChatMessage(response, false);
+        m_chat.Messages.Add(cm);
+        AddChatMessages([cm]);
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>

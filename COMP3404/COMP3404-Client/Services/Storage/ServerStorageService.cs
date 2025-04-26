@@ -30,7 +30,7 @@ public class ServerStorageService : IStorageService
 
         // parse response
         string responseContent = await response.Content.ReadAsStringAsync();
-        var parseResult = JsonSerializer.Deserialize<IEnumerable<Chat>>(responseContent);
+        var parseResult = JsonSerializer.Deserialize<List<Chat>>(responseContent);
         return parseResult ?? new List<Chat>();
     }
 
@@ -43,7 +43,7 @@ public class ServerStorageService : IStorageService
         Task.Run(async () =>
         {
             // ping api to save the chat
-            var content = JsonContent.Create(chat.Messages.ToList());
+            var content = JsonContent.Create(chat.Messages);
             var query = HttpUtility.ParseQueryString(string.Empty);
             query.Add("chatName", chat.ChatName);
 

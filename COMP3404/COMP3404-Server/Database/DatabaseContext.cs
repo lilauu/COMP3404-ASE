@@ -32,7 +32,9 @@ public class DatabaseContext : DbContext
             e.HasOne(c => c.OwnerInfo)
                 .WithMany(ua => ua.Chats)
                 .HasForeignKey(c => c.OwnerId);
-            e.HasMany(c => c.Messages);
+            e.HasMany(c => c.Messages)
+                .WithOne(cm => cm.ChatInfo)
+                .HasForeignKey(cm => cm.ChatId);
         });
 
         modelBuilder.Entity<ChatMessage>(e =>

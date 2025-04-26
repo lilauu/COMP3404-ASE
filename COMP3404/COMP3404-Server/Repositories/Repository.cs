@@ -1,6 +1,7 @@
 ﻿using COMP3404_Server.Database;
 using COMP3404_Shared.Models.Accounts;
 using COMP3404_Shared.Models.Chats;
+using Microsoft.EntityFrameworkCore;
 
 namespace COMP3404_Server.Repositories;
 
@@ -32,7 +33,7 @@ public class Repository : IUserAccountRepository, IChatRepository
 
     IEnumerable<Chat> IChatRepository.GetChats(int userId)
     {
-        return m_dbContext.Chats.Where(c => c.OwnerId == userId);
+        return m_dbContext.Chats.Where(c => c.OwnerId == userId).Include(c => c.Messages);
     }
 
     Chat? IChatRepository.AddChat(int userId, string chatName, IEnumerable<ChatMessage> messages)
