@@ -1,3 +1,5 @@
+using COMP3404_Client.Services;
+
 namespace COMP3404_Client.Views;
 
 /// <summary>
@@ -22,7 +24,7 @@ public partial class MessageView : ContentView
             {
                 var view = (MessageView)bindable;
 
-                view.HorizontalTextAlignment = view.GetAlignment((bool)newValue);
+                view.SenderFlowDirection = view.GetFlowDirection((bool)newValue);
             });
     /// <summary>
     /// Whether or not the message was sent by the user.
@@ -33,26 +35,37 @@ public partial class MessageView : ContentView
         set => SetValue(IsSenderProperty, value);
     }
 
-    public static readonly BindableProperty HorizontalTextAlignmentProperty =
-           BindableProperty.Create(nameof(HorizontalTextAlignment), typeof(TextAlignment), typeof(MessageView),
+    public static readonly BindableProperty SenderFlowDirectionProperty =
+           BindableProperty.Create(nameof(SenderFlowDirection), typeof(FlowDirection), typeof(MessageView),
                defaultValueCreator: bindable =>
                {
                    var view = (MessageView)bindable;
-                   return view.GetAlignment(view.IsSender);
+                   return view.GetFlowDirection(view.IsSender);
                });
     /// <summary>
     /// The desired alignment of the text in the message box, controlled by <see cref="IsSender"/>
     /// </summary>
-    public TextAlignment HorizontalTextAlignment
+    public FlowDirection SenderFlowDirection
     {
-        get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty);
-        private set => SetValue(HorizontalTextAlignmentProperty, value);
+        get => (FlowDirection)GetValue(SenderFlowDirectionProperty);
+        private set => SetValue(SenderFlowDirectionProperty, value);
     }
 
-    private TextAlignment GetAlignment(bool value) => value ? TextAlignment.End : TextAlignment.Start;
+    private FlowDirection GetFlowDirection(bool value) => value ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+    private TTSService m_ttsService;
 
     public MessageView()
-	{
-		InitializeComponent();
-	}
+        : this(MauiProgram.GetService<TTSService>())
+    { }
+
+    public MessageView(TTSService ttsService)
+    {
+        m_ttsService = ttsService;
+        InitializeComponent();
+    }
+
+    private void TTSButton_Clicked(object sender, EventArgs e)
+    {
+        m_ttsService.Speak(MessageText);
+    }
 }

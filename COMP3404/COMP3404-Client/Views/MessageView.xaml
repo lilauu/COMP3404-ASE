@@ -4,7 +4,11 @@
              xmlns:local="clr-namespace:COMP3404_Client.Views"
              x:Name="Message"
              x:Class="COMP3404_Client.Views.MessageView">
-    <Frame BindingContext="{x:Reference Message}" Padding="10" CornerRadius="15">
-        <Label HorizontalTextAlignment="{Binding HorizontalTextAlignment}" Text="{Binding MessageText}" FontSize="18"/>
-    </Frame>
+    <HorizontalStackLayout BindingContext="{x:Reference Message}" FlowDirection="{Binding SenderFlowDirection}">
+        <Button Text="🔊" Clicked="TTSButton_Clicked"/>
+        <Frame Padding="10" CornerRadius="15">
+            <Label Text="{Binding MessageText}" FontSize="18"/>
+        </Frame>
+    </HorizontalStackLayout>
+
 </ContentView>

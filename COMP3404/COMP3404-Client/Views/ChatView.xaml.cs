@@ -30,7 +30,6 @@ public partial class ChatView : ContentView
 	{
 		if (isWaiting)
 			return;
-		TTS.Speak(chatInputFrame.Text);
 
 		// This is a stupid hack that I hoped that I would never have to write in my career
 		// but the *enlightened* individuals over at Microsoft in all their wisdom decided that

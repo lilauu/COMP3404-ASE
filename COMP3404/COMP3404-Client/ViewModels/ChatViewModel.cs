@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using COMP3404_Client.Services.Storage;
+using COMP3404_Client.Services;
 
 namespace COMP3404_Client.ViewModels;
 
@@ -25,6 +26,7 @@ public class ChatViewModel : INotifyPropertyChanged
     public IStorageService DiskStorageService { get; private set; }
 
     private IAIModelService m_modelService;
+    private TTSService m_ttsService;
 
     public string ChatName
     {
@@ -52,8 +54,9 @@ public class ChatViewModel : INotifyPropertyChanged
 
     private readonly Chat m_chat;
 
-    public ChatViewModel(Chat chat, IAIModelService modelService, DiskStorageService diskStorageService, ServerStorageService serverStorageService)
+    public ChatViewModel(Chat chat, IAIModelService modelService, DiskStorageService diskStorageService, ServerStorageService serverStorageService, TTSService ttsService)
     {
+        m_ttsService = ttsService;
         m_modelService = modelService;
         DiskStorageService = diskStorageService;
         ServerStorageService = serverStorageService;
@@ -104,6 +107,7 @@ public class ChatViewModel : INotifyPropertyChanged
         var cm = new ChatMessage(response, false);
         m_chat.Messages.Add(cm);
         AddChatMessages([cm]);
+        m_ttsService.Speak(response);
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>
