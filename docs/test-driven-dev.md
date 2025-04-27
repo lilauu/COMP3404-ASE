@@ -4,9 +4,9 @@ We took a TDD approach to our project, implementing test stubs to help us work o
 
 ## Integration Tests
 
-For our project, integration testing was quite hard to achieve in a 'pure' form. Due to preferences not being available, and wanting to keep the API resource points, we mocked the preferences and used the StubAIModelService in order to complete our integration test that checked everything integrated within the ChatViewModel.
+For our project, integration testing was quite hard to achieve in a 'pure' form. Due to preferences not being available, and wanting to keep the API resource points, we mocked the preferences and used the StubAIModelService in order to complete our integration test that checked everything integrated within the ChatViewModel. Below is that integration test as an example.
 
-
+![integration-test](diagrams/integ-test.png)
 
 ## Mock Testing
 For mock testing, we used the Moq library, which integrated nicely with Visual Studio and XUnit. Moq implements fake versions of classes or interfaces so that individual components can be tested, desptite containing dependencies. This is an example of part of the Act section of a unit test, where we are mocking a database repository interface in order to test an endpoint's logic properly.
@@ -23,4 +23,3 @@ This is an example of unit testing that we built for the save-load testing suite
 ## User Acceptance Testing
 User acceptance testing was used comparatively little compared to other forms of testing, as it is a manual process and not automatable.
 Each requirement was tested before closing the corresponding Github issue, and the requirements were tested repeatedly as development continued to respond quickly to any regressions.
-
