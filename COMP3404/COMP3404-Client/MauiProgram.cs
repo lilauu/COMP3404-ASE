@@ -44,6 +44,7 @@ public static class MauiProgram
             .AddTransient<ServerStorageService>()
             .AddTransient<DiskStorageService>()
             .AddSingleton<TTSService>()
+            .AddSingleton(Preferences.Default)
             ;
 
         return builder;

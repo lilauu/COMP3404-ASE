@@ -1,4 +1,5 @@
 using COMP3404_Client.Services;
+using COMP3404_Client.ViewModels;
 using COMP3404_Shared.Models.Api;
 
 namespace COMP3404_Client;
@@ -6,9 +7,12 @@ namespace COMP3404_Client;
 public partial class SettingsPage : ContentPage
 {
     private ServerService m_serverService;
-    public SettingsPage(ServerService serverService)
+    private SettingsPageViewModel m_viewModel;
+    public SettingsPage(SettingsPageViewModel viewModel, ServerService serverService)
     {
         m_serverService = serverService;
+        m_viewModel = viewModel;
+        BindingContext = m_viewModel;
         InitializeComponent();
     }
 

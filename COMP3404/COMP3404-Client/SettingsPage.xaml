@@ -5,10 +5,6 @@
              x:Class="COMP3404_Client.SettingsPage"
              x:DataType="viewModels:SettingsPageViewModel">
 
-    <ContentPage.BindingContext>
-        <viewModels:SettingsPageViewModel/>
-    </ContentPage.BindingContext>
-
     <Grid Padding="10" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

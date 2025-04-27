@@ -12,15 +12,17 @@ namespace COMP3404_Client.Services.AI;
 class GeminiAIModelService : IAIModelService
 {
     private HttpClient m_httpClient;
+    private ServerService m_serverService;
 
     const string GeminiApiModelsUrl = "https://generativelanguage.googleapis.com/v1beta/models";
     // really bad to have this hardcoded, very insecure. This should really be got from the API server
     // where it is stored in the user secrets or something.
     const string GeminiApiKey = "AIzaSyD7LXfcRukECXJJAQ4mzGQXedZFh9kljc4";
 
-    public GeminiAIModelService(HttpClient httpClient)
+    public GeminiAIModelService(HttpClient httpClient, ServerService server)
     {
         m_httpClient = httpClient;
+        m_serverService = server;
     }
 
     public async void GetResponse(string message, Chat conversation, Action<string> onResponseReceived)
@@ -55,6 +57,10 @@ class GeminiAIModelService : IAIModelService
                     new
                     {
                         text = "Respond in plain text only."
+                    },
+                    new
+                    {
+                        text = string.IsNullOrEmpty(m_serverService.FirstName) ? "The user has not specified their name." : $"The user's name is {m_serverService.FirstName}"
                     }
                 }
             }
@@ -82,10 +88,5 @@ class GeminiAIModelService : IAIModelService
         request.Content = content;
         var result = await m_httpClient.SendAsync(request);
         return result;
-    }
-
-    public void TranslateMessage(string message, string language, Chat conversation, Action<string> onResponseReceived)
-    {
-        throw new NotImplementedException();
     }
 }

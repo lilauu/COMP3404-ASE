@@ -11,44 +11,50 @@ namespace COMP3404_Client.ViewModels;
 public class SettingsPageViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
+    private IPreferences m_preferences;
 
     public bool Enabled
     {
-        get => Preferences.Get("Enabled", false);
+        get => m_preferences.Get("Enabled", false);
 
         set 
         {
             if (value == Enabled)
                 return;
-            Preferences.Set("Enabled", value);
+            m_preferences.Set("Enabled", value);
             OnPropertyChanged();
         } 
     }
 
     public float Volume
     {
-        get => Preferences.Get("Volume", 1f);
+        get => m_preferences.Get("Volume", 1f);
 
         set
         {
             if (value == Volume)
                 return;
-            Preferences.Set("Volume", value);
+            m_preferences.Set("Volume", value);
             OnPropertyChanged();
         }
     }
 
     public float Pitch
     {
-        get => Preferences.Get("Pitch", 0f);
+        get => m_preferences.Get("Pitch", 0f);
 
         set
         {
             if (value == Pitch)
                 return;
-            Preferences.Set("Pitch", value);
+            m_preferences.Set("Pitch", value);
             OnPropertyChanged();
         }
+    }
+
+    public SettingsPageViewModel(IPreferences preferences)
+    {
+        m_preferences = preferences;
     }
 
     public void OnPropertyChanged([CallerMemberName] string name = "") =>
