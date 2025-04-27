@@ -12,15 +12,20 @@ public class TTSService
     // Composed of TTSSettings
     #region Fields
     CancellationTokenSource? cts;
-    public bool enabled;
+    IPreferences m_preferences;
     #endregion
+
+    public TTSService(IPreferences preferences)
+    {
+        m_preferences = preferences;
+    }
 
     #region Methods
     //Speaks a string input
 
     public void Speak(string toSpeak)
     {
-        if (!Preferences.Get("Enabled", false))
+        if (!m_preferences.Get("Enabled", false))
             return;
 
         CancelSpeech();
@@ -28,8 +33,8 @@ public class TTSService
         SpeechOptions opt = new()
         {
             Locale = TextToSpeech.Default.GetLocalesAsync().Result.FirstOrDefault(),
-            Volume = Preferences.Get("Volume", 1f),
-            Pitch = Preferences.Get("Pitch", 0f),
+            Volume = m_preferences.Get("Volume", 1f),
+            Pitch = m_preferences.Get("Pitch", 0f),
         };
         TextToSpeech.Default.SpeakAsync(toSpeak, opt, cancelToken: cts.Token);
 
