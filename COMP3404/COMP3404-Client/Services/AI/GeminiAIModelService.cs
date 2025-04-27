@@ -89,9 +89,4 @@ class GeminiAIModelService : IAIModelService
         var result = await m_httpClient.SendAsync(request);
         return result;
     }
-
-    public void TranslateMessage(string message, string language, Chat conversation, Action<string> onResponseReceived)
-    {
-        throw new NotImplementedException();
-    }
 }
