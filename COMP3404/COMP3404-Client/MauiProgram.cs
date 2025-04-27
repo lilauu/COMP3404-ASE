@@ -2,13 +2,13 @@
 using COMP3404_Client.Services.AI;
 using Microsoft.Extensions.Logging;
 using COMP3404_Client.Services.Storage;
+using Microsoft.Extensions.Configuration;
 
 namespace COMP3404_Client;
 
 public static class MauiProgram
 {
     static IServiceProvider m_serviceProvider = null!;
-
     public static TService GetService<TService>()
         => m_serviceProvider.GetService<TService>();
 
@@ -38,7 +38,7 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
     {
         builder.Services
-            .AddSingleton<IAIModelService, StubAIModelService>() // todo: replace with actual service once implemented
+            .AddSingleton<IAIModelService, GeminiAIModelService>() // todo: replace with actual service once implemented
             .AddSingleton<HttpClient>()
             .AddSingleton<ServerService>()
             .AddTransient<ServerStorageService>()
