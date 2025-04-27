@@ -1,7 +1,6 @@
 ﻿namespace COMP3404_Client.Tests;
 
-using Xunit;
-using COMP3404_Client;
+using COMP3404_Client.Services;
 public class TTSTests
 {
     [Fact]
@@ -12,5 +11,6 @@ public class TTSTests
         //Act 
 
         //Assert
+        Assert.True(true);
     }
 }

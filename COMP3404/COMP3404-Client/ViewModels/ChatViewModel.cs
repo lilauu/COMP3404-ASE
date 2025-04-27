@@ -101,6 +101,11 @@ public class ChatViewModel : INotifyPropertyChanged
         m_modelService.GetResponse(message, m_chat, OnResponseReceived);
     }
 
+    public void TranslateMessage(string message, string language)
+    {
+        m_modelService.GetResponse($"Translate this statment ''{message}'' into {language}", m_chat, OnResponseReceived);
+    }
+
     void OnResponseReceived(string response)
     {
         WaitingForResponse = false;
