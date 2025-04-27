@@ -1,4 +1,6 @@
 using COMP3404_Client.Services;
+using COMP3404_Client.ViewModels;
+using Microsoft.Maui;
 
 namespace COMP3404_Client.Views;
 
@@ -53,19 +55,30 @@ public partial class MessageView : ContentView
 
     private FlowDirection GetFlowDirection(bool value) => value ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
     private TTSService m_ttsService;
+    private MainPageViewModel m_mainPageViewModel;
+    private MainPage m_mainPage;
 
     public MessageView()
-        : this(MauiProgram.GetService<TTSService>())
+        : this(MauiProgram.GetService<TTSService>(), MauiProgram.GetService<MainPageViewModel>())
     { }
 
-    public MessageView(TTSService ttsService)
+    public MessageView(TTSService ttsService, MainPageViewModel mainPageViewModel)
     {
         m_ttsService = ttsService;
+        m_mainPageViewModel = mainPageViewModel;
         InitializeComponent();
     }
 
     private void TTSButton_Clicked(object sender, EventArgs e)
     {
         m_ttsService.Speak(MessageText);
+    }
+
+    private async void LanguageButton_Clicked(object sender, EventArgs e)
+    {
+        //TODO: Translate the MessageText into a language passed in by the user
+        string language = await Shell.Current.CurrentPage.DisplayPromptAsync("Question", "What language do you want to translate to?");
+
+        m_mainPageViewModel.ActiveChat.TranslateMessage(MessageText, language);
     }
 }

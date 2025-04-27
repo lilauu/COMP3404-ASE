@@ -17,6 +17,14 @@ public class StubAIModelService : IAIModelService
         string nameStr = m_serverService.FirstName;
         if (string.IsNullOrEmpty(nameStr))
             nameStr = "You";
-        onResponseReceived($"This is a stub response! {nameStr} said: {message}");
+        onResponseReceived($"Respond to this statement ''{message}'' in 250 or fewer words");
+    }
+
+    public void TranslateMessage(string message, string language, Chat conversation, Action<string> onResponseReceived)
+    {
+        string nameStr = m_serverService.FirstName;
+        if (string.IsNullOrEmpty(nameStr))
+            nameStr = "You";
+        onResponseReceived($"Translating this message: {message} into {language}");
     }
 }

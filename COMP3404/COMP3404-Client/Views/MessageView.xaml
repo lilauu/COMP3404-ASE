@@ -4,10 +4,12 @@
              xmlns:local="clr-namespace:COMP3404_Client.Views"
              x:Name="Message"
              x:Class="COMP3404_Client.Views.MessageView">
+    
     <Grid BindingContext="{x:Reference Message}" FlowDirection="{Binding SenderFlowDirection}"
-          ColumnDefinitions="Auto, 3*, 2*" ColumnSpacing="5"> <!--- Empty column at the end to prevent messages flowing too far to the wrong side-->
+          ColumnDefinitions="Auto, Auto, 3*, 2*" ColumnSpacing="5"> <!--- Empty column at the end to prevent messages flowing too far to the wrong side-->
         <Button Grid.Column="0" Text="🔊" Clicked="TTSButton_Clicked"/>
-        <Frame Grid.Column="1" Padding="10" CornerRadius="15" FlowDirection="LeftToRight">
+        <Button Grid.Column="1" Text="🌍" Clicked="LanguageButton_Clicked"/>
+        <Frame Grid.Column="2" Padding="10" CornerRadius="15" FlowDirection="LeftToRight">
             <Label Text="{Binding MessageText}" FontSize="18"/>
         </Frame>
     </Grid>
