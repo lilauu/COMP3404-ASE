@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:COMP3404_Client.Views"
              x:Name="Message"
              x:Class="COMP3404_Client.Views.MessageView">
+    
     <Grid BindingContext="{x:Reference Message}" FlowDirection="{Binding SenderFlowDirection}"
           ColumnDefinitions="Auto, 3*, 2*" ColumnSpacing="5"> <!--- Empty column at the end to prevent messages flowing too far to the wrong side-->
         <Button Grid.Column="0" Text="🔊" Clicked="TTSButton_Clicked"/>

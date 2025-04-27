@@ -68,4 +68,9 @@ public partial class MessageView : ContentView
     {
         m_ttsService.Speak(MessageText);
     }
+
+    private void LanguageButton_Clicked(object sender, EventArgs e)
+    {
+        m_ttsService.Speak("Translate message");
+    }
 }
