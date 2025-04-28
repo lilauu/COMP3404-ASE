@@ -1,7 +1,7 @@
 # Design Portfolio - Technical Design
 
 ## Design Considerations
-When we started the technical design, we wanted to bear a few considerations in mind to keep our code adequately compartmentalised, and adhering to design strategies such as loose coupling, high cohesion and separation of concerns.\
+When we started the technical design, we wanted to bear a few considerations in mind to keep our code adequately compartmentalised, and adhering to design strategies such as loose coupling, high cohesion, encapsulation and separation of concerns.\
 Some key considerations we came up with were:
 - All API and authentication related process should be handled server-side to keep them separate from the user interface and obscure more technical processes from the user.
 - We should create reusable components for the UI to avoid duplication and support cohesive, clean and testable code.
