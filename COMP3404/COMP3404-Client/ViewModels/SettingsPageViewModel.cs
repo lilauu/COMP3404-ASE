@@ -14,8 +14,6 @@ public class SettingsPageViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
     private IPreferences m_preferences;
 
-    private IPreferences m_preferences;
-
     /// <summary>
     /// Whether TTS is enabled
     /// </summary>
