@@ -28,6 +28,10 @@ These two sequence diagrams show different ways the user can interact with chats
 
 ![user-chat-interaction-sequence-diagrams](diagrams/user-chat-interaction-sequence.png)
 
+## UML Diagram
+
+![uml-diagram](diagrams/UML-diagram.png) 
+
 ## SOLID Principles
 So before we get into SOLID principles, there may be a question of 'where are the CRC cards in the previous section?' however, we decided as a group not to produce any CRC cards because they assume multiple responsibilities and tasks for every class, and this goes directly against the Single Responsibility Principle. The SRP states that each module should only have one reason to change, or be responsible for one thing only, to promote modularity, making code more maintable and testable, as well as much easier to read. Instead of this, for class discovery to help us map responsibilities to classes/components we took an approach of going through the brief and picking out key nouns, such as Chat, Account and AI and created classes such as ChatController, AccountController, which are used in the API and an interface named IAIModelService with two classes named StubAIModel and GeminiAIModel. We also defined classes and view models for each page and component to keep everything separated, such as SettingsPage, SettingsPageViewModel and MessageView and MessageViewModel.
 
