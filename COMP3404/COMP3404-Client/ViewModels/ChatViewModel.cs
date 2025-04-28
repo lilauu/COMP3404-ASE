@@ -66,7 +66,7 @@ public class ChatViewModel : INotifyPropertyChanged
     /// <summary>
     /// Whether the current Chat is ready for user input.
     /// </summary>
-    public bool ReadyForInput => WaitingForResponse;
+    public bool ReadyForInput => !WaitingForResponse;
 
     /// <summary>
     /// A collection of the current Chat's messages.
