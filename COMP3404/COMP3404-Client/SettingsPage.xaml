@@ -31,13 +31,13 @@
                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Text to Speech Settings:" FontSize="24" VerticalTextAlignment="Center"/>
                 
                 <Label Grid.Row="1" Grid.Column="0" Text="Enabled " HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                <CheckBox Grid.Row="1" Grid.Column="1" x:Name="EnabledCheckBox" IsChecked="{Binding Path=Enabled}"/>
+                <CheckBox Grid.Row="1" Grid.Column="1" x:Name="EnabledCheckBox" IsChecked="{Binding Path=TTSEnabled}"/>
 
                 <Label Grid.Row="2" Grid.Column="0" Text="Volume " HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                <Slider Grid.Row="2" Grid.Column="1" Maximum="1" Value="{Binding Path=Volume}"/>
+                <Slider Grid.Row="2" Grid.Column="1" Maximum="1" Value="{Binding Path=TTSVolume}"/>
 
                 <Label Grid.Row="3" Grid.Column="0" Text="Pitch " HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                <Slider  Grid.Row="3" Grid.Column="1" Maximum="2" Value="{Binding Path=Pitch}"/>
+                <Slider  Grid.Row="3" Grid.Column="1" Maximum="2" Value="{Binding Path=TTSPitch}"/>
             </Grid>
 
 

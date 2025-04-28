@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace COMP3404_Shared.Models.Chats;
 
 public class ChatMessage
 {
+    // todo: partial class would be nice here so that client doesn't get the server-specific parts?
     [JsonIgnore]
     public int ChatId { get; set; }
     [JsonIgnore]

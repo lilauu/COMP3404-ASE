@@ -8,26 +8,44 @@ using System.Windows.Input;
 
 namespace COMP3404_Client.ViewModels;
 
+/// <summary>
+/// ViewModel representing the history page.
+/// </summary>
 public class HistoryPageViewModel : INotifyPropertyChanged
 {
+    /// <summary>
+    /// See <seealso cref="INotifyPropertyChanged.PropertyChanged"/>
+    /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
 
+    /// <summary>
+    /// Command that switches the current chat window Takes a <see cref="ChatViewModel"/> parameter.
+    /// </summary>
     public ICommand SwitchChatWindow { get; private set; }
+
+    /// <summary>
+    /// Command that refreshes the loaded chats.
+    /// </summary>
     public ICommand Refresh { get; private set; }
 
-    private ChatViewModel m_activeChat;
-    public ChatViewModel ActiveChat
-    {
-        get => m_activeChat;
-    }
+    /// <summary>
+    /// The currently visible chat.
+    /// </summary>
+    public ChatViewModel ActiveChat => m_activeChat;
 
+    /// <summary>
+    /// All loaded chats.
+    /// </summary>
     public IEnumerable<ChatViewModel> Chats => m_chats;
 
     private ObservableCollection<ChatViewModel> m_chats = new();
-
+    private ChatViewModel m_activeChat;
     private DiskStorageService m_diskStorageService;
     private ServerStorageService m_serverStorageService;
 
+    /// <summary>
+    /// Constructor for <see cref="HistoryPageViewModel"/>. Typically uses Dependency Injection to resolve the required parameters.
+    /// </summary>
     public HistoryPageViewModel(DiskStorageService diskStorageService, ServerStorageService serverStorageService)
     {
         m_diskStorageService = diskStorageService;
@@ -58,6 +76,10 @@ public class HistoryPageViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(ActiveChat));
     }
 
+
+    /// <summary>
+    /// Helper function for invoking <see cref="PropertyChanged"/>
+    /// </summary>
     public void OnPropertyChanged([CallerMemberName] string name = "") =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

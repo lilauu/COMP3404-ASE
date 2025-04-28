@@ -8,3 +8,5 @@
   href: architecture.md
 - name: Testing
   href: test-driven-dev.md
+- name: Coding Standards
+  href: code-standards.md

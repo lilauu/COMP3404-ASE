@@ -1,6 +1,5 @@
 using COMP3404_Client.Services;
 using COMP3404_Client.ViewModels;
-using Microsoft.Maui;
 
 namespace COMP3404_Client.Views;
 
@@ -9,6 +8,9 @@ namespace COMP3404_Client.Views;
 /// </summary>
 public partial class MessageView : ContentView
 {
+    /// <summary>
+    /// A bindable property for <see cref="MessageText"/>
+    /// </summary>
     public static readonly BindableProperty MessageTextProperty =
     BindableProperty.Create(nameof(MessageText), typeof(string), typeof(MessageView), string.Empty);
     /// <summary>
@@ -20,10 +22,14 @@ public partial class MessageView : ContentView
         set => SetValue(MessageTextProperty, value);
     }
 
+    /// <summary>
+    /// A bindable property for <see cref="IsSender"/>
+    /// </summary>
     public static readonly BindableProperty IsSenderProperty =
         BindableProperty.Create(nameof(IsSender), typeof(bool), typeof(MessageView), false,
             propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
             {
+                // update the sender flow direction when this changes
                 var view = (MessageView)bindable;
 
                 view.SenderFlowDirection = view.GetFlowDirection((bool)newValue);
@@ -37,6 +43,9 @@ public partial class MessageView : ContentView
         set => SetValue(IsSenderProperty, value);
     }
 
+    /// <summary>
+    /// A bindable property for <see cref="SenderFlowDirection"/>
+    /// </summary>
     public static readonly BindableProperty SenderFlowDirectionProperty =
            BindableProperty.Create(nameof(SenderFlowDirection), typeof(FlowDirection), typeof(MessageView),
                defaultValueCreator: bindable =>
@@ -56,12 +65,17 @@ public partial class MessageView : ContentView
     private FlowDirection GetFlowDirection(bool value) => value ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
     private TTSService m_ttsService;
     private MainPageViewModel m_mainPageViewModel;
-    private MainPage m_mainPage;
 
+    /// <summary>
+    /// Default constructor for <see cref="MessageView"/>. Attempts to resolve service dependencies automatically.
+    /// </summary>
     public MessageView()
         : this(MauiProgram.GetService<TTSService>(), MauiProgram.GetService<MainPageViewModel>())
     { }
 
+    /// <summary>
+    /// Constructor for <see cref="MessageView"/>. Typically uses Dependency Injection to resolve the required parameters.
+    /// </summary>
     public MessageView(TTSService ttsService, MainPageViewModel mainPageViewModel)
     {
         m_ttsService = ttsService;
