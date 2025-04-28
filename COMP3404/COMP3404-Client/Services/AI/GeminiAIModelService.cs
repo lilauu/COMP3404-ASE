@@ -10,6 +10,7 @@ namespace COMP3404_Client.Services.AI;
 class GeminiAIModelService : IAIModelService
 {
     private HttpClient m_httpClient;
+    private ServerService m_serverService;
 
     const string GeminiApiModelsUrl = "https://generativelanguage.googleapis.com/v1beta/models";
     // really bad to have this hardcoded, very insecure. This should really be got from the API server
@@ -100,10 +101,5 @@ class GeminiAIModelService : IAIModelService
         var request = new HttpRequestMessage(HttpMethod.Post, targetUri);
         request.Content = content;
         return await m_httpClient.SendAsync(request);
-    }
-
-    public void TranslateMessage(string message, string language, Chat conversation, Action<string> onResponseReceived)
-    {
-        throw new NotImplementedException();
     }
 }

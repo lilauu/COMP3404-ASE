@@ -12,6 +12,7 @@ public class SettingsPageViewModel : INotifyPropertyChanged
     /// See <seealso cref="INotifyPropertyChanged.PropertyChanged"/>
     /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
+    private IPreferences m_preferences;
 
     private IPreferences m_preferences;
 

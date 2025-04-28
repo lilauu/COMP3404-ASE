@@ -18,3 +18,6 @@ Later on in the project, we realised we had created a lot of singleton patterns 
 Both .NET MAUI nd Blazor are technologies for application development, but cater to different platforms. We chose to work with .NET MAUI primarily as it focuses on cross-platform applications, being able to work from mobile to desktop apps. MAUI also pairs well with XAML and C#, utilising native platform control.
 
 In terms of actually creating the application, although settling on .NET MAUI we considered blazor as well, but eventually settled on MAUI as it doesn't require JS interop unless you're embedding web content, and gives full native API access. .NET MAUI also works well with XAML and other .NET projects, and allows you to only need a single build in C#/XAML so made the most sense for us to keep our project as modernised as possible.
+
+## ASP.NET Core - Web Development
+We used ASP.NET Core alongside MAUI for our server because it provides a built-in database and comes with everything we would need to build a web-based application. On top of this, it also comes with Blazor support, which we eventually decided to ditch in favour of MAUI but it was a key component of our decision making process to use ASP.NET.

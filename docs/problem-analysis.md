@@ -59,3 +59,9 @@ fashion), that are needed to create & log in to the account.\
 -	AI model is capable of handling longer text inputs
 -	Summarisation will be brief and high-level
 
+  ## Github issues for tracking requirements
+
+  Using these requirements, we created a list of github issues, which was an incredibly efficient way for us to track our progress throughout the project.
+
+  ![github-issues](diagrams/github-issues.png)
+
