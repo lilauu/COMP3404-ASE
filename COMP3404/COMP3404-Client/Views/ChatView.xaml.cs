@@ -1,27 +1,29 @@
-
-using COMP3404_Client.Services;
-
 namespace COMP3404_Client.Views;
 
+/// <summary>
+/// View representing a chat
+/// </summary>
 public partial class ChatView : ContentView
 {
+	/// <summary>
+	/// A bindable property for <see cref="ChatName"/>
+	/// </summary>
 	public static readonly BindableProperty ChatNameProperty =
 		BindableProperty.Create(nameof(ChatName), typeof(string), typeof(ChatView), string.Empty);
+	/// <summary>
+	/// The chat's name.
+	/// </summary>
 	public string ChatName
 	{
 		get => (string)GetValue(ChatNameProperty);
 		set => SetValue(ChatNameProperty, value);
 	}
 
-	private TTSService TTS;
-
+	/// <summary>
+	/// Constructor for <see cref="ChatView"/>
+	/// </summary>
 	public ChatView()
-		: this(MauiProgram.GetService<TTSService>())
-	{ }
-
-	public ChatView(TTSService tts)
 	{
-		TTS = tts;
 		InitializeComponent();
 	}
 

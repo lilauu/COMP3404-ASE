@@ -1,14 +1,16 @@
 ﻿using COMP3404_Client.Services;
 using COMP3404_Client.Services.AI;
-using Microsoft.Extensions.Logging;
 using COMP3404_Client.Services.Storage;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace COMP3404_Client;
 
 public static class MauiProgram
 {
     static IServiceProvider m_serviceProvider = null!;
+    /// <summary>
+    /// Helper function for resolving service dependencies without automatic constructor dependency injection.
+    /// </summary> 
     public static TService GetService<TService>()
         => m_serviceProvider.GetService<TService>();
 
@@ -35,10 +37,13 @@ public static class MauiProgram
         return app;
     }
 
+    /// <summary>
+    /// Extension method. Registers the services used by the application.
+    /// </summary>
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
     {
         builder.Services
-            .AddSingleton<IAIModelService, GeminiAIModelService>() // todo: replace with actual service once implemented
+            .AddSingleton<IAIModelService, GeminiAIModelService>()
             .AddSingleton<HttpClient>()
             .AddSingleton<ServerService>()
             .AddTransient<ServerStorageService>()
@@ -49,6 +54,9 @@ public static class MauiProgram
         return builder;
     }
 
+    /// <summary>
+    /// Extension method. Registers the ViewModels used by the application as services.
+    /// </summary>
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
     {
         builder.Services
@@ -65,6 +73,9 @@ public static class MauiProgram
         return builder;
     }
 
+    /// <summary>
+    /// Extension method. Registers the Views used by the application as services.
+    /// </summary>
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
     {
         builder.Services

@@ -3,8 +3,14 @@ using System.Runtime.CompilerServices;
 
 namespace COMP3404_Client.ViewModels;
 
+/// <summary>
+/// ViewModel representing a chat message.
+/// </summary>
 public class MessageViewModel : INotifyPropertyChanged
 {
+    /// <summary>
+    /// See <seealso cref="INotifyPropertyChanged.PropertyChanged"/>
+    /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
 
     private string m_displayMessage = "";
@@ -13,6 +19,9 @@ public class MessageViewModel : INotifyPropertyChanged
     private readonly Random m_rand;
     private bool m_isSender = false;
 
+    /// <summary>
+    /// Whether the current message was sent by the user.
+    /// </summary>
     public bool IsSender
     {
         get => m_isSender;
@@ -25,6 +34,9 @@ public class MessageViewModel : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// The current message's string message.
+    /// </summary>
     public string Message
     {
         get => m_displayMessage;
@@ -36,6 +48,11 @@ public class MessageViewModel : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Constructor for <see cref="MessageViewModel"/>
+    /// </summary>
+    /// <param name="message">The string content of the message</param>
+    /// <param name="isSender">Whether the message was sent by the user</param>
     public MessageViewModel(string message, bool isSender)
     {
         m_isSender = isSender;
@@ -69,6 +86,10 @@ public class MessageViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(Message));
     }
 
+
+    /// <summary>
+    /// Helper function for invoking <see cref="PropertyChanged"/>
+    /// </summary>
     public void OnPropertyChanged([CallerMemberName] string name = "") =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

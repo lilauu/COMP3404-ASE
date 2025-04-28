@@ -1,15 +1,24 @@
-
 using COMP3404_Client.Services;
 
 namespace COMP3404_Client.Views;
 
+/// <summary>
+/// View representing the navbar on a page
+/// </summary>
 public partial class NavbarView : ContentView
 {
 	private TTSService TTS;
+
+    /// <summary>
+    /// Default constructor for <see cref="NavbarView"/>. Attempts to resolve service dependencies automatically.
+    /// </summary>
 	public NavbarView()
 		: this(MauiProgram.GetService<TTSService>())
 	{ }
 
+    /// <summary>
+    /// Constructor for <see cref="NavbarView"/>. Typically uses Dependency Injection to resolve the required parameters.
+    /// </summary>
     public NavbarView(TTSService service)
     {
         TTS = MauiProgram.GetService<TTSService>();

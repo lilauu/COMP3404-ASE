@@ -1,14 +1,12 @@
 ﻿using COMP3404_Shared.Models.Api;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace COMP3404_Client.Services;
 
+/// <summary>
+/// Service for interacting with the COMP3404 API server.
+/// </summary>
 public class ServerService
 {
     const string ServerURI = "http://localhost:5093";
@@ -19,15 +17,29 @@ public class ServerService
 
     private UserInfo? m_userInfo = null;
 
-    public string FirstName => m_userInfo?.FirstName ?? "";
+    /// <summary>
+    /// Gets the user's first name, if current user info is known.
+    /// </summary>
+    public string GetFirstName() => m_userInfo?.FirstName ?? "";
 
+    /// <summary>
+    /// Gets if the current session is authenticated with the COMP3404 API server
+    /// </summary>
+    public bool IsAuthenticated() => m_accessToken != null;
+
+    /// <summary>
+    /// Constructor for the <see cref="ServerService"/>. Typically uses Dependency Injection to resolve the required services.
+    /// </summary>
+    /// <param name="httpClient">An <see cref="HttpClient"/> that is used to make API requests.</param>
     public ServerService(HttpClient httpClient)
     {
          m_httpClient = httpClient;
     }
 
-    public bool IsAuthenticated() => m_accessToken != null;
-
+    /// <summary>
+    /// Begin the authentication flow with the COMP3404 API server, using Github's OAuth.
+    /// </summary>
+    /// <returns>A Task that returns whether the authentication was successful</returns>
     public async Task<bool> Authenticate()
     {
         // github registration flow: (OAuth)
@@ -49,6 +61,10 @@ public class ServerService
         return m_accessToken is not null;
     }
 
+    /// <summary>
+    /// Get's the authenticated user's profile information from the COMP3404 API server.
+    /// </summary>
+    /// <returns>A Task that returns a <see cref="UserInfo"/> containing information on the user, or null</returns>
     public async Task<UserInfo?> GetUserInfo()
     {
         var res = await MakeAuthenticatedRequest(HttpMethod.Get, new HttpRequestOptions(), "account");
@@ -65,6 +81,14 @@ public class ServerService
         return m_userInfo;
     }
 
+    /// <summary>
+    /// Make a request to the COMP3404 API server, this function will handle authorisation headers and resolving the URI.
+    /// </summary>
+    /// <param name="method">The chosen <see cref="HttpMethod"/></param>
+    /// <param name="options">Any <see cref="HttpRequestOptions"/> used in the request</param>
+    /// <param name="endpoint">The API endpoint to query, should not be prefixed with `/`</param>
+    /// <param name="content">Optional body content for the request</param>
+    /// <returns></returns>
     public async Task<HttpResponseMessage> MakeAuthenticatedRequest(HttpMethod method, HttpRequestOptions options, string endpoint, HttpContent? content = null)
     {
         // if not authed, dont attempt to make authenticated request

@@ -3,12 +3,21 @@ using System.Text.Json;
 
 namespace COMP3404_Client.Services.Storage;
 
+/// <summary>
+/// Service for saving and loading <see cref="Chat"/>s from disk.
+/// </summary>
 public class DiskStorageService : IStorageService
 {
-    // To allow DI to work
+    /// <summary>
+    /// Constructor for <see cref="DiskStorageService"/>
+    /// </summary>
     public DiskStorageService()
     { }
 
+    /// <summary>
+    /// Saves a <see cref="Chat"/> to disk.
+    /// </summary>
+    /// <param name="chat">The chat to save.</param>
     public void SaveChat(Chat chat)
     {
         string directoryPath = GetTargetDirectory();
@@ -19,9 +28,16 @@ public class DiskStorageService : IStorageService
         SaveDataToFile(chat, filePath);
     }
 
+    /// <summary>
+    /// Loads all saved chats from disk.
+    /// </summary>
+    /// <returns>A Task which returns an enumerable of all successfully loaded chats</returns>
     public async Task<IEnumerable<Chat>> LoadChatsAsync()
     {
         string directoryPath = GetTargetDirectory();
+        if (!Directory.Exists(directoryPath))
+            return [];
+
         var files = Directory.GetFiles(directoryPath, "*.json");
 
         List<Task<Chat>> tasks = [];
