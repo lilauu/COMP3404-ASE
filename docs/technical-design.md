@@ -30,6 +30,8 @@ These two sequence diagrams show different ways the user can interact with chats
 
 ## UML Diagram
 
+The UML diagram we've produced shows the hierarchy of the services we've created. 
+
 ![uml-diagram](diagrams/UML-diagram.png) 
 
 ## SOLID Principles
