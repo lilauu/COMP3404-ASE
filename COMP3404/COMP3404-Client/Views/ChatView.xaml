@@ -13,7 +13,7 @@
         <Grid Grid.Row="1" ColumnDefinitions="*, Auto, Auto, Auto" Padding="5" x:Name="chatInput">
             <!-- Wrapped Entry in a Frame for rounded corners -->
             <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" Padding="0">
-                <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame" IsReadOnly="{Binding WaitingForResponse}" Completed="TextEntered" ReturnCommand="{Binding SendChatMessage}" ReturnCommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+                <Entry Placeholder="Type a message..." FontSize="18" x:Name="chatInputFrame" IsEnabled="{Binding ReadyForInput}" Completed="TextEntered" ReturnCommand="{Binding SendChatMessage}" ReturnCommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
             </Frame>
 
             <!-- Wrapped Button in a Frame for rounded corners -->

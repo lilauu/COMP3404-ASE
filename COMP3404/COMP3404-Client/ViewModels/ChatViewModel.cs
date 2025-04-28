@@ -60,6 +60,7 @@ public class ChatViewModel : INotifyPropertyChanged
         {
             m_waitingForResponse = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(ReadyForInput));
         }
     }
 
